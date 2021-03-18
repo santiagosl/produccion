@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resumen{% endblock %}
+
+{% block body %}
+    <main>
+
+<main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Pagina Principal</h1>
+          <p class="lead text-muted">Todos los procesos y control de la producción de las cubiertas</p>
+         </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+        <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="./image/produccion.jpg" alt="producción">
+            <div class="card-body">
+                <p class="card-text">Produccion</p>
+                <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    
+                    <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+               <img class="card-img-top" src="./image/resumen.png" alt="resumen">
+                <div class="card-body">
+                  <p class="card-text">Resumen</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                     
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+              <img class="card-img-top" src="./image/clientes.jpg" alt="cliente">
+                <div class="card-body">
+                  <p class="card-text">Alta Clientes</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                   
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="./image/usuarios.png" alt="usuarios">
+                <div class="card-body">
+                  <p class="card-text">Lista Usuarios</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                      
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="./image/alta-usuarios.jpg" alt="alta_usuarios">
+                <div class="card-body">
+                  <p class="card-text">Alta de Usuarios</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="./image/estadisticas.jpg" alt="estadisticas">
+                <div class="card-body">
+                  <p class="card-text">Estadísticas</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                    
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+
+
+{% endblock %}
