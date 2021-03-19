@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Producción{% endblock %}
+
+{% block body %}
+
+
+
+    <section class="jumbotron text-center">
+            <div class="container">
+            <h1 class="jumbotron-heading">Producción</h1>
+            <p class="lead text-muted">Crear las ordenes de producción</p>
+            </div>
+    </section>
+
+    <div class="d-flex p-3 container-fluid">
+
+        <nav class="navbar navbar-light col ">
+                <form class="form-inline ">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar cliente" aria-label="Buscar">
+            
+                    <select class="custom-select col" id="select_costumer">
+                        <option selected>Elegir cliente</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </form>
+                
+
+          
+                    
+                    <div class="input-group-prepend col">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+                    </div>
+                
+                    <input type="text" class="form-control col" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+  
+        </nav>
+        
+    
+
+    </div>
+
+{% endblock %}
