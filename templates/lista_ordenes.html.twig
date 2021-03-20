@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resumen{% endblock %}
+
+{% block body %}
+
+  <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Lista Ordenes</h1>
+          <p class="lead text-muted">Lista de ordenes de producción</p>
+         </div>
+      </section>
+
+
+    <div class="container w-60">
+        <table class="table table-responsive">
+          
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Ref</th>
+              <th scope="col">Mecánica</th>
+              <th scope="col">Láminas</th>
+              <th scope="col">Embalaje</th>
+              <th scope="col">Transporte</th>
+              <th scope="col">Finalizado</th>
+              <th scope="col">Ver</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Borrar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td><button type="button" class="btn btn-secondary btn-sm">Ver</button></td>
+              <td><button type="button" class="btn btn-warning btn-sm">Editar</button></td>
+              <td><a class="btn btn-danger btn-sm btn-block"  href="#" >Borrar</a> </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>@fat</td>
+              <td>@fat</td>
+              <td>@fat</td>
+              <td>@fat</td>
+              <td>@fat</td>
+              <td><button type="button" class="btn btn-secondary btn-sm">Ver</button></td>
+              <td><button type="button" class="btn btn-warning btn-sm">Editar</button></td>
+              <td><a class="btn btn-danger btn-sm btn-block"  href="#" >Borrar</a> </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <td>@twitter</td>
+              <td>@twitter</td>
+              <td>@twitter</td>
+              <td>@twitter</td>
+              <td>@twitter</td>
+              <td><button type="button" class="btn btn-secondary btn-sm ">Ver</button></td>
+              <td><button type="button" class="btn btn-warning btn-sm">Editar</button></td>
+              <td><a class="btn btn-danger btn-sm btn-block"  href="#" >Borrar</a> </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+          {# BOTON ATRAS #}
+          <div class="container mb-5">
+              <div class="nav justify-content-end mr-5">
+                  <a class="btn btn-primary mr-3"  href="{{ path('resumen')}}" >Atrás</a>
+              </div>
+          </div>
+
+      </div>
+  </main>
+
+
+
+{% endblock %}

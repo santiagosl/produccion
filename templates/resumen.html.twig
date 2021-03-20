@@ -15,32 +15,33 @@
 
       <div class="album py-5 bg-light">
         <div class="container">
+          {# PRODUCCION #}
+          <div class="row">
+          <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+              <img class="card-img-top" src="./image/produccion.jpg" alt="producción">
+              <div class="card-body">
+                  <p class="card-text">Produccion</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                      
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('produccion')}}" >Ver</a>
+                      </div>
+                  </div>
+              </div>
+              </div>
+          </div>
 
-        <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="./image/produccion.jpg" alt="producción">
-            <div class="card-body">
-                <p class="card-text">Produccion</p>
-                <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    
-                    <a class="btn btn-primary btn-lg btn-block"  href="{{ path('produccion')}}" >Ver</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-
+            {# RESUMEN #}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                <img class="card-img-top" src="./image/resumen.png" alt="resumen">
                 <div class="card-body">
-                  <p class="card-text">Resumen</p>
+                  <p class="card-text">Lista ordenes</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       
-                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('inicio')}}" >Ver</a>
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('lista_ordenes')}}" >Ver</a>
                      
                     </div>
                     
@@ -48,7 +49,7 @@
                 </div>
               </div>
             </div>
-
+            {# ALTA CLIENTES #}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
               <img class="card-img-top" src="./image/clientes.jpg" alt="cliente">
@@ -65,6 +66,7 @@
               </div>
             </div>
 
+            {# LISTA USUARIOS #}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="./image/usuarios.png" alt="usuarios">
@@ -81,6 +83,7 @@
               </div>
             </div>
 
+            {# ALTA USUARIOS #}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="./image/alta-usuarios.jpg" alt="alta_usuarios">
@@ -96,6 +99,8 @@
                 </div>
               </div>
             </div>
+
+            {# ESTADISTICAS #}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="./image/estadisticas.jpg" alt="estadisticas">
