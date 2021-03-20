@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Producción{% endblock %}
+
+{% block body %}
+
+
+
+    <section class="jumbotron text-center">
+            <div class="container">
+            <h1 class="jumbotron-heading">Alta Usuarios</h1>
+            <p class="lead text-muted">Dar de alta los Usuarios</p>
+            </div>
+    </section>
+
+    <main>
+    <div class="container w-60">
+        <form>
+            <div class="form-row">
+        
+                <div class="col-sm-12 mb-3">
+                    
+                    <input type="text" class="form-control is-valid" id="nombre" placeholder="Nombre" required>
+                </div>
+                
+                <div class="col-sm-12 mb-3">
+                
+                    <input type="text" class="form-control is-valid" id="apellidos" placeholder="Apellidos" required>
+                </div>
+            
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-sm-12 mb-3">
+                    <input type="password" class="form-control is-invalid" id="validationServer03" placeholder="Password" required>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="ROL" required>
+                </div>
+            </div>
+            <button class="btn btn-success" type="submit">Dar de Alta</button>
+        </div>
+
+        </form>
+
+        {# BOTON ATRAS #}
+        <div class="container">
+            <div class="nav justify-content-end">
+                <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+            </div>
+        </div>
+    </div>
+<main>
+
+
+
+</div>
+
+{% endblock %}
