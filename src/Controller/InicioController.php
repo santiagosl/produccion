@@ -11,8 +11,9 @@ class InicioController extends AbstractController {
      */
 
     public function inicio() { 
-       return $this->render('inicio.html.twig');
+       return $this->render('resumen.html.twig');
     }
+
 }
 
 

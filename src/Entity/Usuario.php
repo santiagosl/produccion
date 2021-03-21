@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=UsuarioRepository::class)
  */
-class Usuario
+class Usuario implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -41,6 +43,39 @@ class Usuario
      * @ORM\ManyToOne(targetEntity=usuario::class)
      */
     private $id_usuario;
+
+    /* --- */
+
+    public function getUserName()
+    {
+        return $this->nombre;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array($this->rol);
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    { 
+        return serialize(array($this->id, $this->nombre, $this->password)); 
+    } 
+    
+    public function unserialize($datos_serializados) 
+    { 
+        list($this->id, $this->nombre, $this->password) = unserialize($datos_serializados, array('allowed_classes'=> false)); 
+    }
+
+    /* --- */
 
     public function getId(): ?int
     {

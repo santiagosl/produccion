@@ -28,9 +28,11 @@
                     <img src="./image/logo_pscover.png" height="50" width="200">
                     </a>
 
-                    <p class="">Fecha y hora actual: {{ "now" |date("d/m/Y H:i:s", "Europe/Paris") }}</p>
                 </div>
+                
+                    <a href="{{ path('logout') }}">Cerrar sesión</a>
 
+                    <p class="">Fecha y hora actual: {{ "now" |date("d/m/Y H:i:s", "Europe/Paris") }}</p>
    
             </nav>
         <!-- Navbar -->
