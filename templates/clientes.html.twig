@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Producción{% endblock %}
+
+{% block body %}
+
+    <section class="jumbotron p-1 text-center">
+            <div class="container">
+            <h1 class="jumbotron-heading">Alta clientes</h1>
+            <p class="lead text-muted">Dar de alta los clientes</p>
+            </div>
+    </section>
+
+   <main>
+    <div class="container w-60">
+
+       <a class="btn btn-primary"  href="{{ path('alta_clientes')}}" >Dar de alta cliente</a>
+
+      
+
+        {% if clientes %}
+            <ul>
+                 <table class="table table-striped mt-2">
+
+                   <h2 class="mt-5">Listado de Clientes</h2>
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">CP</th>
+                        <th scope="col">Población</th>
+                        <th scope="col">Provincia</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">CIF</th>
+                        <th scope="col">e-mail</th>
+                        <th scope="col">web</th>
+                        </tr>
+                    </thead>
+                    {% for cli in clientes %}
+                        <tbody>
+                            <tr>
+                                
+                                <th scope='row'>{{cli.id}}</td>
+                                <td>{{cli.Nombre}}</td>
+                                <td>{{cli.direccion}}</td>
+                                <td>{{cli.cp}}</td>
+                                <td>{{cli.poblacion}}</td>
+                                <td>{{cli.provincia}}</td>
+                                <td>{{cli.telefono}}</td>
+                                <td>{{cli.cif}}</td>
+                                <td>{{cli.mail}}</td>
+                                <td>{{cli.web}}</td>
+                            </tr>
+
+                        </tbody>
+                    {% endfor %}
+                </table>
+
+            </ul>
+
+        {% else %}
+
+            <p>No hay clientes</p>
+        {% endif %}
+
+
+     
+        {# BOTON ATRAS #}
+        <div class="container">
+            <div class="nav justify-content-end p-2">
+                <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+            </div>
+        </div>
+    </div>
+<main>
+
+
+
+</div>
+
+{% endblock %}
