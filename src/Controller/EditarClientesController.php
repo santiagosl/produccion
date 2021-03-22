@@ -15,19 +15,19 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AltaClientesController extends AbstractController {
+class EditarClientesController extends AbstractController {
     
     /**
-     * @Route("/alta_clientes", name="alta_clientes");
-     */
+    * @Route("/editar_clientes/{id}", name="editar_clientes");
+    */
 
-    public function alta_clientes(Request $request) { 
+    public function editar_clientes(Request $request, $id) { 
 
-         $nuevoCliente = new Cliente();
-         
-
-         $formulario = $this->createFormBuilder($nuevoCliente) 
-                       
+        $repositorio = $this->getDoctrine()->getRepository(Cliente::class);
+        $editarClientes = $repositorio->find($id);
+        
+         $formulario = $this->createFormBuilder($editarClientes) 
+                     
             ->add('nombre', TextType::class)
             ->add('direccion', TextType::class)
             ->add('cp', IntegerType::class)
@@ -53,13 +53,16 @@ class AltaClientesController extends AbstractController {
             try {
                 $entityManager->flush(); 
             } catch (Exception $e){
-                return new Response ('Error al insertar el usuario');
+                return new Response ('Error al insertar el cliente');
             }
 
                 return $this->redirectToRoute('clientes');
             }
 
-            return $this->render('alta_clientes.html.twig', array('formulario' => $formulario->createView()));
+            return $this->render('editar_clientes.html.twig', array('formulario' => $formulario->createView()));
         
-        }        
+        }
+
+
+        
     }

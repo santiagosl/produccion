@@ -4,7 +4,7 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use App\Entity\Cliente;
+use App\Entity\Usuario;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -15,28 +15,23 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AltaClientesController extends AbstractController {
+class EditarUsuariosController extends AbstractController {
     
     /**
-     * @Route("/alta_clientes", name="alta_clientes");
-     */
+    * @Route("/editar_usuarios/{id}", name="editar_usuarios");
+    */
 
-    public function alta_clientes(Request $request) { 
+    public function editar_usuarios(Request $request, $id) { 
 
-         $nuevoCliente = new Cliente();
-         
-
-         $formulario = $this->createFormBuilder($nuevoCliente) 
-                       
+        $repositorio = $this->getDoctrine()->getRepository(Usuario::class);
+        $editarUsuarios = $repositorio->find($id);
+        
+         $formulario = $this->createFormBuilder($editarUsuarios) 
+                     
             ->add('nombre', TextType::class)
-            ->add('direccion', TextType::class)
-            ->add('cp', IntegerType::class)
-            ->add('poblacion', TextType::class)
-            ->add('provincia', TextType::class)
-            ->add('telefono', IntegerType::class)
-            ->add('mail', TextType::class)
-            ->add('cif', TextType::class)
-            ->add('web', TextType::class)
+            ->add('apellidos', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('rol', TextType::class,array('label' => 'Valores aceptados: ROLE_USER, ROLE_ADMIN'))
             ->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();
             
@@ -46,20 +41,23 @@ class AltaClientesController extends AbstractController {
             if($formulario->isSubmitted() && $formulario->isValid())
             {
                    
-                $nuevoCliente = $formulario->getData();
+                $nuevoUsuario = $formulario->getData();
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($nuevoCliente);
+                $entityManager->persist($nuevoUsuario);
  
             try {
                 $entityManager->flush(); 
             } catch (Exception $e){
-                return new Response ('Error al insertar el usuario');
+                return new Response ('Error al insertar el cliente');
             }
 
-                return $this->redirectToRoute('clientes');
+                return $this->redirectToRoute('usuarios');
             }
 
-            return $this->render('alta_clientes.html.twig', array('formulario' => $formulario->createView()));
+            return $this->render('editar_usuarios.html.twig', array('formulario' => $formulario->createView()));
         
-        }        
+        }
+
+
+        
     }
