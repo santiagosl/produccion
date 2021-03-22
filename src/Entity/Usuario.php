@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\UsuarioRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 
 /**
@@ -31,6 +34,7 @@ class Usuario implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\Choice(choices = {"ROLE_ADMIN" , "ROLE_USER"}, message= "Elige un rol válido")
      */
     private $rol;
 

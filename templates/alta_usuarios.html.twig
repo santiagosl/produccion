@@ -15,36 +15,12 @@
 
     <main>
     <div class="container w-60">
-        <form>
-            <div class="form-row">
+
         
-                <div class="col-sm-12 mb-3">
-                    
-                    <input type="text" class="form-control is-valid" id="nombre" placeholder="Nombre" required>
-                </div>
-                
-                <div class="col-sm-12 mb-3">
-                
-                    <input type="text" class="form-control is-valid" id="apellidos" placeholder="Apellidos" required>
-                </div>
-            
+        {{ form_start(formulario) }} 
+        {{ form_widget(formulario) }} 
+        {{ form_end(formulario) }}
 
-            </div>
-
-            <div class="form-row">
-
-                <div class="col-sm-12 mb-3">
-                    <input type="password" class="form-control is-invalid" id="validationServer03" placeholder="Password" required>
-                </div>
-
-                <div class="col-sm-12 mb-3">
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="ROL" required>
-                </div>
-            </div>
-            <button class="btn btn-success" type="submit">Dar de Alta</button>
-        </div>
-
-        </form>
 
         {# BOTON ATRAS #}
         <div class="container">
@@ -60,3 +36,4 @@
 </div>
 
 {% endblock %}
+
