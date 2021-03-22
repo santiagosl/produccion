@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ClienteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ClienteRepository::class)
@@ -39,6 +42,7 @@ class Cliente
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Email(message = "El email {{ value }} no es correcto")
      */
     private $mail;
 
@@ -56,6 +60,11 @@ class Cliente
      * @ORM\Column(type="string", length=50)
      */
     private $provincia;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $telefono;
 
     public function getId(): ?int
     {
@@ -154,6 +163,18 @@ class Cliente
     public function setProvincia(string $provincia): self
     {
         $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getTelefono(): ?int
+    {
+        return $this->telefono;
+    }
+
+    public function setTelefono(int $telefono): self
+    {
+        $this->telefono = $telefono;
 
         return $this;
     }

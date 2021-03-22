@@ -6,62 +6,21 @@
 
 
 
-    <section class="jumbotron text-center">
+    <section class="jumbotron p-1 text-center">
             <div class="container">
             <h1 class="jumbotron-heading">Alta clientes</h1>
             <p class="lead text-muted">Dar de alta los clientes</p>
             </div>
     </section>
 
-    <main>
+   <main>
     <div class="container w-60">
-        <form>
-            <div class="form-row">
-                <div class="col-sm-6 mb-3">
-                    <input type="text" class="form-control is-valid" id="nombre" placeholder="Nombre" required>
-                </div>
-                
-                <div class="col-sm-6 mb-3">
-                
-                    <input type="text" class="form-control is-valid" id="direccion" placeholder="Dirección" required>
-                </div>
 
-                <div class="col-sm-4 mb-3">
-                    
-                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Código Postal" required>
-                </div>
-                
+        
+        {{ form_start(formulario) }} 
+        {{ form_widget(formulario) }} 
+        {{ form_end(formulario) }}
 
-                <div class="col-sm-4 mb-3">
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="Población" required>
-                </div>
-                
-                <div class="col-sm-4 mb-3">
-                
-                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="Provincia" required>
-                </div>
-                
-                <div class="col-sm-4 mb-3">
-                
-                    <input type="tel" class="form-control is-valid" id="telefono" placeholder="Teléfono" required>
-                </div>
-
-                <div class="col-sm-4 mb-3">
-                
-                    <input type="text" class="form-control is-valid" id="cif" placeholder="CIF" required>
-                </div>
-
-                <div class="col-sm-4 mb-3">
-                    <input type="mail" class="form-control is-valid" id="mail" placeholder="E-mail" required>
-                </div>
-
-                <div class="col-sm-12 mb-3">
-                    <input type="text" class="form-control is-valid" id="web" placeholder="Web" required>
-                </div>
-            <button class="btn btn-success" type="submit">Dar de Alta</button>
-            </div>
-            
-        </form>
 
         {# BOTON ATRAS #}
         <div class="container">

@@ -39,7 +39,7 @@ class Usuario implements UserInterface, \Serializable
     private $rol;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
