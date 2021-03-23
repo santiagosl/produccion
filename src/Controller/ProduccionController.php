@@ -6,38 +6,68 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Entity\Produccion;
 
-class ProduccionController extends AbstractController {
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+
+
+class ProduccionController extends AbstractController 
+
+{
     
-    /**
-     * @Route("/produccion", name="produccion");
-     */
+  /**
+   * @Route("/produccion", name="produccion");
+   */
 
-    public function produccion() { 
-       return $this->render('produccion.html.twig');
-    }
-
+    public function buscarCliente(Request $request)
+  
+  {
         
-    /**
-     * @Route("/buscarCliente", name="buscar");
-     */
+    $nuevaProduccion = new Produccion();
+    $formulario = $this->createFormBuilder($nuevaProduccion) 
 
-    public function buscar(Request $cli) { 
-      $cliente = $cli->request->get('cliente'); 
-      return new response($cliente);
-    }
+      
+    ->add('referencia', TextType::class, array('label' => 'Referencia'))
+    ->add('mecanica', FileType::class, array('label' => 'Mecánica PDF'))
+    ->add('laminas', FileType::class, array('label' => 'Laminas PDF'))
+    ->add('embalaje', FileType::class, array('label' => 'Embalaje PDF'))
+    ->add('transporte', FileType::class, array('label' => 'Transporte PDF'))
+    ->add('save', SubmitType::Class, array('label' => 'Enviar'))
+    ->getForm();
+      
+      $formulario->handleRequest($request);
 
+      if($formulario->isSubmitted() && $formulario->isValid())
+      {
 
-     /**
-     * @Route("/generar", name="generar");
-     */
+          $nuevaProduccion = $formulario->getData();
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($nuevaProduccion);
 
-    public function generar(Request $generar) { 
-      $orden = $generar->request->get('referencia');
-      $cliente = $generar->request->get('value');
-      return new Response($orden . $cliente);
-    }
-}
+          try {
+              $entityManager->flush(); 
+          } catch (Exception $e){
+              return new Response ('Error al insertar el usuario');
+          }
 
+            return $this->redirectToRoute('produccion');
+      }
+
+            return $this->render('produccion.html.twig', array('formulario' => $formulario->createView()));
+        
+  }
+       
+} 
 
 ?>

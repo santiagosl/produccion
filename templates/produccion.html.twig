@@ -4,8 +4,6 @@
 
 {% block body %}
 
-
-
     <section class="jumbotron p-1 text-center">
             <div class="container">
                 <h1 class="jumbotron-heading">Producción</h1>
@@ -15,91 +13,19 @@
 
     <main>
 
-            {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
-            <div class="container container-fluid p-3">
-                <nav class="navbar navbar-light row">
-                    <div class="col-lg col-12">
-                        <form class="form-inline" action="{{ path('buscar')}}">
-                            <button class="btn btn-outline-success col" type="submit">Buscar</button>
-                            <input name="cliente" class="form-control col" type="text" placeholder="Buscar cliente" aria-label="Buscar">
-                        </form>
-                    </div>
-
-                    <div class="col-lg col-12">
-                        <select class="custom-select mr-3" id="select_costumer">
-                            <option selected>Elegir cliente</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-
-        <form  action="{{ path('generar')}}">
-                    <div class="col-lg col-12 input-group-prepend">
-                            <span class="input-group-text w-100" id="referencia">Referencia</span>
-                            <input type="text" class="form-control" aria-label="referencia" aria-describedby="referencia" name="referencia">
-                    </div>
-                </nav>
-            </div>
-
-            {# MECANICA #}
-            <div class="container input-group mb-3">
-                    <label class="input-group-text ml-3 w-10">Mecanica</label>
-                <div class="custom-file mr-3">
-                    <input type="file" class="custom-file-input" id="file_mecanica">
-                    <label class="custom-file-label" for="file_mecanica">Adjuntar Archivo</label>
-                </div>
-                    
-            </div>
-
-            {# LAMINAS #}
-            <div class="container input-group mb-3">
-                    <label class="input-group-text ml-3 w-10">Láminas</label>
-                <div class="custom-file mr-3">
-                    <input type="file" class="custom-file-input" id="inputGroupFile04">
-                    <label class="custom-file-label" for="inputGroupFile04">Adjuntar Archivo</label>
-                </div>
-                    
-            </div>
-
-            {# EMBALAJE #}
-            <div class="container input-group mb-3">
-                    <label class="input-group-text ml-3 w-10">Embalaje</label>
-                <div class="custom-file mr-3">
-                    <input type="file" class="custom-file-input" id="inputGroupFile04">
-                    <label class="custom-file-label" for="inputGroupFile04">Adjuntar Archivo</label>
-                </div>
-                    
-            </div>
-
-
-            {# TRANSPORTE #}
-            <div class="container input-group mb-3">
-                    <label class="input-group-text ml-3 w-10">Transporte</label>
-                <div class="custom-file mr-3">
-                    <input type="file" class="custom-file-input" id="inputGroupFile04">
-                    <label class="custom-file-label" for="inputGroupFile04">Adjuntar Archivo</label>
-                </div>
-                    
-            </div>
-
-            <div class="container input-group mb-3">
-                <button class="btn btn-outline-success col mr-3 ml-3" type="submit">Generar</button>
-            </div>
+        {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
         
-        </form>
-
-        {# BOTON ATRAS #}
+        <div class="container container-fluid p-3">
+        {{ form_start(formulario) }} 
+        {{ form_widget(formulario) }} 
+        {{ form_end(formulario) }}
+        </div>
+           {# BOTON ATRAS #}
         <div class="container">
             <div class="nav justify-content-end">
                 <a class="btn btn-primary mr-3"  href="{{ path('resumen')}}" >Atrás</a>
             </div>
         </div>
-
-    <main>
-
-
-
-</div>
+    </main>
 
 {% endblock %}

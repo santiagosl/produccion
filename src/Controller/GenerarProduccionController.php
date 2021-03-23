@@ -4,7 +4,7 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use App\Entity\Usuario;
+use App\Entity\Produccion;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -15,20 +15,18 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class EditarUsuariosController extends AbstractController {
+class GenerarProduccionController extends AbstractController {
     
     /**
-    * @Route("/editar_usuarios/{id}", name="editar_usuarios");
-    */
+     * @Route("/generar", name="generar");
+     */
 
+    public function generar(Request $request) { 
 
-    public function editar_usuarios(Request $request, $id, UserPasswordEncoderInterface $encoder) { 
-
-        $repositorio = $this->getDoctrine()->getRepository(Usuario::class);
-        $editarUsuarios = $repositorio->find($id);
-        
-         $formulario = $this->createFormBuilder($editarUsuarios) 
-                     
+         $nuevaProduccion = new Produccion();
+         
+         $formulario = $this->createFormBuilder($nuevaProduccion) 
+         
             ->add('nombre', TextType::class)
             ->add('apellidos', TextType::class)
             ->add('password', PasswordType::class)
@@ -42,26 +40,24 @@ class EditarUsuariosController extends AbstractController {
             if($formulario->isSubmitted() && $formulario->isValid())
             {
 
-                //Encriptamos la contraseña antes de enviarla a la BBDD.
-                $passwordCodificado = $encoder->encodePassword($editarUsuarios, $formulario->get('password')->getData()); 
-                $editarUsuarios->setPassword($passwordCodificado);
-                   
-                $nuevoUsuario = $formulario->getData();
+                $produccion = $formulario->getData();
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($nuevoUsuario);
+                $entityManager->persist($produccion);
  
             try {
                 $entityManager->flush(); 
             } catch (Exception $e){
-                return new Response ('Error al insertar el cliente');
+                return new Response ('Error al insertar el usuario');
             }
 
                 return $this->redirectToRoute('usuarios');
             }
 
-            return $this->render('editar_usuarios.html.twig', array('formulario' => $formulario->createView()));
+            return $this->render('alta_usuarios.html.twig', array('formulario' => $formulario->createView()));
         
         }
-
         
     }
+
+
+?>

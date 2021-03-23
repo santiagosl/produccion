@@ -44,9 +44,12 @@ class AltaUsuariosController extends AbstractController {
                 //Encriptamos la contraseña antes de enviarla a la BBDD.
                 $passwordCodificado = $encoder->encodePassword($nuevoUsuario, $formulario->get('password')->getData()); 
                 $nuevoUsuario->setPassword($passwordCodificado);
-       
+                
                 $nuevoUsuario = $formulario->getData();
                 $entityManager = $this->getDoctrine()->getManager();
+                
+                $nuevoUsuario->setIdUsuario($this->getUser());
+                
                 $entityManager->persist($nuevoUsuario);
  
             try {
@@ -55,7 +58,7 @@ class AltaUsuariosController extends AbstractController {
                 return new Response ('Error al insertar el usuario');
             }
 
-                return $this->redirectToRoute('resumen');
+                return $this->redirectToRoute('usuarios');
             }
 
             return $this->render('alta_usuarios.html.twig', array('formulario' => $formulario->createView()));

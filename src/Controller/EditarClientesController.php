@@ -42,7 +42,6 @@ class EditarClientesController extends AbstractController {
             
             $formulario->handleRequest($request);
 
-
             if($formulario->isSubmitted() && $formulario->isValid())
             {
                    
@@ -60,9 +59,6 @@ class EditarClientesController extends AbstractController {
             }
 
             return $this->render('editar_clientes.html.twig', array('formulario' => $formulario->createView()));
-        
         }
-
-
         
     }

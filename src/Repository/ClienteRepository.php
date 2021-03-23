@@ -47,4 +47,12 @@ class ClienteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function nBuscar($nombre): array 
+    {
+       $entityManager = $this->getEntityManager(); 
+       $query = $entityManager->createQuery('SELECT nombre FROM App\Entity\Cliente nombre WHERE nombre.nombre LIKE :nombre'); 
+       $query->setParameter('nombre', '%' . $nombre . '%');
+       return $query->getResult();
+    }
 }

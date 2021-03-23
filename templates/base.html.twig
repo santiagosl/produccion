@@ -33,6 +33,8 @@
                 <div class="container text-center ">
                  {% if is_granted('ROLE_ADMIN') %}
                     <p class="lead text-muted">Usuario: <span>{{ app.user.username }}</span> </p>
+                    {% elseif is_granted('ROLE_USER') %}
+                    <p class="lead text-muted">Usuario: <span>{{ app.user.username }}</span> </p>
                  {% endif %}
                 </div>
                 
