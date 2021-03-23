@@ -33,16 +33,12 @@ class ProduccionController extends AbstractController
     public function buscarCliente(Request $request, string $archivoPDF)
   
   {
-        
-    $cliente = new Cliente();
-    $usuario = new Usuario();
 
     $nuevaProduccion = new Produccion();
     $formulario = $this->createFormBuilder($nuevaProduccion) 
-
       
     ->add('referencia', TextType::class, array('label' => 'Referencia'))
-
+    
     ->add('mecanica', FileType::class, 
           array('label' => 'Mecánica PDF',
                 'required' => false))
@@ -59,12 +55,10 @@ class ProduccionController extends AbstractController
           array('label' => 'Transporte PDF',
           'required' => false))
    
-
     ->add('save', SubmitType::Class, array('label' => 'Enviar'))
     ->getForm();
       
       $formulario->handleRequest($request);
-
 
       if($formulario->isSubmitted() && $formulario->isValid())
       {
@@ -117,12 +111,12 @@ class ProduccionController extends AbstractController
             $nuevaProduccion->settransporte($nombreTransporte);
           }
           
-          
+      
           //Datos fijos introducidos, fecha, hora y fk de usuario y cliente
            $nuevaProduccion->setFechaCreacion(new \DateTime());
            $nuevaProduccion->setHoraCreacion(new \DateTime());
-           $nuevaProduccion->setIdUsuario($usuario->getId());
-           $nuevaProduccion->setIdCliente($cliente->getId());
+           $nuevaProduccion->setIdUsuario($this->getUser());
+           /* $nuevaProduccion->setIdCliente($cliente->getId()); */
 
           try {
               $entityManager->flush(); 
@@ -133,10 +127,25 @@ class ProduccionController extends AbstractController
             return $this->redirectToRoute('lista_ordenes');
       }
 
-            return $this->render('produccion.html.twig', array('formulario' => $formulario->createView()));
+           
         
-  }
-       
+
+            $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
+            $formCliente = $this->createFormBuilder() 
+            ->add('Nombre', TextType::class)
+            ->add('save', SubmitType::Class, array('label' => 'Enviar'))
+            ->getForm();
+            
+            $formCliente->handleRequest($request);
+     
+             return $this->render('produccion.html.twig', array(
+                                  'formulario' => $formulario->createView(),
+                                  'formCliente' => $formCliente->createView()
+                                
+                                
+                                ));
+      }
+
 } 
 
 ?>

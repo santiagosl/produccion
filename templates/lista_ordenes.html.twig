@@ -18,7 +18,7 @@
 
     <div class="container w-60">
 
-      <a class="btn btn-primary mb-3"  href="{{ path('produccion')}}" >Crear nueva produccion</a>
+      <a class="btn btn-primary mb-2"  href="{{ path('produccion')}}" >Crear nueva produccion</a>
 
         <table class="table table-responsive">
           <h2 class="mt-5">Listado de Producción</h2>
@@ -51,8 +51,8 @@
                     <td>{{ord.transporte}}</td>
                     <td>{{ord.fechaFin}}</td>
                     <td><a class="btn btn-primary" href="#">Ver</a></td>
-                    <td><a class="btn btn-warning" href="#">Editar</a></td>
-                    <td><a class="btn btn-danger" href="#">Borrar</a></td>
+                    <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}">Editar</a></td>
+                    <td><a class="btn btn-danger" href="{{ path('borrar_produccion', {'id': ord.id}) }}">Borrar</a></td> 
             </tbody>
             
             {% endfor %}

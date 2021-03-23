@@ -13,14 +13,18 @@
 
     <main>
 
-        {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
         
+        {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
+          <div class="container container-fluid p-3 h-50">
+            {{ form_start(formCliente) }} 
+            {{ form_widget(formCliente) }} 
+            {{ form_end(formCliente) }}
+        </div>
+
+
+
         <div class="container container-fluid p-3 h-50">
             {{ form_start(formulario) }} 
-
-   
-
-                    
             {{ form_widget(formulario) }} 
             {{ form_end(formulario) }}
         </div>
