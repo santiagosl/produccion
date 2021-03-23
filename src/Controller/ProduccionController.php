@@ -35,10 +35,13 @@ class ProduccionController extends AbstractController
   {
 
     $nuevaProduccion = new Produccion();
+    
     $formulario = $this->createFormBuilder($nuevaProduccion) 
       
-    ->add('referencia', TextType::class, array('label' => 'Referencia'))
+    ->add('idCliente', TextType::class, array('label' => 'Codigo cliente'))
     
+    ->add('referencia', TextType::class, array('label' => 'Referencia'))
+   
     ->add('mecanica', FileType::class, 
           array('label' => 'Mecánica PDF',
                 'required' => false))
@@ -116,8 +119,7 @@ class ProduccionController extends AbstractController
            $nuevaProduccion->setFechaCreacion(new \DateTime());
            $nuevaProduccion->setHoraCreacion(new \DateTime());
            $nuevaProduccion->setIdUsuario($this->getUser());
-           /* $nuevaProduccion->setIdCliente($cliente->getId()); */
-
+           
           try {
               $entityManager->flush(); 
           } catch (Exception $e){
@@ -129,21 +131,26 @@ class ProduccionController extends AbstractController
 
            
         
-
+            $buscar = '';
             $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
             $formCliente = $this->createFormBuilder() 
-            ->add('Nombre', TextType::class)
+            ->add('nombre', TextType::class)
             ->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();
             
             $formCliente->handleRequest($request);
+
+            if($request->server->get('REQUEST_METHOD') == 'POST')
+              {
+
+                $nombre = $formCliente->getData();
+                $buscar = $repositorio->nBuscar($nombre['nombre']);
+
+              }
      
              return $this->render('produccion.html.twig', array(
                                   'formulario' => $formulario->createView(),
-                                  'formCliente' => $formCliente->createView()
-                                
-                                
-                                ));
+                                  'formCliente' => $formCliente->createView(), 'buscar' => $buscar));
       }
 
 } 

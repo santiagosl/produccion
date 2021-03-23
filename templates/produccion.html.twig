@@ -15,12 +15,19 @@
 
         
         {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
-          <div class="container container-fluid p-3 h-50">
+        <div class="container container-fluid p-3 h-50">
             {{ form_start(formCliente) }} 
             {{ form_widget(formCliente) }} 
             {{ form_end(formCliente) }}
-        </div>
 
+            {% if buscar %}
+                <ul>
+                    {% for nombre in buscar %}
+                    <li><strong>[{{ nombre.id }}]</strong> {{ nombre.nombre }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
 
         <div class="container container-fluid p-3 h-50">
