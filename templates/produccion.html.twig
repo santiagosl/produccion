@@ -15,11 +15,14 @@
 
         {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
         
-        <div class="container container-fluid p-3">
+        <div class="container container-fluid p-3 h-50">
+            {{ form_start(formulario) }} 
 
-        {{ form_start(formulario) }} 
-        {{ form_widget(formulario) }} 
-        {{ form_end(formulario) }}
+   
+
+                    
+            {{ form_widget(formulario) }} 
+            {{ form_end(formulario) }}
         </div>
            {# BOTON ATRAS #}
         <div class="container">

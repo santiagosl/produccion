@@ -19,26 +19,31 @@ class Produccion
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $embalaje;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $laminas;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $mecanica;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $transporte;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $referencia;
 
@@ -54,26 +59,31 @@ class Produccion
 
     /**
      * @ORM\Column(type="date")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $fechaInicio;
 
     /**
      * @ORM\Column(type="time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $horaInicio;
 
     /**
      * @ORM\Column(type="date")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $fechaFin;
 
     /**
      * @ORM\Column(type="time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $horaFin;
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $tiempoTotal;
 
@@ -85,7 +95,7 @@ class Produccion
 
     /**
      * @ORM\ManyToOne(targetEntity=Cliente::class)
-     * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $idCliente;
 
@@ -238,24 +248,24 @@ class Produccion
         return $this;
     }
 
-    public function getIdUsuario(): ?usuario
+    public function getIdUsuario(): ?Usuario
     {
         return $this->idUsuario;
     }
 
-    public function setIdUsuario(?usuario $idUsuario): self
+    public function setIdUsuario(?Usuario $idUsuario): self
     {
         $this->idUsuario = $idUsuario;
 
         return $this;
     }
 
-    public function getIdCliente(): ?cliente
+    public function getIdCliente(): ?Cliente
     {
         return $this->idCliente;
     }
 
-    public function setIdCliente(?cliente $idCliente): self
+    public function setIdCliente(?Cliente $idCliente): self
     {
         $this->idCliente = $idCliente;
 
