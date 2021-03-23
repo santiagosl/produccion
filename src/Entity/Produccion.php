@@ -45,49 +45,49 @@ class Produccion
     /**
      * @ORM\Column(type="date")
      */
-    private $fecha_creacion;
+    private $fechaCreacion;
 
     /**
      * @ORM\Column(type="time")
      */
-    private $hora_creacion;
+    private $horaCreacion;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $fecha_inicio;
+    private $fechaInicio;
 
     /**
      * @ORM\Column(type="time")
      */
-    private $hora_inicio;
+    private $horaInicio;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $fecha_fin;
+    private $fechaFin;
 
     /**
      * @ORM\Column(type="time")
      */
-    private $hora_fin;
+    private $horaFin;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $tiempo_total;
+    private $tiempoTotal;
 
     /**
-     * @ORM\ManyToOne(targetEntity=usuario::class)
+     * @ORM\ManyToOne(targetEntity=Usuario::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_usuario;
+    private $idUsuario;
 
     /**
-     * @ORM\ManyToOne(targetEntity=cliente::class)
+     * @ORM\ManyToOne(targetEntity=Cliente::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_cliente;
+    private $idCliente;
 
     public function getId(): ?int
     {
@@ -156,108 +156,108 @@ class Produccion
 
     public function getFechaCreacion(): ?\DateTimeInterface
     {
-        return $this->fecha_creacion;
+        return $this->fechaCreacion;
     }
 
-    public function setFechaCreacion(\DateTimeInterface $fecha_creacion): self
+    public function setFechaCreacion(\DateTimeInterface $fechaCreacion): self
     {
-        $this->fecha_creacion = $fecha_creacion;
+        $this->fechaCreacion = $fechaCreacion;
 
         return $this;
     }
 
     public function getHoraCreacion(): ?\DateTimeInterface
     {
-        return $this->hora_creacion;
+        return $this->horaCreacion;
     }
 
-    public function setHoraCreacion(\DateTimeInterface $hora_creacion): self
+    public function setHoraCreacion(\DateTimeInterface $horaCreacion): self
     {
-        $this->hora_creacion = $hora_creacion;
+        $this->horaCreacion = $horaCreacion;
 
         return $this;
     }
 
     public function getFechaInicio(): ?\DateTimeInterface
     {
-        return $this->fecha_inicio;
+        return $this->fechaInicio;
     }
 
-    public function setFechaInicio(\DateTimeInterface $fecha_inicio): self
+    public function setFechaInicio(\DateTimeInterface $fechaInicio): self
     {
-        $this->fecha_inicio = $fecha_inicio;
+        $this->fechaInicio = $fechaInicio;
 
         return $this;
     }
 
     public function getHoraInicio(): ?\DateTimeInterface
     {
-        return $this->hora_inicio;
+        return $this->horaInicio;
     }
 
-    public function setHoraInicio(\DateTimeInterface $hora_inicio): self
+    public function setHoraInicio(\DateTimeInterface $horaInicio): self
     {
-        $this->hora_inicio = $hora_inicio;
+        $this->horaInicio = $horaInicio;
 
         return $this;
     }
 
     public function getFechaFin(): ?\DateTimeInterface
     {
-        return $this->fecha_fin;
+        return $this->fechaFin;
     }
 
-    public function setFechaFin(\DateTimeInterface $fecha_fin): self
+    public function setFechaFin(\DateTimeInterface $fechaFin): self
     {
-        $this->fecha_fin = $fecha_fin;
+        $this->fechaFin = $fechaFin;
 
         return $this;
     }
 
     public function getHoraFin(): ?\DateTimeInterface
     {
-        return $this->hora_fin;
+        return $this->horaFin;
     }
 
-    public function setHoraFin(\DateTimeInterface $hora_fin): self
+    public function setHoraFin(\DateTimeInterface $horaFin): self
     {
-        $this->hora_fin = $hora_fin;
+        $this->horaFin = $horaFin;
 
         return $this;
     }
 
     public function getTiempoTotal(): ?int
     {
-        return $this->tiempo_total;
+        return $this->tiempoTotal;
     }
 
-    public function setTiempoTotal(int $tiempo_total): self
+    public function setTiempoTotal(int $tiempoTotal): self
     {
-        $this->tiempo_total = $tiempo_total;
+        $this->tiempoTotal = $tiempoTotal;
 
         return $this;
     }
 
     public function getIdUsuario(): ?usuario
     {
-        return $this->id_usuario;
+        return $this->idUsuario;
     }
 
-    public function setIdUsuario(?usuario $id_usuario): self
+    public function setIdUsuario(?usuario $idUsuario): self
     {
-        $this->id_usuario = $id_usuario;
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }
 
     public function getIdCliente(): ?cliente
     {
-        return $this->id_cliente;
+        return $this->idCliente;
     }
 
-    public function setIdCliente(?cliente $id_cliente): self
+    public function setIdCliente(?cliente $idCliente): self
     {
-        $this->id_cliente = $id_cliente;
+        $this->idCliente = $idCliente;
 
         return $this;
     }

@@ -5,7 +5,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Cliente;
 
-class ClientesController extends AbstractController {
+class ClientesController extends AbstractController 
+{
     
     /**
      * @Route("/clientes", name="clientes");

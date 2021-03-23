@@ -14,9 +14,14 @@
       </section>
 
 
-    <div class="container w-60">
+
+
+    <div class="container">
+
+      <a class="btn btn-primary mb-3"  href="{{ path('produccion')}}" >Crear nueva produccion</a>
+
         <table class="table table-responsive">
-          
+          <h2 class="mt-5">Listado de Producción</h2>
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -33,50 +38,24 @@
               <th scope="col">Borrar</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td><button type="button" class="btn btn-secondary btn-sm">Ver</button></td>
-              <td><button type="button" class="btn btn-warning btn-sm">Editar</button></td>
-              <td><a class="btn btn-danger btn-sm btn-block"  href="#" >Borrar</a> </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>@fat</td>
-              <td>@fat</td>
-              <td>@fat</td>
-              <td>@fat</td>
-              <td>@fat</td>
-              <td><button type="button" class="btn btn-secondary btn-sm">Ver</button></td>
-              <td><button type="button" class="btn btn-warning btn-sm">Editar</button></td>
-              <td><a class="btn btn-danger btn-sm btn-block"  href="#" >Borrar</a> </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-              <td><button type="button" class="btn btn-secondary btn-sm ">Ver</button></td>
-              <td><button type="button" class="btn btn-warning btn-sm">Editar</button></td>
-              <td><a class="btn btn-danger btn-sm btn-block"  href="#" >Borrar</a> </td>
-            </tr>
-          </tbody>
+           {% for ord in ordenesProd %}
+              <tbody>
+                <tr>
+                  <th scope='row'>{{ord.id}}</td>
+                    <td>{{ord.fechaCreacion | date('d-m-Y')}}</td>
+                    <td>{{ord.idCliente}}</td>
+                    <td>{{ord.referencia}}</td>
+                    <td>{{ord.mecanica}}</td>
+                    <td>{{ord.laminas}}</td>
+                    <td>{{ord.embalaje}}</td>
+                    <td>{{ord.transporte}}</td>
+                    <td>{{ord.fechaFin}}</td>
+                    <td><a class="btn btn-warning" href="#">Ver</a></td>
+                    <td><a class="btn btn-warning" href="#">Editar</a></td>
+                    <td><a class="btn btn-danger" href="#">Borrar</a></td>
+            </tbody>
+            
+            {% endfor %}
         </table>
 
 

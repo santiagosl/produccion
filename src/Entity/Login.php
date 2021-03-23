@@ -33,7 +33,7 @@ class Login
     private $hora;
 
     /**
-     * @ORM\ManyToOne(targetEntity=usuario::class)
+     * @ORM\ManyToOne(targetEntity=Usuario::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_usuario;
