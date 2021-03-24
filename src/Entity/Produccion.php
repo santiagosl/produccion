@@ -99,6 +99,7 @@ class Produccion
      */
     private $idCliente;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -270,6 +271,10 @@ class Produccion
         $this->idCliente = $idCliente;
 
         return $this;
+    }
+
+      public function __toString() {
+        return $this->idCliente;
     }
 
 

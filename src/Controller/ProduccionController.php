@@ -36,10 +36,17 @@ class ProduccionController extends AbstractController
   
   {
 
+   
+    $idCliente=$request->get('id');
+    $repositorio = $this->getDoctrine()->getRepository(Cliente::class);
+    $clienteSeleccionado = $repositorio->find($idCliente);
+
+
     $nuevaProduccion = new Produccion();
     $formulario = $this->createFormBuilder($nuevaProduccion) 
       
-    ->add('idcliente', TextType::class, array('label' => 'Codigo cliente'))
+    /* ->add('idcliente', TextType::class, 
+          array('label' => 'Codigo cliente')) */
     
     ->add('referencia', TextType::class, array('label' => 'Referencia'))
    
@@ -120,6 +127,7 @@ class ProduccionController extends AbstractController
            $nuevaProduccion->setFechaCreacion(new \DateTime());
            $nuevaProduccion->setHoraCreacion(new \DateTime());
            $nuevaProduccion->setIdUsuario($this->getUser());
+           $nuevaProduccion->setIdCliente($clienteSeleccionado);
            
           try {
               $entityManager->flush(); 
@@ -137,6 +145,7 @@ class ProduccionController extends AbstractController
       */
 
       public function buscarCliente(Request $request){
+
           $buscar = '';
           $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
           $formCliente = $this->createFormBuilder()
