@@ -30,6 +30,10 @@ class EditarProduccionController extends AbstractController {
          $formulario = $this->createFormBuilder($editarProduccion) 
                      
             ->add('referencia', TextType::class)
+            ->add('mecanica', TextType::class)
+            ->add('laminas', TextType::class)
+            ->add('embalaje', TextType::class)
+            ->add('transporte', TextType::class)
            
             ->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();

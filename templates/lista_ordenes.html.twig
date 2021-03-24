@@ -13,15 +13,12 @@
          </div>
       </section>
       
-
  {% for message in app.flashes ('succes') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
  
 {% endfor %}
-
-
 
     <div class="container w-100 ">
 
@@ -31,18 +28,18 @@
           <h2 class="mt-2">Listado de Producción</h2>
           <thead>
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Cliente</th>
-              <th scope="col">Ref</th>
-              <th scope="col">Mecánica</th>
-              <th scope="col">Láminas</th>
-              <th scope="col">Embalaje</th>
+              <th scope="col">ID        </th>
+              <th scope="col">Fecha     </th>
+              <th scope="col">Cliente   </th>
+              <th scope="col">Ref       </th>
+              <th scope="col">Mecánica  </th>
+              <th scope="col">Láminas   </th>
+              <th scope="col">Embalaje  </th>
               <th scope="col">Transporte</th>
               <th scope="col">Finalizado</th>
-              <th scope="col">Ver</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Borrar</th>
+              <th scope="col">Ver       </th>
+              <th scope="col">Editar    </th>
+              <th scope="col">Borrar    </th>
             </tr>
           </thead>
            {% for ord in ordenesProd %}
@@ -52,17 +49,46 @@
                     <td>{{ord.fechaCreacion | date('d-m-Y')}}</td>
                     <td>{{ ord.idCliente}}</td>
                     <td>{{ ord.referencia }}</td>
-                    <td>{% if ord.mecanica %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
-                    <td>{% if ord.laminas %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
-                    <td>{% if ord.embalaje %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
-                    <td>{% if ord.transporte %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
+
+                    <td>
+                        {% if ord.mecanica %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.mecanica }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>
+                    
+                      <td>
+                        {% if ord.laminas %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.laminas }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>
+
+                      <td>
+                        {% if ord.embalaje %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.embalaje }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>
+                    
+                      <td>
+                        {% if ord.transporte %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.transporte }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>                
+                 
                     <td>{{ord.fechaFin}}</td>
-                    <td><a class="btn btn-primary" href="#">Ver</a></td>
+                    <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}">Ver   </a></td>
                     <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}">Editar</a></td>
-                    <td><a class="btn btn-danger" href="{{ path('borrar_produccion', {'id': ord.id}) }}">Borrar</a></td> 
+                    <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}">Borrar</a></td> 
             </tbody>
-            
             {% endfor %}
+            
         </table>
 
           {# BOTON ATRAS #}
@@ -71,11 +97,7 @@
                   <a class="btn btn-primary mr-3"  href="{{ path('resumen')}}" >Atrás</a>
               </div>
           </div>
-
-
       </div>
   </main>
-
-
 
 {% endblock %}

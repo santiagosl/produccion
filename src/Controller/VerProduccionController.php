@@ -15,44 +15,28 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\Response;
 
-class VerProduccionController extends AbstractController {
+class VerProduccionController extends AbstractController 
+{
     
     /**
-    * @Route("/ver_produccion/{id}", name="ver_produccion");
-    */
+     * @Route("/ver_produccion", name="ver_produccion");
+     */
 
-    public function ver_produccion(Request $request, $id) { 
+    public function ver_produccion() 
+    { 
 
-        $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
-        $editarProduccion = $repositorio->find($id);
-        
-         $formulario = $this->createFormBuilder($editarProduccion) 
-                     
-            ->add('referencia', TextType::class)
-           
-            ->add('save', SubmitType::Class, array('label' => 'Enviar'))
-            ->getForm();
-            
-            $formulario->handleRequest($request);
-
-            if($formulario->isSubmitted() && $formulario->isValid())
-            {
-                   
-                $nuevaProduccion = $formulario->getData();
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($nuevaProduccion);
- 
-            try {
-                $entityManager->flush(); 
-            } catch (Exception $e){
-                return new Response ('Error al insertar la produccion');
-            }
-
-                return $this->redirectToRoute('lista_ordenes');
-            }
-
-            return $this->render('editar_produccion.html.twig', array('formulario' => $formulario->createView()));
-        }
-        
+    $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
+    $verProduccion = $repositorio->findAll();
+    return $this->render('ver_produccion.html.twig' ,array ('verProduccion' => $verProduccion));
+    
     }
+
+    public function test(){
+        return new Response ("click");
+    }
+}
+
+?>
+

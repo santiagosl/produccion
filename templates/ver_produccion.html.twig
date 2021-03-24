@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resumen{% endblock %}
+
+{% block body %}
+
+  <main role="main">
+
+      <section class="jumbotron p-1 text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Produccion Activa</h1>
+          <p class="lead text-muted">Aquí procesamos el tiempo de produccion</p>
+         </div>
+      </section>
+      
+ {% for message in app.flashes ('succes') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+ 
+{% endfor %}
+
+    <div class="container w-100 ">
+
+        <div>
+            <table class="table table-responsive text-center">
+            <h2 class="mt-2">Cabecera datos Produccion</h2>
+                <tr>
+                    <th scope="col">ID        </th>
+                    <th scope="col">Fecha creación     </th>
+                     <th scope="col">Hora creación    </th>
+                    <th scope="col">Cliente   </th>
+                    <th scope="col">Referencia   </th>
+                </tr>
+                {% for pr in verProduccion %}
+                <tr>
+                    <td scope='row'>{{pr.id}}</td>
+                    <td>{{pr.fechaCreacion | date('d-m-Y')}}</td>
+                    <td>{{pr.horaCreacion | date ('H:i:s')}}</td>
+                    <td>{{ pr.idCliente}}</td>
+                    <td>{{ pr.referencia }}</td>
+                </tr>
+                 {% endfor %}
+            </table>
+        </div>
+
+
+
+        <table class="table table-responsive text-center">
+          <h2 class="mt-2">Listado de Producción</h2>
+          <thead>
+            <tr>
+              
+              <th scope="col">Mecánica  </th>
+              <th scope="col">Láminas   </th>
+              <th scope="col">Embalaje  </th>
+              <th scope="col">Transporte</th>
+           
+            </tr>
+          </thead>
+           {% for prod in verProduccion %}
+              <tbody>
+                <tr>
+                    
+                    <td>
+                        {% if prod.mecanica %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ prod.mecanica }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+
+                    </td>
+                    
+                      <td>
+                        {% if prod.laminas %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ prod.laminas }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>
+
+                      <td>
+                        {% if prod.embalaje %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ prod.embalaje }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>
+                    
+                      <td>
+                        {% if prod.transporte %} 
+                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ prod.transporte }}" target="_blank">Ver</a></p>
+                        {% else %} 
+                            <p>NO</p> 
+                        {% endif %}
+                    </td>                
+         
+            </tbody>
+            {% endfor %}
+            
+        </table>
+
+          {# BOTON ATRAS #}
+          <div class="container mb-5">
+              <div class="nav justify-content-end mr-5">
+                  <a class="btn btn-primary mr-3"  href="{{ path('lista_ordenes')}}" >Atrás</a>
+              </div>
+          </div>
+      </div>
+  </main>
+
+{% endblock %}
