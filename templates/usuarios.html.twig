@@ -12,23 +12,20 @@
     </section>
 
    <main>
-    <div class="container w-60">
+    <div class="container w-50">
 
        <a class="btn btn-primary"  href="{{ path('alta_usuarios')}}" >Dar de alta usuarios</a>
 
-      
-
-            <div class="container w-60">
+    
         {% if usuarios %}
-                 <table class="table table-responsive center mt-2">
+                <table class="table table-responsive center mt-2">
                    <h2 class="mt-5">Listado de usuarios</h2>
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">ROL</th>
-                       
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">ROL</th>
                         </tr>
                     </thead>
                     {% for usu in usuarios %}
@@ -40,27 +37,23 @@
                                 <td>{{usu.rol}}</td>
                                 <td><a class="btn btn-warning" href="{{ path('editar_usuarios', {'id': usu.id}) }}">Editar</a></td>
                                 <td><a class="btn btn-danger" href="{{ path('borrar_usuarios', {'id': usu.id}) }}">Borrar</a></td>
-                            
                             </tr>
-
                         </tbody>
                     {% endfor %}
                 </table>
-            </div>  
-
+        
         {% else %}
-
             <p>No hay Usuarios</p>
         {% endif %}
 
 
      
-        {# BOTON ATRAS #}
-        <div class="container">
-            <div class="nav justify-content-end p-2">
-                <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+            {# BOTON ATRAS #}
+            <div class="container">
+                <div class="nav justify-content-end p-2">
+                    <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+                </div>
             </div>
-        </div>
     </div>
 <main>
 

@@ -31,7 +31,7 @@ class AltaUsuariosController extends AbstractController {
             ->add('nombre', TextType::class)
             ->add('apellidos', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('rol', TextType::class,array('label' => 'Valores aceptados: ROLE_USER, ROLE_ADMIN'))
+            ->add('rol', TextType::class,array('label' => 'Valores: ROLE_USER, ROLE_ADMIN'))
             ->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();
             

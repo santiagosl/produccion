@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Producción{% endblock %}
+
+{% block body %}
+
+    <section class="jumbotron p-1 text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Producción</h1>
+                <p class="lead text-muted">Seleccion el cliente que solicita la producción</p>
+            </div>
+    </section>
+
+    <main>
+
+        
+        {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
+        <div class="container">
+            {{ form_start(formCliente) }}   
+            {{ form_widget(formCliente) }} 
+            {{ form_end(formCliente) }}
+        </div>
+
+
+    <div class="container w-60">
+        {% if buscar %}
+                <table class="table table-responsive mt-1">
+                    <h2 class="mt-1">Listado de Clientes</h2>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">CP</th>
+                            <th scope="col">Población</th>
+                            <th scope="col">Provincia</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">e-mail</th>
+                            <th scope="col">Producción</th>
+                        </tr>
+                    </thead>
+                    {% for nombre in buscar %}
+                        <tbody>
+                            <tr>
+                                <th scope='row'>{{nombre.id}}</td>
+                                <td>{{nombre.Nombre}}</td>
+                                <td>{{nombre.direccion}}</td>
+                                <td>{{nombre.cp}}</td>
+                                <td>{{nombre.poblacion}}</td>
+                                <td>{{nombre.provincia}}</td>
+                                <td>{{nombre.telefono}}</td>
+                                <td>{{nombre.mail}}</td>
+                                <td><a class="btn btn-warning" href="{{ path('editar_clientes', {'id': nombre.id}) }}">Seleccionar</a></td>
+                              
+                            </tr>
+
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>  
+
+        {% else %}
+
+        <div class="alert alert-info mt-2" role="alert">
+              <p>No hay clientes en la búsqueda</p>
+        </div>
+
+        {% endif %}
+
+
+           {# BOTON ATRAS #}
+        <div class="container">
+            <div class="nav justify-content-end">
+                <a class="btn btn-primary mr-3"  href="{{ path('lista_ordenes')}}" >Atrás</a>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

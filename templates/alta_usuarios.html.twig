@@ -14,12 +14,14 @@
     </section>
 
 <main>
-    <div class="container w-60">
-
+            <div class="container w-25">
+                
+                    {{form_start(formulario)}} 
+                    {{ form_widget(formulario) }} 
+                    {{ form_end(formulario) }}
         
-        {{ form_start(formulario) }} 
-        {{ form_widget(formulario) }} 
-        {{ form_end(formulario) }}
+            </div>
+
 
 
         {# BOTON ATRAS #}

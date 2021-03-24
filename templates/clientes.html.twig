@@ -12,13 +12,13 @@
     </section>
 
    <main>
-    <div class="container w-60">
+    <div class="container w-80">
 
        <a class="btn btn-primary ml-3"  href="{{ path('alta_clientes')}}" >Dar de alta cliente</a>
 
         <div class="container w-60">
         {% if clientes %}
-                <table class="table table-responsive center mt-2">
+                <table class="table table-responsive mt-1">
                     <h2 class="mt-5">Listado de Clientes</h2>
                     <thead>
                         <tr>
@@ -29,9 +29,9 @@
                         <th scope="col">Población</th>
                         <th scope="col">Provincia</th>
                         <th scope="col">Teléfono</th>
-                        <th scope="col">CIF</th>
+                        {# <th scope="col">CIF</th> #}
                         <th scope="col">e-mail</th>
-                        <th scope="col">web</th>
+                        {# <th scope="col">web</th> #}
                         <th scope="col">Editar</th>
                         <th scope="col">Borrar</th>
        
@@ -47,9 +47,9 @@
                                 <td>{{cli.poblacion}}</td>
                                 <td>{{cli.provincia}}</td>
                                 <td>{{cli.telefono}}</td>
-                                <td>{{cli.cif}}</td>
+                                {# <td>{{cli.cif}}</td> #}
                                 <td>{{cli.mail}}</td>
-                                <td>{{cli.web}}</td>
+                                {# <td>{{cli.web}}</td> #}
                                 <td><a class="btn btn-warning" href="{{ path('editar_clientes', {'id': cli.id}) }}">Editar</a></td>
                                 <td><a class="btn btn-danger" href="{{ path('borrar_clientes', {'id': cli.id}) }}">Borrar</a></td>
                             </tr>

@@ -22,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 
 
+
 class ProduccionController extends AbstractController 
 
 {
@@ -30,15 +31,15 @@ class ProduccionController extends AbstractController
    * @Route("/produccion", name="produccion");
    */
 
-    public function buscarCliente(Request $request, string $archivoPDF)
+
+    public function produccion(Request $request, string $archivoPDF)
   
   {
 
     $nuevaProduccion = new Produccion();
-    
     $formulario = $this->createFormBuilder($nuevaProduccion) 
       
-    ->add('idCliente', TextType::class, array('label' => 'Codigo cliente'))
+    ->add('idcliente', TextType::class, array('label' => 'Codigo cliente'))
     
     ->add('referencia', TextType::class, array('label' => 'Referencia'))
    
@@ -128,30 +129,39 @@ class ProduccionController extends AbstractController
 
             return $this->redirectToRoute('lista_ordenes');
       }
+        return $this->render('produccion.html.twig', array('formulario' => $formulario->createView()));
+  }
 
-           
+      /**
+        * @Route("/selec_cliente_prod", name="selec_cliente_prod");
+      */
+
+      public function buscarCliente(Request $request){
+          $buscar = '';
+          $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
+          $formCliente = $this->createFormBuilder()
+          ->add('nombre', TextType::class)
+          ->add('save', SubmitType::Class, array('label' => 'Buscar'))
+          ->getForm();
+          
+          $formCliente->handleRequest($request);
+          
+          if($request->server->get('REQUEST_METHOD') == 'POST')
+          {
+
+            $nombre = $formCliente->getData();
+            $buscar = $repositorio->nBuscar($nombre['nombre']);
+
+          }
         
-            $buscar = '';
-            $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
-            $formCliente = $this->createFormBuilder() 
-            ->add('nombre', TextType::class)
-            ->add('save', SubmitType::Class, array('label' => 'Enviar'))
-            ->getForm();
-            
-            $formCliente->handleRequest($request);
+            return $this->render(
+            'selec_cliente_produccion.html.twig', array
+            (
 
-            if($request->server->get('REQUEST_METHOD') == 'POST')
-              {
-
-                $nombre = $formCliente->getData();
-                $buscar = $repositorio->nBuscar($nombre['nombre']);
-
-              }
-     
-             return $this->render('produccion.html.twig', array(
-                                  'formulario' => $formulario->createView(),
-                                  'formCliente' => $formCliente->createView(), 'buscar' => $buscar));
-      }
+            'formCliente' => $formCliente->createView(),'buscar' => $buscar,
+          
+            ));
+        }
 
 } 
 
