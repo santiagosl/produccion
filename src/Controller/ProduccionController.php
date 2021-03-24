@@ -131,11 +131,13 @@ class ProduccionController extends AbstractController
            
           try {
               $entityManager->flush(); 
+
           } catch (Exception $e){
               return new Response ('Error al insertar el usuario');
           }
 
             return $this->redirectToRoute('lista_ordenes');
+               
       }
         return $this->render('produccion.html.twig', array('formulario' => $formulario->createView()));
   }

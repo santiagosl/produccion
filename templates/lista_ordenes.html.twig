@@ -12,7 +12,14 @@
           <p class="lead text-muted">Lista de ordenes de producción</p>
          </div>
       </section>
+      
 
+ {% for message in app.flashes ('succes') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+ 
+{% endfor %}
 
 
 
@@ -20,7 +27,7 @@
 
       <a class="btn btn-primary mb-1"  href="{{ path('selec_cliente_prod')}}" >Crear nueva produccion</a>
 
-        <table class="table table-responsive">
+        <table class="table table-responsive text-center">
           <h2 class="mt-2">Listado de Producción</h2>
           <thead>
             <tr>
@@ -44,11 +51,11 @@
                   <th scope='row'>{{ord.id}}</td>
                     <td>{{ord.fechaCreacion | date('d-m-Y')}}</td>
                     <td>{{ ord.idCliente}}</td>
-                    <td>{{ord.referencia}}</td>
-                    <td>{{ord.mecanica}}</td>
-                    <td>{{ord.laminas}}</td>
-                    <td>{{ord.embalaje}}</td>
-                    <td>{{ord.transporte}}</td>
+                    <td>{{ ord.referencia }}</td>
+                    <td>{% if ord.mecanica %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
+                    <td>{% if ord.laminas %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
+                    <td>{% if ord.embalaje %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
+                    <td>{% if ord.transporte %} <p class="btn-success">SI</p>{% else %} <p>NO</p> {% endif %}</td>
                     <td>{{ord.fechaFin}}</td>
                     <td><a class="btn btn-primary" href="#">Ver</a></td>
                     <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}">Editar</a></td>
@@ -58,13 +65,13 @@
             {% endfor %}
         </table>
 
-
           {# BOTON ATRAS #}
           <div class="container mb-5">
               <div class="nav justify-content-end mr-5">
                   <a class="btn btn-primary mr-3"  href="{{ path('resumen')}}" >Atrás</a>
               </div>
           </div>
+
 
       </div>
   </main>
