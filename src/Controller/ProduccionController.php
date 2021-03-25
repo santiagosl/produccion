@@ -20,6 +20,7 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 
@@ -125,7 +126,7 @@ class ProduccionController extends AbstractController
       
           //Datos fijos introducidos, fecha, hora y fk de usuario y cliente
            $nuevaProduccion->setFechaCreacion(new \DateTime('Europe/Paris'));
-           $nuevaProduccion->setHoraCreacion(new \DateTime('Europe/Paris'));
+           
            $nuevaProduccion->setIdUsuario($this->getUser());
            $nuevaProduccion->setIdCliente($clienteSeleccionado);
            

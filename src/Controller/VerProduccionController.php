@@ -47,7 +47,7 @@ class VerProduccionController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaInicioMecanica(new \DateTime('Europe/Paris'));
-        $produccionActiva->setHoraInicioMecanica(new \DateTime('Europe/Paris'));
+        
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -60,8 +60,8 @@ class VerProduccionController extends AbstractController
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
         $verProduccion = $repositorio->findBy(["id"=> $id]);
-        //return $this->render('ver_produccion.html.twig' ,array ('verProduccion' => $verProduccion));
-        return $this->redirect('http://localhost/produccion/public/lista_ordenes');
+        return $this->render('ver_produccion.html.twig' ,array ('verProduccion' => $verProduccion));
+
     
     }
 
@@ -77,7 +77,7 @@ class VerProduccionController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaFinMecanica(new \DateTime('Europe/Paris'));
-        $produccionActiva->setHoraFinMecanica(new \DateTime('Europe/Paris'));
+        
     
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -90,8 +90,7 @@ class VerProduccionController extends AbstractController
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
         $verProduccion = $repositorio->findBy(["id"=> $id]);
-        //return $this->render('ver_produccion.html.twig' ,array ('verProduccion' => $verProduccion));
-        return $this->redirect('http://localhost/produccion/public/lista_ordenes');
+        return $this->render('ver_produccion.html.twig' ,array ('verProduccion' => $verProduccion));
     
     }
     
@@ -105,8 +104,8 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        $produccionActiva->setFechaInicioLaminas(new \DateTime());
-        $produccionActiva->setHoraInicioLaminas(new \DateTime());
+        $produccionActiva->setFechaInicioLaminas(new \DateTime('Europe/Paris'));
+      
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -133,8 +132,8 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        $produccionActiva->setFechaFinLaminas(new \DateTime());
-        $produccionActiva->setHoraFinLaminas(new \DateTime());
+        $produccionActiva->setFechaFinLaminas(new \DateTime('Europe/Paris'));
+        
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -161,8 +160,8 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        $produccionActiva->setFechaInicioEmbalaje(new \DateTime());
-        $produccionActiva->setHoraInicioEmbalaje(new \DateTime());
+        $produccionActiva->setFechaInicioEmbalaje(new \DateTime('Europe/Paris'));
+
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -189,8 +188,8 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        $produccionActiva->setFechaFinEmbalaje(new \DateTime());
-        $produccionActiva->setHoraFinEmbalaje(new \DateTime());
+        $produccionActiva->setFechaFinEmbalaje(new \DateTime('Europe/Paris'));
+       
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -217,8 +216,8 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        $produccionActiva->setFechaInicioTransporte(new \DateTime());
-        $produccionActiva->setHoraInicioTransporte(new \DateTime());
+        $produccionActiva->setFechaInicioTransporte(new \DateTime('Europe/Paris'));
+
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -245,8 +244,8 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        $produccionActiva->setFechaFinTransporte(new \DateTime());
-        $produccionActiva->setHoraFinTransporte(new \DateTime());
+        $produccionActiva->setFechaFinTransporte(new \DateTime('Europe/Paris'));
+  
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -273,72 +272,54 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-        //Calculo de horas para la mecanica
-         if ($produccionActiva->getHoraInicioMecanica() != null && $produccionActiva->getHoraFinMecanica() != null )
+        //Calculo de Fechas para la mecanica
+         if ($produccionActiva->getFechaInicioMecanica() != null && $produccionActiva->getFechaFinMecanica() != null )
         {
             $inicioMecanica = $produccionActiva->getFechaInicioMecanica('Europe/Paris');
             $finMecanica = $produccionActiva->getFechaFinMecanica('Europe/Paris');
-            $totalMecanica = date_diff($inicioMecanica, $finMecanica);
-            $tiempoMecanica=array();
-            
-            foreach($totalMecanica as $valorMecanica){
-                $tiempoMecanica[]=$valorMecanica;
-            }
+            $totalMecanica = $inicioMecanica->diff($finMecanica);
+
         }
 
-            $produccionActiva->setTiempoMecanica($tiempoMecanica     [2]);
+            $produccionActiva->setTiempoMecanica($totalMecanica->format('%D dias - %H:%I:%S'));
         
-        //Calculo de horas para las laminas
-        if ($produccionActiva->getHoraInicioLaminas() != null && $produccionActiva->getHoraFinLaminas() != null )
+        //Calculo de Fechas para las laminas
+        if ($produccionActiva->getFechaInicioLaminas() != null && $produccionActiva->getFechaFinLaminas() != null )
         {
 
-            $inicioLaminas = $produccionActiva->getHoraInicioLaminas('Europe/Paris');
-            $finLaminas = $produccionActiva->getHoraFinLaminas('Europe/Paris');
-            $totalLaminas = date_diff($inicioLaminas, $finLaminas);
-            $tiempoLaminas=array();
-            
-            foreach($totalLaminas as $valorLaminas){
-                $tiempoLaminas[]=$valorLaminas;
-            }
-
-            $produccionActiva->setTiempoLaminas($tiempoLaminas       [3]);
+            $inicioLaminas = $produccionActiva->getFechaInicioLaminas('Europe/Paris');
+            $finLaminas = $produccionActiva->getFechaFinLaminas('Europe/Paris');
+            $totalLaminas = $inicioLaminas->diff($finLaminas);
+     
+            $produccionActiva->setTiempoLaminas($totalLaminas->format('%D dias - %H:%I:%S'));
       
         }
 
-        //Calculo de horas para el embalaje
-         if ($produccionActiva->getHoraInicioEmbalaje() != null && $produccionActiva->getHoraFinEmbalaje() != null )
+        //Calculo de Fechas para el embalaje
+         if ($produccionActiva->getFechaInicioEmbalaje() != null && $produccionActiva->getFechaFinEmbalaje() != null )
         {
-            $inicioEmbalaje = $produccionActiva->getHoraInicioEmbalaje('Europe/Paris');
-            $finEmbalaje = $produccionActiva->getHoraFinEmbalaje('Europe/Paris');
-            $totalEmbalaje = date_diff($inicioEmbalaje, $finEmbalaje);
-            $tiempoEmbalaje=array();
-            
-            foreach($totalEmbalaje as $valorEmbalaje){
-                $tiempoEmbalaje[]=$valorEmbalaje;
-            }
+            $inicioEmbalaje = $produccionActiva->getFechaInicioEmbalaje('Europe/Paris');
+            $finEmbalaje = $produccionActiva->getFechaFinEmbalaje('Europe/Paris');
+            $totalEmbalaje = $inicioEmbalaje->diff($finEmbalaje);
 
-            $produccionActiva->setTiempoEmbalaje($tiempoEmbalaje     [3]);
+
+            $produccionActiva->setTiempoEmbalaje($totalEmbalaje->format('%D dias - %H:%I:%S'));
         }   
 
-        //Calculo de horas para el transporte
-        if ($produccionActiva->getHoraInicioTransporte() != null && $produccionActiva->getHoraFinTransporte() != null )
+        //Calculo de Fechas para el transporte
+        if ($produccionActiva->getFechaInicioTransporte() != null && $produccionActiva->getFechaFinTransporte() != null )
         {
-            $inicioTransporte = $produccionActiva->getHoraInicioTransporte('Europe/Paris');
-            $finTransporte = $produccionActiva->getHoraFinTransporte('Europe/Paris');
-            $totalTransporte = date_diff($inicioTransporte, $finTransporte);
-            $tiempoTransporte=array();
-            
-            foreach($totalTransporte as $valorTransporte){
-                $tiempoTransporte[]=$valorTransporte;
-            }
+            $inicioTransporte = $produccionActiva->getFechaInicioTransporte('Europe/Paris');
+            $finTransporte = $produccionActiva->getFechaFinTransporte('Europe/Paris');
+            $totalTransporte = $inicioTransporte->diff($finTransporte);
 
-            $produccionActiva->setTiempoTransporte($tiempoTransporte [3]);
+            $produccionActiva->setTiempoTransporte($totalTransporte->format('%D dias - %H:%I:%S'));
         }
 
-        //Graba la fecha y hora de finalizacion 
+        //Graba la fecha y Fecha de finalizacion 
 
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
-        $produccionActiva->setHoraFin(new \DateTime('Europe/Paris'));
+        $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
 
 
 

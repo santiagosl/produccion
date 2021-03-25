@@ -55,7 +55,7 @@
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioMecanica %} 
                             <p class="btn-warning">Iniciado</p>
-                        {% elseif ord.fechaInicioMecanica == null %} 
+                        {% elseif ord.mecanica %} 
                             <p class="btn-danger">No Iniciado</p>
                         {% else %}                          
                             <p>NO</p> 
@@ -97,8 +97,10 @@
                             <p>NO</p> 
                         {% endif %}
                     </td>             
-                 
-                    <td>{{ord.fechaFin | date ('d/m/y')}}</td>
+
+                    
+                    <td>{% if(ord.fechaFin) %} {{ord.fechaFin | date ('d/m/y')}}{% else %} <p>SIN FECHA</p>{% endif %}</td>
+                    
                     <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}">Ver   </a></td>
                     <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}">Editar</a></td>
                     <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}">Borrar</a></td> 

@@ -48,27 +48,16 @@ class Produccion
     private $referencia;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $fechaCreacion;
 
-    /**
-     * @ORM\Column(type="time")
-     */
-    private $horaCreacion;
-
- 
-    /**
-     * @ORM\Column(type="date",nullable=true)
+     /**
+     * @ORM\Column(type="datetime",nullable=true)
      * @ORM\JoinColumn(nullable=true)
      */
     private $fechaFin;
 
-    /**
-     * @ORM\Column(type="time",nullable=true)
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $horaFin;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
@@ -89,84 +78,51 @@ class Produccion
     private $idCliente;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaInicioMecanica;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaInicioMecanica;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaFinMecanica;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaFinMecanica;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaInicioLaminas;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaInicioLaminas;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaFinLaminas;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaFinLaminas;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaInicioEmbalaje;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaInicioEmbalaje;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaFinEmbalaje;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaFinEmbalaje;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaInicioTransporte;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaInicioTransporte;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaFinTransporte;
 
-    /**
-     * @ORM\Column(type="time", nullable=true)
-     */
-    private $horaFinTransporte;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -266,18 +222,6 @@ class Produccion
         return $this;
     }
 
-    public function getHoraCreacion(): ?\DateTimeInterface
-    {
-        return $this->horaCreacion;
-    }
-
-    public function setHoraCreacion(\DateTimeInterface $horaCreacion): self
-    {
-        $this->horaCreacion = $horaCreacion;
-
-        return $this;
-    }
-
 
     public function getFechaFin(): ?\DateTimeInterface
     {
@@ -287,18 +231,6 @@ class Produccion
     public function setFechaFin(\DateTimeInterface $fechaFin): self
     {
         $this->fechaFin = $fechaFin;
-
-        return $this;
-    }
-
-    public function getHoraFin(): ?\DateTimeInterface
-    {
-        return $this->horaFin;
-    }
-
-    public function setHoraFin(\DateTimeInterface $horaFin): self
-    {
-        $this->horaFin = $horaFin;
 
         return $this;
     }
@@ -355,17 +287,6 @@ class Produccion
           return $this;
       }
 
-      public function getHoraInicioMecanica(): ?\DateTimeInterface
-      {
-          return $this->horaInicioMecanica;
-      }
-
-      public function setHoraInicioMecanica(?\DateTimeInterface $horaInicioMecanica): self
-      {
-          $this->horaInicioMecanica = $horaInicioMecanica;
-
-          return $this;
-      }
 
       public function getFechaFinMecanica(): ?\DateTimeInterface
       {
@@ -379,17 +300,6 @@ class Produccion
           return $this;
       }
 
-      public function getHoraFinMecanica(): ?\DateTimeInterface
-      {
-          return $this->horaFinMecanica;
-      }
-
-      public function setHoraFinMecanica(?\DateTimeInterface $horaFinMecanica): self
-      {
-          $this->horaFinMecanica = $horaFinMecanica;
-
-          return $this;
-      }
 
       public function getFechaInicioLaminas(): ?\DateTimeInterface
       {
@@ -403,17 +313,6 @@ class Produccion
           return $this;
       }
 
-      public function getHoraInicioLaminas(): ?\DateTimeInterface
-      {
-          return $this->horaInicioLaminas;
-      }
-
-      public function setHoraInicioLaminas(?\DateTimeInterface $horaInicioLaminas): self
-      {
-          $this->horaInicioLaminas = $horaInicioLaminas;
-
-          return $this;
-      }
 
       public function getFechaFinLaminas(): ?\DateTimeInterface
       {
@@ -427,17 +326,6 @@ class Produccion
           return $this;
       }
 
-      public function getHoraFinLaminas(): ?\DateTimeInterface
-      {
-          return $this->horaFinLaminas;
-      }
-
-      public function setHoraFinLaminas(?\DateTimeInterface $horaFinLaminas): self
-      {
-          $this->horaFinLaminas = $horaFinLaminas;
-
-          return $this;
-      }
 
       public function getFechaInicioEmbalaje(): ?\DateTimeInterface
       {
@@ -451,17 +339,6 @@ class Produccion
           return $this;
       }
 
-      public function getHoraInicioEmbalaje(): ?\DateTimeInterface
-      {
-          return $this->horaInicioEmbalaje;
-      }
-
-      public function setHoraInicioEmbalaje(?\DateTimeInterface $horaInicioEmbalaje): self
-      {
-          $this->horaInicioEmbalaje = $horaInicioEmbalaje;
-
-          return $this;
-      }
 
       public function getFechaFinEmbalaje(): ?\DateTimeInterface
       {
@@ -471,18 +348,6 @@ class Produccion
       public function setFechaFinEmbalaje(?\DateTimeInterface $fechaFinEmbalaje): self
       {
           $this->fechaFinEmbalaje = $fechaFinEmbalaje;
-
-          return $this;
-      }
-
-      public function getHoraFinEmbalaje(): ?\DateTimeInterface
-      {
-          return $this->horaFinEmbalaje;
-      }
-
-      public function setHoraFinEmbalaje(?\DateTimeInterface $horaFinEmbalaje): self
-      {
-          $this->horaFinEmbalaje = $horaFinEmbalaje;
 
           return $this;
       }
@@ -499,18 +364,6 @@ class Produccion
           return $this;
       }
 
-      public function getHoraInicioTransporte(): ?\DateTimeInterface
-      {
-          return $this->horaInicioTransporte;
-      }
-
-      public function setHoraInicioTransporte(?\DateTimeInterface $horaInicioTransporte): self
-      {
-          $this->horaInicioTransporte = $horaInicioTransporte;
-
-          return $this;
-      }
-
       public function getFechaFinTransporte(): ?\DateTimeInterface
       {
           return $this->fechaFinTransporte;
@@ -519,18 +372,6 @@ class Produccion
       public function setFechaFinTransporte(?\DateTimeInterface $fechaFinTransporte): self
       {
           $this->fechaFinTransporte = $fechaFinTransporte;
-
-          return $this;
-      }
-
-      public function getHoraFinTransporte(): ?\DateTimeInterface
-      {
-          return $this->horaFinTransporte;
-      }
-
-      public function setHoraFinTransporte(?\DateTimeInterface $horaFinTransporte): self
-      {
-          $this->horaFinTransporte = $horaFinTransporte;
 
           return $this;
       }
