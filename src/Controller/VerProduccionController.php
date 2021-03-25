@@ -42,12 +42,10 @@ class VerProduccionController extends AbstractController
     public function fechaInicioMecanica($id) 
     { 
 
-          
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaInicioMecanica(new \DateTime('Europe/Paris'));
-        
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -71,13 +69,11 @@ class VerProduccionController extends AbstractController
 
     public function fechaFinMecanica($id) 
     { 
-
           
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaFinMecanica(new \DateTime('Europe/Paris'));
-        
     
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -105,7 +101,6 @@ class VerProduccionController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaInicioLaminas(new \DateTime('Europe/Paris'));
-      
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -134,7 +129,6 @@ class VerProduccionController extends AbstractController
 
         $produccionActiva->setFechaFinLaminas(new \DateTime('Europe/Paris'));
         
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
@@ -161,7 +155,6 @@ class VerProduccionController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaInicioEmbalaje(new \DateTime('Europe/Paris'));
-
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -190,7 +183,6 @@ class VerProduccionController extends AbstractController
 
         $produccionActiva->setFechaFinEmbalaje(new \DateTime('Europe/Paris'));
        
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
@@ -217,7 +209,6 @@ class VerProduccionController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaInicioTransporte(new \DateTime('Europe/Paris'));
-
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
@@ -246,7 +237,6 @@ class VerProduccionController extends AbstractController
 
         $produccionActiva->setFechaFinTransporte(new \DateTime('Europe/Paris'));
   
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
@@ -278,10 +268,10 @@ class VerProduccionController extends AbstractController
             $inicioMecanica = $produccionActiva->getFechaInicioMecanica('Europe/Paris');
             $finMecanica = $produccionActiva->getFechaFinMecanica('Europe/Paris');
             $totalMecanica = $inicioMecanica->diff($finMecanica);
-
+            
+            $produccionActiva->setTiempoMecanica($totalMecanica->format('%D:%H:%I'));
         }
 
-            $produccionActiva->setTiempoMecanica($totalMecanica->format('%D dias - %H:%I:%S'));
         
         //Calculo de Fechas para las laminas
         if ($produccionActiva->getFechaInicioLaminas() != null && $produccionActiva->getFechaFinLaminas() != null )
@@ -291,8 +281,7 @@ class VerProduccionController extends AbstractController
             $finLaminas = $produccionActiva->getFechaFinLaminas('Europe/Paris');
             $totalLaminas = $inicioLaminas->diff($finLaminas);
      
-            $produccionActiva->setTiempoLaminas($totalLaminas->format('%D dias - %H:%I:%S'));
-      
+            $produccionActiva->setTiempoLaminas($totalLaminas->format('%D:%H:%I'));
         }
 
         //Calculo de Fechas para el embalaje
@@ -302,8 +291,7 @@ class VerProduccionController extends AbstractController
             $finEmbalaje = $produccionActiva->getFechaFinEmbalaje('Europe/Paris');
             $totalEmbalaje = $inicioEmbalaje->diff($finEmbalaje);
 
-
-            $produccionActiva->setTiempoEmbalaje($totalEmbalaje->format('%D dias - %H:%I:%S'));
+            $produccionActiva->setTiempoEmbalaje($totalEmbalaje->format('%D:%H:%I'));
         }   
 
         //Calculo de Fechas para el transporte
@@ -313,17 +301,33 @@ class VerProduccionController extends AbstractController
             $finTransporte = $produccionActiva->getFechaFinTransporte('Europe/Paris');
             $totalTransporte = $inicioTransporte->diff($finTransporte);
 
-            $produccionActiva->setTiempoTransporte($totalTransporte->format('%D dias - %H:%I:%S'));
+            $produccionActiva->setTiempoTransporte($totalTransporte->format('%D:%H:%I'));
         }
 
+         //Suma de todos los tiempos finalizados y lo almacenamos en la base de datos.
+        $tiempoMecancia = $produccionActiva->getTiempoMecanica();
+        $tiempoLaminas = $produccionActiva->getTiempoLaminas();
+        $tiempoEmbalaje = $produccionActiva->getTiempoEmbalaje();
+        $tiempoTransporte = $produccionActiva->getTiempoTransporte();
+
         //Graba la fecha y Fecha de finalizacion 
-
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
 
+        
+        $tiempoM = preg_split("/:/",$tiempoMecancia);
+        $tiempoL = preg_split("/:/",$tiempoLaminas);
+        $tiempoE = preg_split("/:/",$tiempoEmbalaje);
+        $tiempoT = preg_split("/:/",$tiempoTransporte);
+         
+        $diasT =     (int)$tiempoM[0] + (int)$tiempoL[0] + (int)$tiempoE[0] + (int)$tiempoT[0];
+        $horasT =    (int)$tiempoM[1] + (int)$tiempoL[1] + (int)$tiempoE[1] + (int)$tiempoT[1];
+        $minutosT =  (int)$tiempoM[2] + (int)$tiempoL[2] + (int)$tiempoE[2] + (int)$tiempoT[2];
 
+        $total = ((($diasT/24)*60) + ($horasT*60) + $minutosT)/60;
+        $produccionActiva->setTiempoTotal(round($total,0));
 
-
+        //Preparamos los datos y los manda a la base de datos.
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
@@ -336,6 +340,7 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
         $verProduccion = $repositorio->findBy(["id"=> $id]);
         return $this->render('ver_produccion.html.twig' ,array ('verProduccion' => $verProduccion));
+
     
     }
     

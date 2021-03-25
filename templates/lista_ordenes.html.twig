@@ -51,7 +51,9 @@
                     <td>{{ ord.referencia }}</td>
 
                     <td>
-                        {% if ord.fechaFinMecanica %} 
+                       {% if ord.mecanica == '' %} 
+                            <p class="btn-secondary">Sin datos</p>
+                        {% elseif ord.fechaFinMecanica %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioMecanica %} 
                             <p class="btn-warning">Iniciado</p>
@@ -63,7 +65,9 @@
                     </td>
                     
                       <td>
-                        {% if ord.fechaFinLaminas %} 
+                        {% if ord.laminas == '' %} 
+                            <p class="btn-secondary">Sin datos</p>
+                        {% elseif ord.fechaFinLaminas %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioLaminas %} 
                             <p class="btn-warning">Iniciado</p>
@@ -75,7 +79,9 @@
                     </td>
 
                       <td>
-                        {% if ord.fechaFinembalaje %} 
+                        {% if ord.embalaje == '' %} 
+                            <p class="btn-secondary">Sin datos</p>
+                        {% elseif ord.fechaFinembalaje %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioembalaje %} 
                             <p class="btn-warning">Iniciado</p>
@@ -87,7 +93,9 @@
                     </td>
                     
                       <td>
-                        {% if ord.fechaFintransporte %} 
+                        {% if ord.transporte == '' %} 
+                            <p class="btn-secondary">Sin datos</p>
+                        {% elseif ord.fechaFintransporte %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaIniciotransporte %} 
                             <p class="btn-warning">Iniciado</p>

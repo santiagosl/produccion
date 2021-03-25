@@ -45,10 +45,7 @@ class ProduccionController extends AbstractController
 
     $nuevaProduccion = new Produccion();
     $formulario = $this->createFormBuilder($nuevaProduccion) 
-      
-    /* ->add('idcliente', TextType::class, 
-          array('label' => 'Codigo cliente')) */
-    
+        
     ->add('referencia', TextType::class, array('label' => 'Referencia'))
    
     ->add('mecanica', FileType::class, 
@@ -80,7 +77,8 @@ class ProduccionController extends AbstractController
           $entityManager->persist($nuevaProduccion);
 
           //Codigo que se encarga de subir los archivos MECANICA a la base de datos
-          if($mecanica = $formulario['mecanica']->getData()){
+          if($mecanica = $formulario['mecanica']->getData())
+          {
             $nombreMecanica = bin2hex(random_bytes(6)). '.' . $mecanica->guessExtension();
             try {
               $mecanica->move($archivoPDF, $nombreMecanica);
@@ -88,10 +86,16 @@ class ProduccionController extends AbstractController
 
             }
             $nuevaProduccion->setMecanica($nombreMecanica);
+          } else {
+            $nuevaProduccion->setMecanica('');
+            $nuevaProduccion->setFechaInicioMecanica(new \DateTime('Europe/Paris'));
+            $nuevaProduccion->setFechaFinMecanica(new \DateTime('Europe/Paris'));
+            
           }
           
           //Codigo que se encarga de subir los archivos LAMINAS a la base de datos
-          if($laminas = $formulario['laminas']->getData()){
+          if($laminas = $formulario['laminas']->getData())
+          {
             $nombreLaminas = bin2hex(random_bytes(6)). '.' . $laminas->guessExtension();
             try {
               $laminas->move($archivoPDF, $nombreLaminas);
@@ -99,10 +103,15 @@ class ProduccionController extends AbstractController
 
             }
             $nuevaProduccion->setLaminas($nombreLaminas);
+          } else {
+            $nuevaProduccion->setLaminas('');
+            $nuevaProduccion->setFechaInicioLaminas(new \DateTime('Europe/Paris'));
+            $nuevaProduccion->setFechaFinLaminas(new \DateTime('Europe/Paris'));
           }
 
           //Codigo que se encarga de subir los archivos EMBALAJE a la base de datos
-          if($embalaje = $formulario['embalaje']->getData()){
+          if($embalaje = $formulario['embalaje']->getData())
+          {
             $nombreEmbalaje = bin2hex(random_bytes(6)). '.' . $embalaje->guessExtension();
             try {
               $embalaje->move($archivoPDF, $nombreEmbalaje);
@@ -110,10 +119,15 @@ class ProduccionController extends AbstractController
 
             }
             $nuevaProduccion->setembalaje($nombreEmbalaje);
+          } else {
+            $nuevaProduccion->setEmbalaje('');
+            $nuevaProduccion->setFechaInicioEmbalaje(new \DateTime('Europe/Paris'));
+            $nuevaProduccion->setFechaFinEmbalaje(new \DateTime('Europe/Paris'));
           }
 
           //Codigo que se encarga de subir los archivos TRANSPORTE a la base de datos
-          if($transporte = $formulario['transporte']->getData()){
+          if($transporte = $formulario['transporte']->getData())
+          {
             $nombreTransporte = bin2hex(random_bytes(6)). '.' . $transporte->guessExtension();
             try {
               $transporte->move($archivoPDF, $nombreTransporte);
@@ -121,6 +135,10 @@ class ProduccionController extends AbstractController
 
             }
             $nuevaProduccion->settransporte($nombreTransporte);
+          } else {
+            $nuevaProduccion->setTransporte('');
+            $nuevaProduccion->setFechaInicioTransporte(new \DateTime('Europe/Paris'));
+            $nuevaProduccion->setFechaFinTransporte(new \DateTime('Europe/Paris'));
           }
           
       
@@ -130,6 +148,7 @@ class ProduccionController extends AbstractController
            $nuevaProduccion->setIdUsuario($this->getUser());
            $nuevaProduccion->setIdCliente($clienteSeleccionado);
            
+                  
           try {
               $entityManager->flush(); 
 

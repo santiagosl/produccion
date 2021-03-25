@@ -54,43 +54,43 @@
               <tbody>
                 
                     
-                    <td> {# TABLA MECANICA #}
+                    <td class="w-25"> {# TABLA MECANICA #}
                         {% if prod.mecanica %} 
-                            <p class="container btn-success"><a class="text-white" href="{{ './archivos/pdf/' ~ prod.mecanica }}" target="_blank">Ver Documento</a></p>
-                      
-                        {% if prod.fechaInicioMecanica == null %} 
-                    <div class="container w-60 mb-1">
-                                <a class="btn btn-primary mr-3 w-100"  href="{{ path('fechaInicioMecanica', {'id': prod.id}) }}" >Iniciar</a>
-                                <input class="text-center w-100" type="text" disabled>
-                                <input class="text-center w-100" type="text"  disabled>
-                        {% else %} 
-                                <a class="btn btn-success w-100 disabled"  href="#">Iniciado</a>
-                                <input class="text-center w-100" type="text" value="{{ prod.fechaInicioMecanica | date("d/m/y H:i:s")}}" disabled>
-                                
-                        {% endif %}
-                    </div>
-
-                        {% if prod.fechaFinMecanica == null %} 
+                                <p class="container btn-success"><a class="text-white" href="{{ './archivos/pdf/' ~ prod.mecanica }}" target="_blank">Ver Documento</a></p>
+                        
+                            {% if prod.fechaInicioMecanica == null %} 
                             <div class="container w-60 mb-1">
-                                <a class="btn btn-primary mr-3 w-100"  href="{{ path('fechaFinMecanica', {'id': prod.id}) }}" >Finalizar</a>
-                                <input class="text-center w-100" type="text" disabled>
-                                <input class="text-center w-100" type="text"  disabled>
-                        {% else %} 
-                                <a class="btn btn-success w-100 disabled"  href="#">Finalizado</a>
-                                <input class="text-center w-100" type="text" value="{{ prod.fechaFinMecanica | date("d/m/y H:i:s")}}" disabled>
-                                
-                                <a class="btn btn-success mt-1 w-100 disabled">Total</a>
-                                <input class="text-center w-100" type="text" value="{{ prod.tiempoMecanica }}" disabled>
-                                
-                        {% endif %}
+                                    <a class="btn btn-primary mr-3 w-100"  href="{{ path('fechaInicioMecanica', {'id': prod.id}) }}" >Iniciar</a>
+                                    <input class="text-center w-100" type="text" disabled>
+                                    <input class="text-center w-100" type="text"  disabled>
+                            {% else %} 
+                                    <a class="btn btn-success w-100 disabled"  href="#">Iniciado</a>
+                                    <input class="text-center w-100" type="text" value="{{ prod.fechaInicioMecanica | date("d/m/y H:i:s")}}" disabled>
+                                    
+                            {% endif %}
                             </div>
+
+                            {% if prod.fechaFinMecanica == null %} 
+                                <div class="container w-60 mb-1">
+                                    <a class="btn btn-primary mr-3 w-100"  href="{{ path('fechaFinMecanica', {'id': prod.id}) }}" >Finalizar</a>
+                                    <input class="text-center w-100" type="text" disabled>
+                                    <input class="text-center w-100" type="text"  disabled>
+                            {% else %} 
+                                    <a class="btn btn-success w-100 disabled"  href="#">Finalizado</a>
+                                    <input class="text-center w-100" type="text" value="{{ prod.fechaFinMecanica | date("d/m/y H:i:s")}}" disabled>
+                                    
+                                    <a class="btn btn-success mt-1 w-100 disabled text-white">Total (d/h/m)</a>
+                                    <input class="text-center w-100" type="text" value="{{ prod.tiempoMecanica }}" disabled>
+                                    
+                            {% endif %}
+                                </div>
                         {% else %} 
                             <p>NO</p> 
                         {% endif %}
                     </td>
                     
                     
-                    <td> {# TABLA LAMINAS #}
+                    <td class="w-25"> {# TABLA LAMINAS #}
                         {% if prod.Laminas %} 
                             <p class="btn-success"><a class="text-white" href="{{ './archivos/pdf/' ~ prod.Laminas }}" target="_blank">Ver Documento</a></p>
                       
@@ -115,8 +115,8 @@
                                 <a class="btn btn-success mr-3 w-100 disabled"  href="#">Finalizado</a>
                                 <input class="text-center w-100" type="text" value="{{ prod.fechaFinLaminas | date("d/m/y H:i:s",'Europe/Paris')}}" disabled>
                                
-
-                                <a class="btn btn-success mt-1 w-100 disabled">Total</a>
+ 
+                                <a class="btn btn-success mt-1 w-100 disabled text-white">Total (d/h/m)</a>
                                 <input class="text-center w-100" type="text" value="{{ prod.tiempoLaminas }}" disabled>
                                
                             {% endif %}
@@ -128,7 +128,7 @@
 
 
 
-                    <td> {# TABLA EMBALAJE #}
+                    <td class="w-25"> {# TABLA EMBALAJE #}
                         {% if prod.Embalaje %} 
                             <p class="btn-success"><a class="text-white" href="{{ './archivos/pdf/' ~ prod.Embalaje }}" target="_blank">Ver Documento</a></p>
                       
@@ -154,7 +154,7 @@
                                 <input class="text-center w-100" type="text" value="{{ prod.fechaFinEmbalaje | date("d/m/y H:i:s",'Europe/Paris')}}" disabled>
                                 
 
-                                <a class="btn btn-success mt-1 w-100 disabled">Total</a>
+                                <a class="btn btn-success mt-1 w-100 disabled text-white">Total (d/h/m)</a>
                                 <input class="text-center w-100" type="text" value="{{ prod.tiempoEmbalaje }}" disabled>
                                 
                             {% endif %}
@@ -164,7 +164,7 @@
                         {% endif %}
                     </td>
                     
-                    <td> {# TABLA TRANSPORTE #}
+                    <td class="w-25"> {# TABLA TRANSPORTE #}
                         {% if prod.Transporte %} 
                             <p class="btn-success"><a class="text-white" href="{{ './archivos/pdf/' ~ prod.Transporte }}" target="_blank">Ver Documento</a></p>
                       
@@ -190,7 +190,7 @@
                                 <input class="text-center w-100" type="text" value="{{ prod.fechaFinTransporte | date("d/m/y H:i:s",'Europe/Paris')}}" disabled>
                                 
 
-                               <a class="btn btn-success mt-1 w-100 disabled">Total</a>
+                               <a class="btn btn-success mt-1 w-100 disabled text-white">Total (d/h/m)</a>
                                 <input class="text-center w-100" type="text" value="{{ prod.tiempoTransporte }}" disabled>
                                 
                             {% endif %}
@@ -205,17 +205,17 @@
 
             {# BOTON DE GRABAR LA FINALIZACION DE PRODUCCION #}
             {% for produccion in verProduccion %}
+       
             <div class="container ">
                 <a class="btn btn-primary mr-3 float-left"  href="{{ path('finProduccion', {'id': produccion.id}) }}" >Finalizacion produccion</a>
+                <a class="btn btn-success mt-1 w-100 text-white disabled">Total produccion</a>
+                <input class="text-center w-100 mb-1" type="text" value="{{ produccion.tiempoTotal }} Horas" disabled>
             {% endfor %}
 
-
-             {# BOTON ATRAS #}
-            <div class="float-right">
-                <a class="btn btn-primary"  href="{{ path('lista_ordenes')}}" >Atrás</a>
-            </div>
-        
-
+                {# BOTON ATRAS #}
+                <div class="float-right">
+                    <a class="btn btn-primary"  href="{{ path('lista_ordenes')}}" >Atrás</a>
+                </div>
             </div>
       </div>
   </main>
