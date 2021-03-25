@@ -82,7 +82,7 @@
                                 <input class="text-center w-100" type="text" value="{{ prod.horaFinMecanica | date("H:i:s")}}" disabled>
 
                                 <a class="btn btn-success mt-1 w-100 disabled">Total</a>
-                                <input class="text-center w-100" type="text" value="{{ prod.tiempoMecanica }} horas" disabled>
+                                <input class="text-center w-100" type="text" value="{{ prod.tiempoMecanica * 24  }} horas" disabled>
                         {% endif %}
                             </div>
                         {% else %} 

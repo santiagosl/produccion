@@ -274,16 +274,19 @@ class VerProduccionController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         //Calculo de horas para la mecanica
-        $inicioMecanica = $produccionActiva->getHoraInicioMecanica('Europe/Paris');
-        $finMecanica = $produccionActiva->getHoraFinMecanica('Europe/Paris');
-        $totalMecanica = date_diff($inicioMecanica, $finMecanica);
-        $tiempoMecanica=array();
-        
-        foreach($totalMecanica as $valorMecanica){
-            $tiempoMecanica[]=$valorMecanica;
+         if ($produccionActiva->getHoraInicioMecanica() != null && $produccionActiva->getHoraFinMecanica() != null )
+        {
+            $inicioMecanica = $produccionActiva->getFechaInicioMecanica('Europe/Paris');
+            $finMecanica = $produccionActiva->getFechaFinMecanica('Europe/Paris');
+            $totalMecanica = date_diff($inicioMecanica, $finMecanica);
+            $tiempoMecanica=array();
+            
+            foreach($totalMecanica as $valorMecanica){
+                $tiempoMecanica[]=$valorMecanica;
+            }
         }
 
-        $produccionActiva->setTiempoMecanica($tiempoMecanica     [3]);
+            $produccionActiva->setTiempoMecanica($tiempoMecanica     [2]);
         
         //Calculo de horas para las laminas
         if ($produccionActiva->getHoraInicioLaminas() != null && $produccionActiva->getHoraFinLaminas() != null )
@@ -299,6 +302,7 @@ class VerProduccionController extends AbstractController
             }
 
             $produccionActiva->setTiempoLaminas($tiempoLaminas       [3]);
+      
         }
 
         //Calculo de horas para el embalaje
@@ -330,6 +334,13 @@ class VerProduccionController extends AbstractController
 
             $produccionActiva->setTiempoTransporte($tiempoTransporte [3]);
         }
+
+        //Graba la fecha y hora de finalizacion 
+
+        $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
+        $produccionActiva->setHoraFin(new \DateTime('Europe/Paris'));
+
+
 
 
         $entityManager = $this->getDoctrine()->getManager();
