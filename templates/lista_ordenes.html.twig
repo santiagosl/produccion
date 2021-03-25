@@ -20,11 +20,11 @@
  
 {% endfor %}
 
-    <div class="container w-100 ">
+    <div class="container w-100">
 
-      <a class="btn btn-primary mb-1"  href="{{ path('selec_cliente_prod')}}" >Crear nueva produccion</a>
+      <a class="btn btn-primary mb-1"  href="{{ path('selec_cliente_prod')}}">Crear nueva produccion</a>
 
-        <table class="table table-responsive text-center">
+        <table class="table table-responsive table-hover text-center">
           <h2 class="mt-2">Listado de Producción</h2>
           <thead>
             <tr>
@@ -51,36 +51,52 @@
                     <td>{{ ord.referencia }}</td>
 
                     <td>
-                        {% if ord.mecanica %} 
-                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.mecanica }}" target="_blank">Ver</a></p>
-                        {% else %} 
+                        {% if ord.fechaFinMecanica %} 
+                            <p class="btn-success">Finalizado</p>
+                        {% elseif ord.fechaInicioMecanica %} 
+                            <p class="btn-warning">Iniciado</p>
+                        {% elseif ord.fechaInicioMecanica == null %} 
+                            <p class="btn-danger">No Iniciado</p>
+                        {% else %}                          
                             <p>NO</p> 
                         {% endif %}
                     </td>
                     
                       <td>
-                        {% if ord.laminas %} 
-                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.laminas }}" target="_blank">Ver</a></p>
-                        {% else %} 
+                        {% if ord.fechaFinLaminas %} 
+                            <p class="btn-success">Finalizado</p>
+                        {% elseif ord.fechaInicioLaminas %} 
+                            <p class="btn-warning">Iniciado</p>
+                        {% elseif ord.laminas %} 
+                            <p class="btn-danger">No Iniciado</p>
+                        {% else %}                          
                             <p>NO</p> 
                         {% endif %}
                     </td>
 
                       <td>
-                        {% if ord.embalaje %} 
-                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.embalaje }}" target="_blank">Ver</a></p>
-                        {% else %} 
+                        {% if ord.fechaFinembalaje %} 
+                            <p class="btn-success">Finalizado</p>
+                        {% elseif ord.fechaInicioembalaje %} 
+                            <p class="btn-warning">Iniciado</p>
+                        {% elseif ord.embalaje %} 
+                            <p class="btn-danger">No Iniciado</p>
+                        {% else %}                          
                             <p>NO</p> 
                         {% endif %}
                     </td>
                     
                       <td>
-                        {% if ord.transporte %} 
-                            <p class="btn-success"><a class="text-white" href="{{ 'archivos/pdf/' ~ ord.transporte }}" target="_blank">Ver</a></p>
-                        {% else %} 
+                        {% if ord.fechaFintransporte %} 
+                            <p class="btn-success">Finalizado</p>
+                        {% elseif ord.fechaIniciotransporte %} 
+                            <p class="btn-warning">Iniciado</p>
+                        {% elseif ord.transporte %} 
+                            <p class="btn-danger">No Iniciado</p>
+                        {% else %}                          
                             <p>NO</p> 
                         {% endif %}
-                    </td>                
+                    </td>             
                  
                     <td>{{ord.fechaFin}}</td>
                     <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}">Ver   </a></td>

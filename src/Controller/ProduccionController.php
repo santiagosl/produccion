@@ -124,8 +124,8 @@ class ProduccionController extends AbstractController
           
       
           //Datos fijos introducidos, fecha, hora y fk de usuario y cliente
-           $nuevaProduccion->setFechaCreacion(new \DateTime());
-           $nuevaProduccion->setHoraCreacion(new \DateTime());
+           $nuevaProduccion->setFechaCreacion(new \DateTime('Europe/Paris'));
+           $nuevaProduccion->setHoraCreacion(new \DateTime('Europe/Paris'));
            $nuevaProduccion->setIdUsuario($this->getUser());
            $nuevaProduccion->setIdCliente($clienteSeleccionado);
            
