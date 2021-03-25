@@ -263,7 +263,7 @@ class VerProduccionController extends AbstractController
     
     }
 
-       /**
+    /**
     * @Route("/finProduccion/{id}", name="finProduccion");
     */
 
@@ -273,24 +273,65 @@ class VerProduccionController extends AbstractController
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class);
         $produccionActiva = $repositorio->find($id);
 
-
-        $fechaInicio = $produccionActiva->getHoraInicioMecanica('Europe/Paris');
-        $fechaFin = $produccionActiva->getHoraFinMecanica('Europe/Paris');
-        $interval = date_diff($fechaInicio, $fechaFin);
-
-        echo "<pre>";
-        print_r($interval);
-        echo "</pre>";
-
-        $tiempo=array();
-
-        foreach($interval as $valor){
-            $tiempo[]=$valor;
+        //Calculo de horas para la mecanica
+        $inicioMecanica = $produccionActiva->getHoraInicioMecanica('Europe/Paris');
+        $finMecanica = $produccionActiva->getHoraFinMecanica('Europe/Paris');
+        $totalMecanica = date_diff($inicioMecanica, $finMecanica);
+        $tiempoMecanica=array();
+        
+        foreach($totalMecanica as $valorMecanica){
+            $tiempoMecanica[]=$valorMecanica;
         }
 
-        $produccionActiva->setTiempoMecanica($tiempo[3]);
+        $produccionActiva->setTiempoMecanica($tiempoMecanica     [3]);
+        
+        //Calculo de horas para las laminas
+        if ($produccionActiva->getHoraInicioLaminas() != null && $produccionActiva->getHoraFinLaminas() != null )
+        {
 
-      
+            $inicioLaminas = $produccionActiva->getHoraInicioLaminas('Europe/Paris');
+            $finLaminas = $produccionActiva->getHoraFinLaminas('Europe/Paris');
+            $totalLaminas = date_diff($inicioLaminas, $finLaminas);
+            $tiempoLaminas=array();
+            
+            foreach($totalLaminas as $valorLaminas){
+                $tiempoLaminas[]=$valorLaminas;
+            }
+
+            $produccionActiva->setTiempoLaminas($tiempoLaminas       [3]);
+        }
+
+        //Calculo de horas para el embalaje
+         if ($produccionActiva->getHoraInicioEmbalaje() != null && $produccionActiva->getHoraFinEmbalaje() != null )
+        {
+            $inicioEmbalaje = $produccionActiva->getHoraInicioEmbalaje('Europe/Paris');
+            $finEmbalaje = $produccionActiva->getHoraFinEmbalaje('Europe/Paris');
+            $totalEmbalaje = date_diff($inicioEmbalaje, $finEmbalaje);
+            $tiempoEmbalaje=array();
+            
+            foreach($totalEmbalaje as $valorEmbalaje){
+                $tiempoEmbalaje[]=$valorEmbalaje;
+            }
+
+            $produccionActiva->setTiempoEmbalaje($tiempoEmbalaje     [3]);
+        }   
+
+        //Calculo de horas para el transporte
+        if ($produccionActiva->getHoraInicioTransporte() != null && $produccionActiva->getHoraFinTransporte() != null )
+        {
+            $inicioTransporte = $produccionActiva->getHoraInicioTransporte('Europe/Paris');
+            $finTransporte = $produccionActiva->getHoraFinTransporte('Europe/Paris');
+            $totalTransporte = date_diff($inicioTransporte, $finTransporte);
+            $tiempoTransporte=array();
+            
+            foreach($totalTransporte as $valorTransporte){
+                $tiempoTransporte[]=$valorTransporte;
+            }
+
+            $produccionActiva->setTiempoTransporte($tiempoTransporte [3]);
+        }
+
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
