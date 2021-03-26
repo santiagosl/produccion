@@ -13,20 +13,13 @@
          </div>
       </section>
       
- {% for message in app.flashes ('succes') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
- 
-{% endfor %}
-
-    <div class="container w-100">
+     <div class="container w-100">
 
       <a class="btn btn-primary mb-1"  href="{{ path('selec_cliente_prod')}}">Crear nueva produccion</a>
 
         <table class="table table-responsive table-hover text-center">
           <h2 class="mt-2">Listado de Producción</h2>
-          <thead>
+          <thead class="bg-info">
             <tr>
               <th scope="col">ID        </th>
               <th scope="col">Fecha     </th>
@@ -52,7 +45,7 @@
 
                     <td>
                        {% if ord.mecanica == '' %} 
-                            <p class="btn-secondary">Sin datos</p>
+                            <p class="btn-light">Sin datos</p>
                         {% elseif ord.fechaFinMecanica %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioMecanica %} 
@@ -66,7 +59,7 @@
                     
                       <td>
                         {% if ord.laminas == '' %} 
-                            <p class="btn-secondary">Sin datos</p>
+                            <p class="btn-light">Sin datos</p>
                         {% elseif ord.fechaFinLaminas %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioLaminas %} 
@@ -80,7 +73,7 @@
 
                       <td>
                         {% if ord.embalaje == '' %} 
-                            <p class="btn-secondary">Sin datos</p>
+                            <p class="btn-light">Sin datos</p>
                         {% elseif ord.fechaFinembalaje %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaInicioembalaje %} 
@@ -94,7 +87,7 @@
                     
                       <td>
                         {% if ord.transporte == '' %} 
-                            <p class="btn-secondary">Sin datos</p>
+                            <p class="btn-light">Sin datos</p>
                         {% elseif ord.fechaFintransporte %} 
                             <p class="btn-success">Finalizado</p>
                         {% elseif ord.fechaIniciotransporte %} 
@@ -107,7 +100,7 @@
                     </td>             
 
                     
-                    <td>{% if(ord.fechaFin) %} {{ord.fechaFin | date ('d/m/y')}}{% else %} <p>SIN FECHA</p>{% endif %}</td>
+                    <td>{% if(ord.fechaFin) %}  <p class="btn-success">{{ord.fechaFin | date ('d/m/y')}}</p> {% else %} <p>SIN FECHA</p>{% endif %}</td>
                     
                     <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}">Ver   </a></td>
                     <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}">Editar</a></td>
@@ -116,6 +109,14 @@
             {% endfor %}
             
         </table>
+
+        {% for message in app.flashes ('succes') %}
+ 
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+    
+        {% endfor %}
 
           {# BOTON ATRAS #}
           <div class="container mb-5">

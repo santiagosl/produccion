@@ -38,7 +38,7 @@ class SelecClienteProdController extends AbstractController
       $buscar = '';
       $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
       $formCliente = $this->createFormBuilder()
-      ->add('nombre', TextType::class)
+      ->add('nombre', TextType::class, array('required' => false))
       ->add('save', SubmitType::Class, array('label' => 'Buscar'))
       ->getForm();
       
@@ -53,8 +53,7 @@ class SelecClienteProdController extends AbstractController
       }
   
       return $this->render(
-      'selec_cliente_produccion.html.twig', array
-      (
+      'selec_cliente_produccion.html.twig', array(
 
       'formCliente' => $formCliente->createView(),'buscar' => $buscar,
     

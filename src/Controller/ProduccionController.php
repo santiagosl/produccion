@@ -152,6 +152,7 @@ class ProduccionController extends AbstractController
                   
           try {
               $entityManager->flush(); 
+              $this->addFlash('success', 'Registro insertado correctamente!');
 
           } catch (Exception $e){
               return new Response ('Error al insertar el usuario');

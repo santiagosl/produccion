@@ -20,12 +20,14 @@
         {% if usuarios %}
                 <table class="table table-responsive center mt-2">
                    <h2 class="mt-5">Listado de usuarios</h2>
-                    <thead>
+                    <thead class="bg-info">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">ROL</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Borrar</th>
                         </tr>
                     </thead>
                     {% for usu in usuarios %}
