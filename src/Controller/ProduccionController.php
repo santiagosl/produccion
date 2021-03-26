@@ -22,50 +22,48 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-
-
 class ProduccionController extends AbstractController 
 
 {
     
   /**
    * @Route("/produccion", name="produccion");
+   *
    */
 
-
+    //Esta función se encarga de mandar el formulario a la vista producción.html.twig
     public function produccion(Request $request, string $archivoPDF)
   
   {
-
    
     $idCliente=$request->get('id');
     $repositorio = $this->getDoctrine()->getRepository(Cliente::class);
     $clienteSeleccionado = $repositorio->find($idCliente);
 
-
     $nuevaProduccion = new Produccion();
-    $formulario = $this->createFormBuilder($nuevaProduccion) 
-        
-    ->add('referencia', TextType::class, array('label' => 'Referencia'))
-   
-    ->add('mecanica', FileType::class, 
-          array('label' => 'Mecánica PDF',
-                'required' => false))
 
-    ->add('laminas', FileType::class, 
-          array('label' => 'Laminas PDF',
-          'required' => false))
+    $formulario = $this->createFormBuilder($nuevaProduccion)         
+        ->add('referencia', TextType::class, array('label' => 'Referencia'))
+      
+        ->add('mecanica', FileType::class, 
+              array('label' => 'Mecánica',
+                    'required' => false))
 
-    ->add('embalaje', FileType::class, 
-          array('label' => 'Embalaje PDF',
-          'required' => false))
+        ->add('laminas', FileType::class, 
+              array('label' => 'Laminas',
+              'required' => false))
 
-    ->add('transporte', FileType::class,
-          array('label' => 'Transporte PDF',
-          'required' => false))
-   
-    ->add('save', SubmitType::Class, array('label' => 'Enviar'))
-    ->getForm();
+        ->add('embalaje', FileType::class, 
+              array('label' => 'Embalaje',
+              'required' => false))
+
+        ->add('transporte', FileType::class,
+              array('label' => 'Transporte',
+              'required' => false))
+
+        ->add('save', SubmitType::Class, array('label' => 'Enviar'))
+      
+        ->getForm();
       
       $formulario->handleRequest($request);
 
@@ -77,13 +75,14 @@ class ProduccionController extends AbstractController
           $entityManager->persist($nuevaProduccion);
 
           //Codigo que se encarga de subir los archivos MECANICA a la base de datos
+          //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($mecanica = $formulario['mecanica']->getData())
           {
             $nombreMecanica = bin2hex(random_bytes(6)). '.' . $mecanica->guessExtension();
             try {
               $mecanica->move($archivoPDF, $nombreMecanica);
             } catch (FileException $e) {
-
+                  return new Response ('Error al insertar archivo mecanica');
             }
             $nuevaProduccion->setMecanica($nombreMecanica);
           } else {
@@ -94,13 +93,14 @@ class ProduccionController extends AbstractController
           }
           
           //Codigo que se encarga de subir los archivos LAMINAS a la base de datos
+          //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($laminas = $formulario['laminas']->getData())
           {
             $nombreLaminas = bin2hex(random_bytes(6)). '.' . $laminas->guessExtension();
             try {
               $laminas->move($archivoPDF, $nombreLaminas);
             } catch (FileException $e) {
-
+                return new Response ('Error al insertar archivo laminas');
             }
             $nuevaProduccion->setLaminas($nombreLaminas);
           } else {
@@ -110,13 +110,14 @@ class ProduccionController extends AbstractController
           }
 
           //Codigo que se encarga de subir los archivos EMBALAJE a la base de datos
+          //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($embalaje = $formulario['embalaje']->getData())
           {
             $nombreEmbalaje = bin2hex(random_bytes(6)). '.' . $embalaje->guessExtension();
             try {
               $embalaje->move($archivoPDF, $nombreEmbalaje);
             } catch (FileException $e) {
-
+                  return new Response ('Error al insertar archivo embalaje'); 
             }
             $nuevaProduccion->setembalaje($nombreEmbalaje);
           } else {
@@ -126,13 +127,14 @@ class ProduccionController extends AbstractController
           }
 
           //Codigo que se encarga de subir los archivos TRANSPORTE a la base de datos
+          //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($transporte = $formulario['transporte']->getData())
           {
             $nombreTransporte = bin2hex(random_bytes(6)). '.' . $transporte->guessExtension();
             try {
               $transporte->move($archivoPDF, $nombreTransporte);
             } catch (FileException $e) {
-
+                 return new Response ('Error al insertar archivo transporte');
             }
             $nuevaProduccion->settransporte($nombreTransporte);
           } else {
@@ -141,8 +143,7 @@ class ProduccionController extends AbstractController
             $nuevaProduccion->setFechaFinTransporte(new \DateTime('Europe/Paris'));
           }
           
-      
-          //Datos fijos introducidos, fecha, hora y fk de usuario y cliente
+           //Datos fijos introducidos, fecha, hora y fk de usuario y cliente
            $nuevaProduccion->setFechaCreacion(new \DateTime('Europe/Paris'));
            
            $nuevaProduccion->setIdUsuario($this->getUser());
@@ -161,38 +162,6 @@ class ProduccionController extends AbstractController
       }
         return $this->render('produccion.html.twig', array('formulario' => $formulario->createView()));
   }
-
-      /**
-        * @Route("/selec_cliente_prod", name="selec_cliente_prod");
-      */
-
-      public function buscarCliente(Request $request){
-
-          $buscar = '';
-          $repositorio = $this->getDoctrine()->getRepository(Cliente::class); 
-          $formCliente = $this->createFormBuilder()
-          ->add('nombre', TextType::class)
-          ->add('save', SubmitType::Class, array('label' => 'Buscar'))
-          ->getForm();
-          
-          $formCliente->handleRequest($request);
-          
-          if($request->server->get('REQUEST_METHOD') == 'POST')
-          {
-
-            $nombre = $formCliente->getData();
-            $buscar = $repositorio->nBuscar($nombre['nombre']);
-
-          }
-        
-            return $this->render(
-            'selec_cliente_produccion.html.twig', array
-            (
-
-            'formCliente' => $formCliente->createView(),'buscar' => $buscar,
-          
-            ));
-        }
 
 } 
 

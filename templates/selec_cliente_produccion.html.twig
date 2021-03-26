@@ -16,15 +16,15 @@
         
         {# FORMULARIO DE BUSQUEDA CLIENTE, LISTA CLIENTE Y REFERENCIA #}
         <div class="container">
-            {{ form_start(formCliente) }}   
+            {{ form_start(formCliente) }}  
             {{ form_widget(formCliente) }} 
             {{ form_end(formCliente) }}
         </div>
 
 
-    <div class="container w-60">
+    <div class="container text-center">
         {% if buscar %}
-                <table class="table table-responsive mt-1">
+                <table class="container table-responsive table mt-1  ">
                     <h2 class="mt-1">Listado de Clientes</h2>
                     <thead>
                         <tr>
@@ -61,7 +61,7 @@
 
         {% else %}
 
-        <div class="alert alert-info mt-2" role="alert">
+         <div class="container alert alert-info mt-2" role="alert">
               <p>No hay clientes en la búsqueda</p>
         </div>
 

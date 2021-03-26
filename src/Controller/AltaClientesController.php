@@ -37,7 +37,6 @@ class AltaClientesController extends AbstractController {
             ->add('mail', TextType::class)
             ->add('cif', TextType::class)
             ->add('web', TextType::class)
-//            ->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();
             
             $formulario->handleRequest($request);

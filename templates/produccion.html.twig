@@ -13,14 +13,13 @@
 
     <main>
 
-
-        <div class="container container-fluid p-3 h-50">
+        <div class="container w-50">
             {{ form_start(formulario) }} 
             {{ form_widget(formulario) }} 
             {{ form_end(formulario) }}
         </div>
 
-           {# BOTON ATRAS #}
+        {# BOTON ATRAS #}
         <div class="container">
             <div class="nav justify-content-end">
                 <a class="btn btn-primary mr-3"  href="{{ path('lista_ordenes')}}" >Atrás</a>
