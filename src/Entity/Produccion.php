@@ -144,6 +144,11 @@ class Produccion
      */
     private $tiempoTransporte;
 
+    /**
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $finalizado;
+
 
     public function getId(): ?int
     {
@@ -420,6 +425,18 @@ class Produccion
       public function setTiempoTransporte(?string $tiempoTransporte): self
       {
           $this->tiempoTransporte = $tiempoTransporte;
+
+          return $this;
+      }
+
+      public function getFinalizado(): ?string
+      {
+          return $this->finalizado;
+      }
+
+      public function setFinalizado(?string $finalizado): self
+      {
+          $this->finalizado = $finalizado;
 
           return $this;
       }

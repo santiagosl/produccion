@@ -6,6 +6,8 @@ use App\Entity\Produccion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * @method Produccion|null find($id, $lockMode = null, $lockVersion = null)
  * @method Produccion|null findOneBy(array $criteria, array $orderBy = null)
@@ -47,4 +49,36 @@ class ProduccionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    //Funcion para buscar por rango de fecha y si está finalizado o no.
+       public function nBuscar($finalizado,$fechaInicio,$fechaFinal): array 
+    {
+       $entityManager = $this->getEntityManager(); 
+ 
+        $query = $entityManager->createQuery('SELECT produccion
+                                                FROM App\Entity\Produccion produccion 
+                                                WHERE produccion.finalizado =:finalizado
+                                                AND produccion.fechaCreacion BETWEEN :fechaInicio and :fechaFinal');
+        
+        $query->setParameter('fechaInicio' , $fechaInicio) ;
+        $query->setParameter('fechaFinal'  , $fechaFinal)  ;
+        $query->setParameter('finalizado'  , $finalizado)  ;
+
+        
+        return $query->getResult();
+    }
+
 }
+
+/* 
+
+    public function nBuscar($nombre): array 
+    {
+       $entityManager = $this->getEntityManager(); 
+       $query = $entityManager->createQuery('SELECT nombre FROM App\Entity\Cliente nombre WHERE nombre.nombre LIKE :nombre'); 
+       $query->setParameter('nombre', '%' . $nombre . '%');
+       return $query->getResult();
+    }
+    
+*/
+

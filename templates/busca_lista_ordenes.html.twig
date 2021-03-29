@@ -14,10 +14,28 @@
       </section>
       
      <div class="container">
+           
+            {{ form_start(formProduccion) }}  
 
-      <a class="btn btn-primary mb-1"  href="{{ path('selec_cliente_produccion')}}">Crear nueva produccion</a>
+             <div class="float-left col-md-3">
+                {{form_row(formProduccion.Finalizado)}}
+              </div>
+              
+              <div class="float-left col-md-3">
+                {{form_row(formProduccion.FechaInicio)}}
+              </div>
 
-        <table class="table table-responsive w-100 table-hover text-center">
+              <div class="float-left col-md-3">
+                {{form_row(formProduccion.FechaFinal)}}
+              </div>
+            
+            {{ form_widget(formProduccion) }} 
+            {{ form_end(formProduccion) }}
+     
+
+        {% if produccion %}
+
+          <table class="table table-responsive w-100 table-hover text-center">
          
           <thead class="bg-info">
             <tr>
@@ -35,7 +53,7 @@
               <th scope="col">Borrar    </th>
             </tr>
           </thead>
-           {% for ord in ordenesProd %}
+           {% for ord in produccion %}
               <tbody>
                 <tr>
                   <th scope='row'>{{ord.id}}</td>
@@ -110,10 +128,20 @@
             
         </table>
 
+          {% else %}
+
+        <div class="container alert alert-info mt-5" role="alert">
+              <p>No hay produccion en el criterio de búsqueda</p>
+        </div>
+
+        {% endif %}
+   
+
           {# BOTON ATRAS #}
           <div class="container mb-5">
               <div class="nav justify-content-end mr-5">
-                  <a class="btn btn-primary mr-3"  href="{{ path('resumen')}}" >Atrás</a>
+                  <a class="btn btn-success mr-1"  href="{{ path('selec_cliente_produccion')}}">Crear nueva produccion</a>
+                  <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
               </div>
           </div>
       </div>

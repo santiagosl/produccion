@@ -29,7 +29,7 @@ class SelecClienteProdController extends AbstractController
 {
     
   /**
-  * @Route("/selec_cliente_prod", name="selec_cliente_prod");
+  * @Route("/seleccionarClienteProd", name="selec_cliente_produccion");
   */
 
   public function buscarCliente(Request $request)

@@ -22,6 +22,6 @@ class ListaOrdenesController extends AbstractController
     
     }
 }
-
+    
 ?>
 
