@@ -145,20 +145,20 @@ class ProduccionController extends AbstractController
           
            //Datos fijos introducidos, fecha, hora y fk de usuario y cliente
            $nuevaProduccion->setFechaCreacion(new \DateTime('Europe/Paris'));
-           
+           $nuevaProduccion->setFinalizado('NO');
            $nuevaProduccion->setIdUsuario($this->getUser());
            $nuevaProduccion->setIdCliente($clienteSeleccionado);
            
                   
           try {
               $entityManager->flush(); 
-              $this->addFlash('success', 'Registro insertado correctamente!');
+             
 
           } catch (Exception $e){
               return new Response ('Error al insertar el usuario');
           }
 
-            return $this->redirectToRoute('lista_ordenes');
+            return $this->redirectToRoute('busca_lista_ordenes');
                
       }
         return $this->render('produccion.html.twig', array('formulario' => $formulario->createView()));

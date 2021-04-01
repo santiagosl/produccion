@@ -8,8 +8,8 @@
 
       <section class="jumbotron p-1 text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Lista Ordenes</h1>
-          <p class="lead text-muted">Lista de ordenes de producción</p>
+          <h2 class="jumbotron-heading">Lista Ordenes</h2>
+          <p class="lead text-muted">Buscar ordenes de producción</p>
          </div>
       </section>
       
@@ -28,11 +28,16 @@
               <div class="float-left col-md-3">
                 {{form_row(formProduccion.FechaFinal)}}
               </div>
-            
+
+                <div class="float-left col-md-3">
+                  <div class='container p-4 mt-2'>
+                     {{form_row(formProduccion.save)}}
+                </div>
+               </div>
+
             {{ form_widget(formProduccion) }} 
             {{ form_end(formProduccion) }}
-     
-
+            
         {% if produccion %}
 
           <table class="table table-responsive w-100 table-hover text-center">
@@ -125,21 +130,20 @@
                     <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}">Borrar</a></td> 
             </tbody>
             {% endfor %}
-            
+      
         </table>
-
           {% else %}
 
-        <div class="container alert alert-info mt-5" role="alert">
-              <p>No hay produccion en el criterio de búsqueda</p>
-        </div>
+          <div class="container alert alert-info mt-2 float-left col-md-12" role="alert">
+                <p>No hay produccion en el criterio de búsqueda</p>
+          </div>
 
         {% endif %}
    
 
           {# BOTON ATRAS #}
           <div class="container mb-5">
-              <div class="nav justify-content-end mr-5">
+              <div class="nav justify-content-end float-left mr-5 pr-5 col-md-12">
                   <a class="btn btn-success mr-1"  href="{{ path('selec_cliente_produccion')}}">Crear nueva produccion</a>
                   <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
               </div>

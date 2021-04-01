@@ -24,11 +24,13 @@ class Usuario implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message = "El campo no puede estar vacío")
      */
     private $nombre;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message = "El campo no puede estar vacío")
      */
     private $apellidos;
 
@@ -40,6 +42,7 @@ class Usuario implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "El campo no puede estar vacío")
      */
     private $password;
 

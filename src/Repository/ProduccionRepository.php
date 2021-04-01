@@ -51,18 +51,48 @@ class ProduccionRepository extends ServiceEntityRepository
     */
 
     //Funcion para buscar por rango de fecha y si está finalizado o no.
-       public function nBuscar($finalizado,$fechaInicio,$fechaFinal): array 
+       public function finalizado($fechaInicio,$fechaFinal): array 
     {
-       $entityManager = $this->getEntityManager(); 
- 
-        $query = $entityManager->createQuery('SELECT produccion
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT produccion
                                                 FROM App\Entity\Produccion produccion 
-                                                WHERE produccion.finalizado =:finalizado
-                                                AND produccion.fechaCreacion BETWEEN :fechaInicio and :fechaFinal');
+                                                WHERE produccion.finalizado = 'SI'
+                                                AND produccion.fechaCreacion BETWEEN :fechaInicio and :fechaFinal");
         
         $query->setParameter('fechaInicio' , $fechaInicio) ;
         $query->setParameter('fechaFinal'  , $fechaFinal)  ;
-        $query->setParameter('finalizado'  , $finalizado)  ;
+        
+
+        
+        return $query->getResult();
+    }
+
+        public function noFinalizado($fechaInicio,$fechaFinal): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT produccion
+                                                FROM App\Entity\Produccion produccion 
+                                                WHERE produccion.finalizado = 'NO'
+                                                AND produccion.fechaCreacion BETWEEN :fechaInicio and :fechaFinal");
+        
+        $query->setParameter('fechaInicio' , $fechaInicio) ;
+        $query->setParameter('fechaFinal'  , $fechaFinal)  ;
+        
+
+        
+        return $query->getResult();
+    }
+
+          public function todos($fechaInicio,$fechaFinal): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT produccion
+                                                FROM App\Entity\Produccion produccion 
+                                                WHERE produccion.fechaCreacion BETWEEN :fechaInicio and :fechaFinal");
+        
+        $query->setParameter('fechaInicio' , $fechaInicio) ;
+        $query->setParameter('fechaFinal'  , $fechaFinal)  ;
+        
 
         
         return $query->getResult();

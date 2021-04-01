@@ -53,7 +53,7 @@ class FechasLaminasController extends AbstractController
     }
 
     /**
-    * @Route("/fechaInicioLaminas/{id}", name="fechaFinLaminas");
+    * @Route("/fechaFinLaminas/{id}", name="fechaFinLaminas");
     */
 
     public function fechaFinLaminas($id) 

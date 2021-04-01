@@ -30,7 +30,7 @@ class BuscaListaOrdenesController extends AbstractController
 {
     
   /**
-  * @Route("/selec_cliente_prod", name="busca_lista_ordenes");
+  * @Route("/busquedaOrdenes", name="busca_lista_ordenes");
   */
 
   public function buscarProduccion(Request $request)
@@ -39,9 +39,9 @@ class BuscaListaOrdenesController extends AbstractController
       $produccion = '';
       $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
       $formProduccion = $this->createFormBuilder()
-      ->add('Finalizado', ChoiceType::class, array('choices'=> array('No Finalizado' => 'NO', 'Finalizado' => 'SI')))
-      ->add('FechaInicio', DateType::class, array('widget' => 'single_text', 'format' =>'yyyy-MM-dd'))
-      ->add('FechaFinal', DateType::class, array('widget' => 'single_text', 'format' =>'yyyy-MM-dd'))
+      ->add('Finalizado', ChoiceType::class, array('choices'=> array('No Finalizado' => 'NO','Finalizado' => 'SI','Todos' => 'r')))
+      ->add('FechaInicio', DateType::class, array('widget' => 'single_text', 'format' =>'yyyy-MM-dd', 'data' => new \DateTime('now - 1 month')))
+      ->add('FechaFinal', DateType::class, array('widget' => 'single_text', 'format' =>'yyyy-MM-dd', 'data' => new \DateTime('now + 1 day')))
       ->add('save', SubmitType::Class, array('label' => 'Buscar'))
       ->getForm();
       
@@ -54,18 +54,31 @@ class BuscaListaOrdenesController extends AbstractController
         $FechaInicio = $formProduccion->getData();
         $FechaFinal = $formProduccion->getData();
 
-        $produccion = $repositorio->nBuscar($Finalizado ['Finalizado'],
-                                            $FechaInicio['FechaInicio'],
-                                            $FechaFinal ['FechaFinal']);
+        
+        if($Finalizado['Finalizado'] == 'SI'){
+
+          $produccion = $repositorio->finalizado($FechaInicio['FechaInicio'],
+                                                 $FechaFinal ['FechaFinal']);
+        } else if($Finalizado['Finalizado'] == 'NO')
+        
+        {
+           $produccion = $repositorio->noFinalizado($FechaInicio['FechaInicio'],
+                                                    $FechaFinal ['FechaFinal']);
+        }
+        
+        else 
+        
+        {
+          
+          $produccion = $repositorio->todos($FechaInicio['FechaInicio'],
+                                                   $FechaFinal ['FechaFinal']);
+        } 
+
+
 
       }
-  
-      return $this->render(
-      'busca_lista_ordenes.html.twig', array(
 
-      'formProduccion' => $formProduccion->createView(),'produccion' => $produccion,
-    
-      ));
+      return $this->render('busca_lista_ordenes.html.twig', array('formProduccion' => $formProduccion->createView(),'produccion' => $produccion,));
   }
 
 } 

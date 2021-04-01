@@ -74,27 +74,28 @@ class FechasFinProduccionController extends AbstractController
             $produccionActiva->setTiempoTransporte($totalTransporte->format('%D:%H:%I'));
         }
 
-         //Suma de todos los tiempos finalizados y lo almacenamos en la base de datos.
+         //Recogemos todos los datos de la base de datos y los almacenamos en variables
         $tiempoMecancia = $produccionActiva->getTiempoMecanica();
         $tiempoLaminas = $produccionActiva->getTiempoLaminas();
         $tiempoEmbalaje = $produccionActiva->getTiempoEmbalaje();
         $tiempoTransporte = $produccionActiva->getTiempoTransporte();
 
-        //Graba la fecha y Fecha de finalizacion 
+        //Graba la fecha y Hora de finalizacion 
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
 
-        
+        //Recogemos los datos de la fecha y metemos todos los numeros en un arry tipo split
         $tiempoM = preg_split("/:/",$tiempoMecancia);
         $tiempoL = preg_split("/:/",$tiempoLaminas);
         $tiempoE = preg_split("/:/",$tiempoEmbalaje);
         $tiempoT = preg_split("/:/",$tiempoTransporte);
         
-
+        //Sumamos todos los tiempos para mostrarlo en el total.
         $diasT =     (int)$tiempoM[0] + (int)$tiempoL[0] + (int)$tiempoE[0] + (int)$tiempoT[0];
         $horasT =    (int)$tiempoM[1] + (int)$tiempoL[1] + (int)$tiempoE[1] + (int)$tiempoT[1];
         $minutosT =  (int)$tiempoM[2] + (int)$tiempoL[2] + (int)$tiempoE[2] + (int)$tiempoT[2];   
 
+        //Hacemos la conversión a horas.
         $total = ((($diasT/24)*60) + ($horasT*60) + $minutosT)/60;
         $produccionActiva->setTiempoTotal(round($total,0));
 
@@ -105,8 +106,11 @@ class FechasFinProduccionController extends AbstractController
         try {
             $self = $_SERVER['PHP_SELF'];
             header("refresh:0.1; url=$self/$id");
-            $entityManager->flush(); 
+            $produccionActiva->setFinalizado('SI') ;
+            $entityManager->flush();
+            
         } catch (Exception $e){
+
             return new Response ('Error al insertar datos');
         }
 

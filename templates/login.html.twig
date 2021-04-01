@@ -5,11 +5,20 @@
  
   {% block body %} 
   
+ 
+
+
     <form class="container-fluid form-signin col-md-4" action="{{ path('login') }}" method="POST">
+
+    
 
         <div class="text-center mb-4">
           <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-          {% if error %} <div>{{ error.messageKey }}</div> {% endif %}
+            {% if error %}
+            <div class="container alert alert-danger mt-2 float-left col-md-12" role="alert">
+                    <p>Error en la autenticación</p>
+              </div>
+      {% endif %}
         </div>
 
         <div class="form-label-group mb-2">
@@ -23,6 +32,10 @@
         <button class="btn btn-lg btn-primary btn-block mb-5" type="submit">Entrar</button>
      
     </form>
+
+ 
+
+
 {% endblock %}
 
 
