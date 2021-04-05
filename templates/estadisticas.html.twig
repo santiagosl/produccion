@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resumen{% endblock %}
+
+{% block body %}
+
+  <main role="main">
+
+      <section class="jumbotron p-1 text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Estadísticas</h1>
+          <p class="lead text-muted">Estadísticas de producción</p>
+         </div>
+      </section>
+      
+     <div class="container">
+
+        {{ form_start(formEstadisticas) }}  
+
+  
+              <div class="float-left col-md-3">
+                {{form_row(formEstadisticas.Desde)}}
+              </div>
+
+              <div class="float-left col-md-3">
+                {{form_row(formEstadisticas.Hasta)}}
+              </div>
+
+                <div class="float-left col-md-3">
+                  <div class='container p-4 mt-2'>
+                     {{form_row(formEstadisticas.save)}}
+                </div>
+               </div>
+
+            {{ form_widget(formEstadisticas) }} 
+            {{ form_end(formEstadisticas) }}
+
+
+    {# TABLA DE ESTADISTICAS #}
+         
+        {% if produccion %}
+
+        {# TABLA DE NUMERO DE PEDIDOS/TIEMPO MEDIO/TIEMPO RECORD #}
+        <table class="table w-100 table-hover text-center float-left ">
+          <thead class="bg-info">
+            <tr>
+              <th scope="col">Numero de pedidos</th>
+              <th scope="col">Tiempo medio</th>
+              <th scope="col">Tiempo Record</th>
+            </tr>
+          </thead>
+            <tr>
+                <td>{{produccion}}</td>
+                <td>{{tiempoTotal | number_format(1, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
+                <td>{{tiempoRecord | number_format(1, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
+                
+            </tr>
+        </table>
+
+        {# TABLA DE TIEMPOS DE MECANICA, EMBALAJE, LAMINAS Y TRANSPORTE#}
+        <table class="table w-100 table-hover text-center float-left ">
+          <thead class="bg-info">
+            <tr>
+              <th scope="col">Tiempo medio Mecánica</th>
+              <th scope="col">Tiempo medio Láminas</th>
+              <th scope="col">Tiempo medio Embalaje</th>
+              <th scope="col">Tiempo medio Transporte </th>
+            </tr>
+          </thead>
+            <tr>
+                <td>{{tiempoMedioMecanica | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
+                <td>{{tiempoMedioLaminas | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
+                <td>{{tiempoMedioEmbalaje | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
+                <td>{{tiempoMedioTransporte | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
+                
+            </tr>
+        </table>
+
+       
+          {% else %}
+
+          <div class="container alert alert-info mt-2 float-left col-md-12" role="alert">
+                <p>No hay produccion en el criterio de búsqueda</p>
+          </div>
+
+        {% endif %}
+
+
+
+          {# BOTON ATRAS #}
+          <div class="container mb-5 ">
+              <div class="nav justify-content-end mr-5 float-right ">
+                  <a class="btn btn-primary mr-3"  href="{{ path('resumen')}}" >Atrás</a>
+              </div>
+          </div>
+      </div>
+  </main>
+
+{% endblock %}
+

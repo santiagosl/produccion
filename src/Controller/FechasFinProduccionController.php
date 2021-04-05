@@ -38,8 +38,16 @@ class FechasFinProduccionController extends AbstractController
             $inicioMecanica = $produccionActiva->getFechaInicioMecanica('Europe/Paris');
             $finMecanica = $produccionActiva->getFechaFinMecanica('Europe/Paris');
             $totalMecanica = $inicioMecanica->diff($finMecanica);
-            
-            $produccionActiva->setTiempoMecanica($totalMecanica->format('%D:%H:%I'));
+  
+            $tiempoM = $totalMecanica->format('%D:%H:%I');
+            $tiempoMecanica = preg_split("/:/",$tiempoM);
+            $diasMecanica = $tiempoMecanica[0];
+            $horasMecanica = $tiempoMecanica[1];
+            $minMecanica = $tiempoMecanica[2];
+
+            $totalMecanica =  ((($diasMecanica/24)*60) + ($horasMecanica*60) + $minMecanica)/60;
+
+            $produccionActiva->setTiempoMecanica($totalMecanica);
         }
 
         
@@ -51,7 +59,15 @@ class FechasFinProduccionController extends AbstractController
             $finLaminas = $produccionActiva->getFechaFinLaminas('Europe/Paris');
             $totalLaminas = $inicioLaminas->diff($finLaminas);
      
-            $produccionActiva->setTiempoLaminas($totalLaminas->format('%D:%H:%I'));
+            $tiempoL = $totalLaminas->format('%D:%H:%I');
+            $tiempoLaminas = preg_split("/:/",$tiempoL);
+            $diasLaminas = $tiempoLaminas[0];
+            $horasLaminas = $tiempoLaminas[1];
+            $minLaminas = $tiempoLaminas[2];
+
+            $totalLaminas =  ((($diasLaminas/24)*60) + ($horasLaminas*60) + $minLaminas)/60;
+
+            $produccionActiva->setTiempoLaminas($totalLaminas);
         }
 
         //Calculo de Fechas para el embalaje
@@ -61,7 +77,15 @@ class FechasFinProduccionController extends AbstractController
             $finEmbalaje = $produccionActiva->getFechaFinEmbalaje('Europe/Paris');
             $totalEmbalaje = $inicioEmbalaje->diff($finEmbalaje);
 
-            $produccionActiva->setTiempoEmbalaje($totalEmbalaje->format('%D:%H:%I'));
+            $tiempoE = $totalEmbalaje->format('%D:%H:%I');
+            $tiempoEmbalaje = preg_split("/:/",$tiempoE);
+            $diasEmbalaje = $tiempoEmbalaje[0];
+            $horasEmbalaje = $tiempoEmbalaje[1];
+            $minEmbalaje = $tiempoEmbalaje[2];
+
+            $totalEmbalaje =  ((($diasEmbalaje/24)*60) + ($horasEmbalaje*60) + $minEmbalaje)/60;
+
+            $produccionActiva->setTiempoEmbalaje($totalEmbalaje);
         }   
 
         //Calculo de Fechas para el transporte
@@ -71,10 +95,18 @@ class FechasFinProduccionController extends AbstractController
             $finTransporte = $produccionActiva->getFechaFinTransporte('Europe/Paris');
             $totalTransporte = $inicioTransporte->diff($finTransporte);
 
-            $produccionActiva->setTiempoTransporte($totalTransporte->format('%D:%H:%I'));
+            $tiempoT = $totalTransporte->format('%D:%H:%I');
+            $tiempoTransporte = preg_split("/:/",$tiempoT);
+            $diasTransporte = $tiempoTransporte[0];
+            $horasTransporte = $tiempoTransporte[1];
+            $minTransporte = $tiempoTransporte[2];
+
+            $totalTransporte =  ((($diasTransporte/24)*60) + ($horasTransporte*60) + $minTransporte)/60;
+
+            $produccionActiva->setTiempoTransporte($totalTransporte);
         }
 
-         //Recogemos todos los datos de la base de datos y los almacenamos en variables
+        //Recogemos todos los datos de la base de datos y los almacenamos en variables
         $tiempoMecancia = $produccionActiva->getTiempoMecanica();
         $tiempoLaminas = $produccionActiva->getTiempoLaminas();
         $tiempoEmbalaje = $produccionActiva->getTiempoEmbalaje();
@@ -83,20 +115,10 @@ class FechasFinProduccionController extends AbstractController
         //Graba la fecha y Hora de finalizacion 
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
         $produccionActiva->setFechaFin(new \DateTime('Europe/Paris'));
-
-        //Recogemos los datos de la fecha y metemos todos los numeros en un arry tipo split
-        $tiempoM = preg_split("/:/",$tiempoMecancia);
-        $tiempoL = preg_split("/:/",$tiempoLaminas);
-        $tiempoE = preg_split("/:/",$tiempoEmbalaje);
-        $tiempoT = preg_split("/:/",$tiempoTransporte);
-        
-        //Sumamos todos los tiempos para mostrarlo en el total.
-        $diasT =     (int)$tiempoM[0] + (int)$tiempoL[0] + (int)$tiempoE[0] + (int)$tiempoT[0];
-        $horasT =    (int)$tiempoM[1] + (int)$tiempoL[1] + (int)$tiempoE[1] + (int)$tiempoT[1];
-        $minutosT =  (int)$tiempoM[2] + (int)$tiempoL[2] + (int)$tiempoE[2] + (int)$tiempoT[2];   
+       
 
         //Hacemos la conversión a horas.
-        $total = ((($diasT/24)*60) + ($horasT*60) + $minutosT)/60;
+        $total = $tiempoMecancia + $tiempoEmbalaje + $tiempoTransporte + $tiempoLaminas;
         $produccionActiva->setTiempoTotal(round($total,0));
 
         //Preparamos los datos y los manda a la base de datos.

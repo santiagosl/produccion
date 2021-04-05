@@ -14,6 +14,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  * @method Produccion[]    findAll()
  * @method Produccion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class ProduccionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,37 +22,8 @@ class ProduccionRepository extends ServiceEntityRepository
         parent::__construct($registry, Produccion::class);
     }
 
-    // /**
-    //  * @return Produccion[] Returns an array of Produccion objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Produccion
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
-    //Funcion para buscar por rango de fecha y si está finalizado o no.
-       public function finalizado($fechaInicio,$fechaFinal): array 
+        //Funcion para buscar por rango de fecha y si está finalizado o no.
+        public function finalizado($fechaInicio,$fechaFinal): array 
     {
         $entityManager = $this->getEntityManager(); 
         $query = $entityManager->createQuery("SELECT produccion
@@ -67,6 +39,7 @@ class ProduccionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+        //Funcion para buscar por rango de fecha y si está finalizado o no.
         public function noFinalizado($fechaInicio,$fechaFinal): array 
     {
         $entityManager = $this->getEntityManager(); 
@@ -77,13 +50,13 @@ class ProduccionRepository extends ServiceEntityRepository
         
         $query->setParameter('fechaInicio' , $fechaInicio) ;
         $query->setParameter('fechaFinal'  , $fechaFinal)  ;
-        
 
-        
         return $query->getResult();
     }
 
-          public function todos($fechaInicio,$fechaFinal): array 
+
+        //Funcion que devuelve todos los resultados dentro de un rango de fechas
+        public function todos($fechaInicio,$fechaFinal): array 
     {
         $entityManager = $this->getEntityManager(); 
         $query = $entityManager->createQuery("SELECT produccion
@@ -92,23 +65,122 @@ class ProduccionRepository extends ServiceEntityRepository
         
         $query->setParameter('fechaInicio' , $fechaInicio) ;
         $query->setParameter('fechaFinal'  , $fechaFinal)  ;
-        
-
-        
+          
         return $query->getResult();
     }
 
-}
-
-/* 
-
-    public function nBuscar($nombre): array 
+        //Funcion el numero de pedidos dentro de un rango de fechas
+        public function numPedidos($Desde,$Hasta)
     {
-       $entityManager = $this->getEntityManager(); 
-       $query = $entityManager->createQuery('SELECT nombre FROM App\Entity\Cliente nombre WHERE nombre.nombre LIKE :nombre'); 
-       $query->setParameter('nombre', '%' . $nombre . '%');
-       return $query->getResult();
-    }
-    
-*/
+        $entityManager = $this->getEntityManager();
 
+        $query = $entityManager->createQuery("SELECT produccion FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $array = $query->getResult();
+        return count($array);
+    }
+
+        //Funcion tiempo medio total de todos los pedidos finalizados y con un rango de fechas
+        public function tiempoMedioTotal($Desde,$Hasta)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT avg(produccion.tiempoTotal) FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $tiempoMedio = $query->getResult();
+        return $tiempoMedio[0][1];
+    }
+
+        //Funcion el mejor tiempo de todos los pedidos finalizados y con un rango de fechas
+        public function tiempoRecord($Desde,$Hasta)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT min(produccion.tiempoTotal) FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $tiempoRecord = $query->getResult();
+        return $tiempoRecord[0][1];
+    }
+
+        //Funcion tiempo medio mecanica de todos los pedidos finalizados y con un rango de fechas
+        public function tiempoMedioMecanica($Desde,$Hasta)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT avg(produccion.tiempoMecanica) FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $tiempoMedio = $query->getResult();
+        return $tiempoMedio[0][1];
+    }
+
+    
+        //Funcion tiempo medio laminas de todos los pedidos finalizados y con un rango de fechas
+        public function tiempoMedioLaminas($Desde,$Hasta)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT avg(produccion.tiempoLaminas) FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $tiempoMedio = $query->getResult();
+        return $tiempoMedio[0][1];
+    }
+
+        
+        //Funcion tiempo medio embalaje de todos los pedidos finalizados y con un rango de fechas
+        public function tiempoMedioEmbalaje($Desde,$Hasta)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT avg(produccion.tiempoEmbalaje) FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $tiempoMedio = $query->getResult();
+        return $tiempoMedio[0][1];
+    }
+            
+        //Funcion tiempo medio transporte de todos los pedidos finalizados y con un rango de fechas
+        public function tiempoMedioTransporte($Desde,$Hasta)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT avg(produccion.tiempoTransporte) FROM App\Entity\Produccion produccion
+                                            WHERE produccion.fechaCreacion BETWEEN :Desde and :Hasta
+                                            AND produccion.finalizado = 'SI' ");
+
+
+        $query->setParameter('Desde'  , $Desde);
+        $query->setParameter('Hasta'  , $Hasta);
+        $tiempoMedio = $query->getResult();
+        return $tiempoMedio[0][1];
+    }
+
+}
