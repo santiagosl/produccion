@@ -46,7 +46,7 @@ class LoginController extends AbstractController
             try {
                 $entityManager->flush(); 
                 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 return new Response ('Error al insertar el usuario');
             }
 

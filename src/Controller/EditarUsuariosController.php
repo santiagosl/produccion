@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class EditarUsuariosController extends AbstractController {
     
@@ -32,7 +35,7 @@ class EditarUsuariosController extends AbstractController {
             ->add('nombre', TextType::class)
             ->add('apellidos', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('rol', TextType::class,array('label' => 'Valores aceptados: ROLE_USER, ROLE_ADMIN'))
+            ->add('rol', ChoiceType::class, array('choices'=> array('Usuario' => 'ROLE_USER','Administrador' => 'ROLE_ADMIN')))
             ->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();
             
@@ -52,7 +55,7 @@ class EditarUsuariosController extends AbstractController {
  
             try {
                 $entityManager->flush(); 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 return new Response ('Error al insertar el cliente');
             }
 

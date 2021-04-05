@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class AltaClientesController extends AbstractController {
     
@@ -51,7 +52,7 @@ class AltaClientesController extends AbstractController {
  
             try {
                 $entityManager->flush(); 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 return new Response ('Error al insertar el usuario');
             }
 

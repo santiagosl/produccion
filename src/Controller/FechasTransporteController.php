@@ -41,7 +41,7 @@ class FechasTransporteController extends AbstractController
             $self = $_SERVER['PHP_SELF'];
             header("refresh:0.1; url=$self/$id");
             $entityManager->flush(); 
-        } catch (Exception $e){
+        } catch (\Exception $e){
             return new Response ('Error al insertar datos');
         }
 
@@ -70,7 +70,7 @@ class FechasTransporteController extends AbstractController
             $self = $_SERVER['PHP_SELF'];
             header("refresh:0.1; url=$self/$id");
             $entityManager->flush(); 
-        } catch (Exception $e){
+        } catch (\Exception $e){
             return new Response ('Error al insertar datos');
         }
 

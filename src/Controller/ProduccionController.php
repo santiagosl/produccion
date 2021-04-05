@@ -81,7 +81,7 @@ class ProduccionController extends AbstractController
             $nombreMecanica = bin2hex(random_bytes(6)). '.' . $mecanica->guessExtension();
             try {
               $mecanica->move($archivoPDF, $nombreMecanica);
-            } catch (FileException $e) {
+            } catch (\FileException $e) {
                   return new Response ('Error al insertar archivo mecanica');
             }
             $nuevaProduccion->setMecanica($nombreMecanica);
@@ -99,7 +99,7 @@ class ProduccionController extends AbstractController
             $nombreLaminas = bin2hex(random_bytes(6)). '.' . $laminas->guessExtension();
             try {
               $laminas->move($archivoPDF, $nombreLaminas);
-            } catch (FileException $e) {
+            } catch (\FileException $e) {
                 return new Response ('Error al insertar archivo laminas');
             }
             $nuevaProduccion->setLaminas($nombreLaminas);
@@ -116,7 +116,7 @@ class ProduccionController extends AbstractController
             $nombreEmbalaje = bin2hex(random_bytes(6)). '.' . $embalaje->guessExtension();
             try {
               $embalaje->move($archivoPDF, $nombreEmbalaje);
-            } catch (FileException $e) {
+            } catch (\FileException $e) {
                   return new Response ('Error al insertar archivo embalaje'); 
             }
             $nuevaProduccion->setembalaje($nombreEmbalaje);
@@ -133,7 +133,7 @@ class ProduccionController extends AbstractController
             $nombreTransporte = bin2hex(random_bytes(6)). '.' . $transporte->guessExtension();
             try {
               $transporte->move($archivoPDF, $nombreTransporte);
-            } catch (FileException $e) {
+            } catch (\FileException $e) {
                  return new Response ('Error al insertar archivo transporte');
             }
             $nuevaProduccion->settransporte($nombreTransporte);
@@ -154,7 +154,7 @@ class ProduccionController extends AbstractController
               $entityManager->flush(); 
              
 
-          } catch (Exception $e){
+          } catch (\Exception $e){
               return new Response ('Error al insertar el usuario');
           }
 

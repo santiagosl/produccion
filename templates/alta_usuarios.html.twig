@@ -16,7 +16,7 @@
 <main>
             <div class="container w-50">
                 
-                    {{form_start(formulario)}} 
+                    {{ form_start(formulario)}} 
                     {{ form_widget(formulario) }} 
                     {{ form_end(formulario) }}
         
@@ -27,7 +27,7 @@
         {# BOTON ATRAS #}
         <div class="container">
             <div class="nav justify-content-end">
-                <a class="btn btn-primary"  href="{{ path('usuarios')}}" >Atrás</a>
+                <a class="btn btn-primary"  href="{{ path('usuarios')}}" ><i class="fas fa-undo"></i></a>
             </div>
         </div>
     </div>

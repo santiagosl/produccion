@@ -14,17 +14,16 @@
    <main>
     <div class="container w-50">
 
-       <a class="btn btn-primary"  href="{{ path('alta_usuarios')}}" >Dar de alta usuarios</a>
+      
 
     
         {% if usuarios %}
                 <table class="table table-responsive center mt-2">
-                   {# <h2 class="mt-5">Listado de usuarios</h2> #}
                     <thead class="bg-info">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
+                            <th class="col" scope="col">Apellidos</th>
                             <th scope="col">ROL</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Borrar</th>
@@ -37,8 +36,8 @@
                                 <td>{{usu.Nombre}}</td>
                                 <td>{{usu.apellidos}}</td>
                                 <td>{{usu.rol}}</td>
-                                <td><a class="btn btn-warning" href="{{ path('editar_usuarios', {'id': usu.id}) }}">Editar</a></td>
-                                <td><a class="btn btn-danger" href="{{ path('borrar_usuarios', {'id': usu.id}) }}">Borrar</a></td>
+                                <td><a class="btn btn-warning" href="{{ path('editar_usuarios', {'id': usu.id}) }}"><i class="far fa-edit"></i></a></td>
+                                <td><a class="btn btn-danger" href="{{ path('borrar_usuarios', {'id': usu.id}) }}"><i class="far fa-trash-alt"></i></a></td>
                             </tr>
                         </tbody>
                     {% endfor %}
@@ -53,7 +52,8 @@
             {# BOTON ATRAS #}
             <div class="container">
                 <div class="nav justify-content-end p-2">
-                    <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+                    <a class="btn btn-primary mr-2"  href="{{ path('alta_usuarios')}}" ><i class="fas fa-user-plus"></i></a>
+                    <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>
                 </div>
             </div>
     </div>

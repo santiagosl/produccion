@@ -14,18 +14,23 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
-class BorrarUsuariosController extends AbstractController {
+
+class BorrarUsuariosController extends AbstractController 
+{
     
     /**
     * @Route("/borrar_usuarios/{id}", name="borrar_usuarios");
     */
 
-    public function borrar_usuarios(Request $request, $id) { 
+    public function borrar_usuarios(Request $request, $id) 
+    { 
 
         $entityManager = $this->getDoctrine()->getManager(); 
         $repositorio = $this->getDoctrine()->getRepository(Usuario::class); 
         $usuario = $repositorio->find($id); 
+
         if ($usuario) 
         {
               $entityManager->remove($usuario); 
@@ -33,16 +38,11 @@ class BorrarUsuariosController extends AbstractController {
               try {
 
                   $entityManager->flush(); 
-              } catch(Exception $e){
-                  return new Response ('Error al borrar el registro');
+              } catch(\Exception $e){
+                  return new Response ('No puede borrar el registro seleccionado');
               }
-
-        } else {
-             return new Response ('No se puede borrar el último registro');
         }
         return $this->redirectToRoute('usuarios');
      }
-
-
         
-    }
+}

@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class EditarClientesController extends AbstractController {
     
@@ -37,7 +38,7 @@ class EditarClientesController extends AbstractController {
             ->add('mail', TextType::class)
             ->add('cif', TextType::class)
             ->add('web', TextType::class)
-            ->add('save', SubmitType::Class, array('label' => 'Enviar'))
+            //->add('save', SubmitType::Class, array('label' => 'Enviar'))
             ->getForm();
             
             $formulario->handleRequest($request);
@@ -51,7 +52,7 @@ class EditarClientesController extends AbstractController {
  
             try {
                 $entityManager->flush(); 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 return new Response ('Error al insertar el cliente');
             }
 

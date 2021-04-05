@@ -6,16 +6,46 @@
 
     <section class="jumbotron p-1 text-center">
             <div class="container">
-            <h1 class="jumbotron-heading">Alta clientes</h1>
-            <p class="lead text-muted">Dar de alta los clientes</p>
+            <h1 class="jumbotron-heading">Editar clientes</h1>
+            <p class="lead text-muted">Editar los clientes</p>
             </div>
     </section>
 
    <main>
     <div class="container w-60">
 
-        
-        {{ form_start(formulario) }} 
+            {{ form_start(formulario) }} 
+            <div class="float-left col-md-6">
+                {{form_row(formulario.nombre)}} 
+            </div>
+            <div class="float-right col-md-6">
+                {{form_row(formulario.direccion)}} 
+            </div>
+            <div class="float-left col-md-6">
+                {{form_row(formulario.cp)}} 
+            </div>
+            <div class="float-right col-md-6">
+                {{form_row(formulario.poblacion)}} 
+            </div>
+            <div class="float-left col-md-6">
+                {{form_row(formulario.provincia)}} 
+            </div>
+            <div class="float-right col-md-6">
+                {{form_row(formulario.telefono)}} 
+            </div>
+            <div class="float-left col-md-6">
+                {{form_row(formulario.mail)}} 
+            </div>
+            <div class="float-right col-md-6">
+                {{form_row(formulario.cif)}} 
+            </div>
+            <div class="float-left col-md-6">
+                {{form_row(formulario.web)}} 
+            </div>
+            <div class=" col-md-5">
+                <button class="btn btn-primary" type="submit">Enviar </button>
+            </div>
+
         {{ form_widget(formulario) }} 
         {{ form_end(formulario) }}
 

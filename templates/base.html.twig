@@ -3,11 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Produccion PS COVER{% endblock %}</title>
+        <link rel="shortcut icon" type="image/jpg" href="./image/logo2.png" />
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         {% endblock %}
 
         {% block javascripts %}
@@ -17,12 +18,11 @@
         {% endblock %}
     </head>
 
-    <header>
         {% block header %}
+    <header>
         
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
-
             <div class="container-fluid content-align align-middle">
                 <div class="container text-center ">
                     <a class="navbar-brand " href="{{ path('resumen')}}">
@@ -32,7 +32,7 @@
                 
                 <div class="container text-center ">
                  {% if is_granted('ROLE_ADMIN') %}
-                    <p class="lead text-muted">Usuario: <span>{{ app.user.username }}</span> </p>
+                    <p class="lead text-muted">Usuario: <span>{{ app.user.username }} (Administrador)</span> </p>
                     {% elseif is_granted('ROLE_USER') %}
                     <p class="lead text-muted">Usuario: <span>{{ app.user.username }}</span> </p>
                  {% endif %}
@@ -61,16 +61,15 @@
 
     </body>
 
-
- 
         {% block footer %}
 
         <!-- Footer -->
         
         <footer class="bg-light text-center text-lg-start w-100 float-left">
-            <div class="text-center p-3 ">&copy 2020-2021 Copyright:
+            <div class="text-center p-3 ">
+             <img src="./image/logo_pscover.png" height="25" width="100" alt="logo_pscover">&copy 2020-2021 Copyright:
                 <a class="text-dark" href="https://www.ps-cover.com/">www.ps-cover.com</a>
-                <a class="btn btn-success btn-sm" href="{{ path('logout') }}">Cerrar sesión</a>
+                <a class="btn btn-success btn-sm" href="{{ path('logout') }}"><i class="fas fa-power-off"></i> Cerrar Sesión</a>
             </div>
         </footer>
         

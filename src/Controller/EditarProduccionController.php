@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\Response;
 
 class EditarProduccionController extends AbstractController {
     
@@ -48,7 +49,7 @@ class EditarProduccionController extends AbstractController {
  
             try {
                 $entityManager->flush(); 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 return new Response ('Error al insertar la produccion');
             }
 

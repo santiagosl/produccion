@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Resumen{% endblock %}
+{% block title %}Listado Produccion{% endblock %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
 
       <section class="jumbotron p-1 text-center">
         <div class="container">
-          <h2 class="jumbotron-heading">Lista Ordenes</h2>
+          <h2 class="jumbotron-heading">Listado Produccion</h2>
           <p class="lead text-muted">Buscar ordenes de producción</p>
          </div>
       </section>
@@ -125,9 +125,9 @@
                     
                     <td>{% if(ord.fechaFin) %}  <p class="btn-success">{{ord.fechaFin | date ('d/m/y')}}</p> {% else %} <p>-</p>{% endif %}</td>
                     
-                    <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}">Ver   </a></td>
-                    <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}">Editar</a></td>
-                    <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}">Borrar</a></td> 
+                    <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}"><i class="far fa-eye"></i></a></td>
+                    <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}"><i class="far fa-edit"></i></a></td>
+                    <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}"><i class="far fa-trash-alt"></i></a></td> 
             </tbody>
             {% endfor %}
       
@@ -145,7 +145,9 @@
           <div class="container mb-5">
               <div class="nav justify-content-end float-left mr-5 pr-5 col-md-12">
                   <a class="btn btn-success mr-1"  href="{{ path('selec_cliente_produccion')}}">Crear nueva produccion</a>
-                  <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>
+                  
+                 
               </div>
           </div>
       </div>

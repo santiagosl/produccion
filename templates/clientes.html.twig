@@ -12,27 +12,23 @@
     </section>
 
    <main>
-    <div class="container w-80">
+    <div class="container">
 
-       <a class="btn btn-primary ml-3"  href="{{ path('alta_clientes')}}" >Dar de alta cliente</a>
-
-        <div class="container w-60">
+        <div class="container">
         {% if clientes %}
                 <table class="table table-responsive mt-1">
-         {#            <h2 class="mt-5">Listado de Clientes</h2> #}
                     <thead class="bg-info">
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">CP</th>
-                        <th scope="col">Población</th>
-                        <th scope="col">Provincia</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">e-mail</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Borrar</th>
-       
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th class="col" scope="col">Dirección</th>
+                            <th class="col" scope="col">CP</th>
+                            <th class="col" scope="col">Población</th>
+                            <th class="col" scope="col">Provincia</th>
+                            <th class="col" scope="col">Teléfono</th>
+                            <th class="col" scope="col">e-mail</th>
+                            <th class="col" scope="col">Editar</th>
+                            <th class="col" scope="col">Borrar</th>
                         </tr>
                     </thead>
                     {% for cli in clientes %}
@@ -46,10 +42,10 @@
                                 <td>{{cli.provincia}}</td>
                                 <td>{{cli.telefono}}</td>
                                 <td>{{cli.mail}}</td>
-                                <td><a class="btn btn-warning" href="{{ path('editar_clientes', {'id': cli.id}) }}">Editar</a></td>
-                                <td><a class="btn btn-danger" href="{{ path('borrar_clientes', {'id': cli.id}) }}">Borrar</a></td>
+                                <td><a class="btn btn-warning" href="{{ path('editar_clientes', {'id': cli.id}) }}"><i class="far fa-edit"></i></a></td>
+                                <td><a class="btn btn-danger" href="{{ path('borrar_clientes', {'id': cli.id}) }}"><i class="far fa-trash-alt"></i></a></td>
                             </tr>
-
+ 
                         </tbody>
                     {% endfor %}
                 </table>
@@ -68,7 +64,8 @@
         {# BOTON ATRAS #}
         <div class="container">
             <div class="nav justify-content-end p-2">
-                <a class="btn btn-primary"  href="{{ path('resumen')}}" >Atrás</a>
+                <a class="btn btn-primary mr-3"  href="{{ path('alta_clientes')}}" >Dar de alta cliente</a>
+                <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>
             </div>
         </div>
     </div>
