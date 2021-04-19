@@ -27,27 +27,3 @@ class LoginController extends AbstractController
 }
 
 ?>
-
-
-
-<!-- 
-
-                       
-                $registro = new Login();
-
-                $registro->setNombreUsuario('xx');
-                $registro->setFecha(new \DateTime());
-                $registro->setHora(new \DateTime('Europe/Paris'));
-                $registro->setIdUsuario($request->request->get(1));
-                
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($registro);
-        
-            try {
-                $entityManager->flush(); 
-                
-            } catch (\Exception $e){
-                return new Response ('Error al insertar el usuario');
-            }
-
- -->

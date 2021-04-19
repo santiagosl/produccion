@@ -4,8 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Produccion PS COVER{% endblock %}</title>
         <link rel="shortcut icon" type="image/jpg" href="./image/logo2.png" />
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -15,6 +14,8 @@
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
         {% endblock %}
     </head>
 
@@ -38,8 +39,11 @@
                  {% endif %}
                 </div>
                 
+                {# FORMULARIO DONDE MUESTRO LA FECHA Y LA HORA ACTUALES #}
                 <div class="container text-center ">
-                    <p class="lead text-muted">Fecha/Hora: {{ "now" |date("d/m/Y H:i:s", "Europe/Paris") }}</p>
+                    <form name="form_reloj">
+                        <p class="lead text-muted">Fecha/Hora: <input class="lead text-muted border-0 bg-light" type="text" name="reloj" size="16" disabled> </p>
+                    </form>
                 </div>                  
             </div>
         </nav>
@@ -54,7 +58,11 @@
         <!-- Body -->
 
         {% block body %}
-        
+
+
+
+     
+                
         {% endblock %}
 
         <!-- Body -->
@@ -67,8 +75,8 @@
         
         <footer class="bg-light text-center text-lg-start w-100 float-left">
             <div class="text-center p-3 ">
-             <img src="./image/logo_pscover.png" height="25" width="100" alt="logo_pscover">&copy 2020-2021 Copyright:
-                <a class="text-dark" href="https://www.ps-cover.com/">www.ps-cover.com</a>
+                <img class="mr-2" src="./image/logo_pscover.png" height="25" width="100" alt="logo_pscover">&copy 2020-2021 Copyright:
+                <a class="text-dark mr-2 ml-2" href="https://www.ps-cover.com/">www.ps-cover.com</a>
                 <a class="btn btn-success btn-sm" href="{{ path('logout') }}"><i class="fas fa-power-off"></i> Cerrar Sesión</a>
             </div>
         </footer>
@@ -77,5 +85,38 @@
 
         {% endblock %}
 
-    
+
+        <script language="JavaScript">
+
+            function mueveReloj(){
+                momentoActual = new Date()
+                dia = momentoActual.getDate();
+                mes = momentoActual.getMonth();
+                anyo = momentoActual.getFullYear();
+                hora = momentoActual.getHours()
+                minuto = momentoActual.getMinutes()
+                segundo = momentoActual.getSeconds()
+
+                str_segundo = new String (segundo)
+                if (str_segundo.length == 1)
+                segundo = "0" + segundo
+
+                str_minuto = new String (minuto)
+                if (str_minuto.length == 1)
+                minuto = "0" + minuto
+
+                str_hora = new String (hora)
+                if (str_hora.length == 1)
+                hora = "0" + hora
+
+                horaImprimible = dia + "/" + (mes+1) + "/" + anyo + " - " + hora + ":" + minuto + ":" + segundo ;
+
+                document.form_reloj.reloj.value = horaImprimible
+
+                setTimeout("mueveReloj()",1000)
+            }
+        </script>
+
+        <script> mueveReloj();</script>
+
 </html>
