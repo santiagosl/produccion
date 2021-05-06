@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<skipper version="3.2.32.1734" mvc="Symfony" orm="Doctrine2" name="Produccion" uuid="2d061d4f-d792-4808-bac9-faa61e25f59a">
+  <module name="\src/Entity" local-name="src/Entity" namespace="\App\Entity" local-namespace="\App\Entity" export-format="Doctrine2Php" export-path="src/Entity" uuid="34cf0c13-1604-48ff-a858-1284015d4615">
+    <entity name="\App\Entity\Cliente" local-name="Cliente" namespace="\App\Entity" uuid="18bb5ea0-a039-4171-9faf-7e8265e11d93">
+      <field name="id" type="integer" required="true" primary="true" uuid="61761ec4-ee45-4817-8856-371d30f34d72">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="nombre" type="string" size="50" required="true" uuid="257ca53d-752b-43de-a600-ffcd1034be90"/>
+      <field name="direccion" type="string" size="100" required="true" uuid="f0568add-939d-4c0f-b5b9-9a3ad045c6ff"/>
+      <field name="cp" type="integer" required="true" uuid="8e1dc14b-5ca8-42d6-976c-c4e843d07065"/>
+      <field name="cif" type="string" size="20" required="true" uuid="5ebc7142-35bc-42d9-a522-21a8da5d920c"/>
+      <field name="mail" type="string" size="50" required="true" uuid="e0b1c68e-4d11-4a12-9632-3b4d7e7c9688"/>
+      <field name="web" type="string" size="50" required="true" uuid="224868b6-dae3-4366-8806-4b2ccceabdab"/>
+      <field name="poblacion" type="string" size="50" required="true" uuid="4e4684fb-ace7-4f4b-9782-d4348ea16148"/>
+      <field name="provincia" type="string" size="50" required="true" uuid="c8ea4ef6-f441-41a7-aafe-a4d1ad09a5e7"/>
+      <field name="telefono" type="integer" required="true" uuid="b717f1c6-a282-417b-9480-f07523aaef99"/>
+      <orm-attributes>
+        <attribute name="repository-class">ClienteRepository::class</attribute>
+        <attribute name="export-file-name">Cliente.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\App\Entity\Login" local-name="Login" namespace="\App\Entity" uuid="d7b5b4b9-abff-4b89-b40f-a90e0c992808">
+      <field name="id" type="integer" required="true" primary="true" uuid="d14c10f1-d612-410d-ab09-4f6bff465b92">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="nombre_usuario" type="string" size="50" required="true" uuid="800f2755-9cdf-4605-8f64-b031707a3c7d"/>
+      <field name="fecha" type="date" required="true" uuid="a7683200-64de-4f7c-a7af-208aad3cccc2"/>
+      <field name="hora" type="time" required="true" uuid="694979ef-953a-4997-857c-ce612a3f4152"/>
+      <field name="id_usuario_id" required="true" uuid="0872e62b-1547-45a4-b779-c2781e87d144"/>
+      <orm-attributes>
+        <attribute name="repository-class">LoginRepository::class</attribute>
+        <attribute name="export-file-name">Login.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Login" to="\Usuario::class" owner-alias="" inverse-alias="id_usuario" many-owner="true" many-inverse="false" parent-required="true" uuid="dad54bb5-0e36-44d2-b6b0-dc963a36b992">
+      <association-field from="id_usuario_id" to="id" uuid="8bd8cee3-4716-4e6a-aee0-f5c88a4e0724"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\App\Entity\Produccion" local-name="Produccion" namespace="\App\Entity" uuid="5907fce2-05f5-4f14-a235-cf2f9474239c">
+      <field name="id" type="integer" required="true" primary="true" uuid="5ef8383a-3d9a-43b6-8646-43ff38511416">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="embalaje" type="string" size="255" uuid="4e917c49-38b4-47dc-acf7-fbab526ab6ac"/>
+      <field name="laminas" type="string" size="255" uuid="2f60a458-5256-4d53-a251-4baf242f4817"/>
+      <field name="mecanica" type="string" size="255" uuid="940078d8-ab6b-43fb-bbca-c8465da02f36"/>
+      <field name="transporte" type="string" size="255" uuid="ca7e41e5-6577-4a58-8e0c-927b098dbf02"/>
+      <field name="referencia" type="string" size="255" uuid="9f1e99a1-0739-42dc-830a-5ade01f64c4d"/>
+      <field name="fechaCreacion" type="datetime" required="true" uuid="eac23c77-449f-4113-947c-a2c1aaf6ca76"/>
+      <field name="fechaFin" type="datetime" uuid="df9c58fa-ef10-4369-a402-d3c9ba41a2d1"/>
+      <field name="tiempoTotal" type="integer" uuid="2b1b50b2-7ebe-4432-96d0-3ff6c7ce6159"/>
+      <field name="fechaInicioMecanica" type="datetime" uuid="072a8b3b-2c2a-4954-acba-4b83b7c4a2d9"/>
+      <field name="fechaFinMecanica" type="datetime" uuid="1b108529-8466-413e-b42a-25da77ed2bf0"/>
+      <field name="fechaInicioLaminas" type="datetime" uuid="791c47b2-f672-4a20-b47e-08cb9ec181d8"/>
+      <field name="fechaFinLaminas" type="datetime" uuid="e052ad19-a30d-43ba-a925-79bf458769ea"/>
+      <field name="fechaInicioEmbalaje" type="datetime" uuid="27b34512-67b9-40cf-bc56-cdbf3148198e"/>
+      <field name="fechaFinEmbalaje" type="datetime" uuid="31930da8-9734-4aa1-bf11-c910199c5f85"/>
+      <field name="fechaInicioTransporte" type="datetime" uuid="f9deaf76-6bc0-4a75-aa0c-0c949a9109bc"/>
+      <field name="fechaFinTransporte" type="datetime" uuid="048745b5-9b54-4486-9ba7-746ee0e0c6ae"/>
+      <field name="tiempoMecanica" type="string" size="255" uuid="6e3c8581-8e11-4cb0-971c-a63caf3c96e3"/>
+      <field name="tiempoLaminas" type="string" size="255" uuid="e4fa9bb6-f47e-449c-abdc-eda2929870fb"/>
+      <field name="tiempoEmbalaje" type="string" size="255" uuid="f3e4b15d-6152-4ace-a282-08c189a093b1"/>
+      <field name="tiempoTransporte" type="string" size="255" uuid="7e3ee327-6ac8-4098-8ee1-5e656dd62d92"/>
+      <field name="finalizado" type="string" size="2" uuid="21f8b9ca-d6fa-4b5e-b5c9-8a42f59dd4b1"/>
+      <field name="usuarioFinLaminas" type="string" size="3" required="true" uuid="7d59b533-a5de-4085-89aa-d1d542216e99"/>
+      <field name="usuarioFinMecanica" type="string" size="3" required="true" uuid="bc070b39-0338-41af-b7b0-db74b303e45e"/>
+      <field name="usuarioFinEmbalaje" type="string" size="3" required="true" uuid="8c5ee9d2-88dd-4483-aa88-72f075e780bf"/>
+      <field name="usuarioFinTransporte" type="string" size="3" required="true" uuid="02b389c5-16e3-4c68-9aeb-2fbf43e44bed"/>
+      <field name="idUsuario_id" uuid="66ac0e1d-b146-48b0-9c41-94b2ecd842d1"/>
+      <field name="idCliente_id" uuid="3a53c6ba-59fb-41df-99ad-b578b08af632"/>
+      <field name="usuarioFinLaminas_id" uuid="8f779c27-71f0-4ba8-9e0f-3553930adeae"/>
+      <field name="usuarioFinMecanica_id" uuid="0aa003ff-4315-4768-8593-66f83d0c1648"/>
+      <field name="usuarioFinEmbalaje_id" uuid="3d765291-f4f9-487b-8664-3dc6025c3a2b"/>
+      <field name="usuarioFinTransporte_id" uuid="ce52cb77-26b4-447b-b923-a83c2b024f88"/>
+      <orm-attributes>
+        <attribute name="repository-class">ProduccionRepository::class</attribute>
+        <attribute name="export-file-name">Produccion.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Produccion" to="\Usuario::class" owner-alias="" inverse-alias="idUsuario" many-owner="true" many-inverse="false" uuid="1438efa9-3363-45a4-8844-3b348520b0bf">
+      <association-field from="idUsuario_id" to="id" uuid="aa173b3f-8083-4e8f-9160-cfea7eeb474a"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Produccion" to="\Cliente::class" owner-alias="" inverse-alias="idCliente" many-owner="true" many-inverse="false" uuid="e6e1b0c8-a9c3-4035-aa87-39c87a0d84a9">
+      <association-field from="idCliente_id" to="id" uuid="12d13605-694f-406b-b62d-23281518d89f"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Produccion" to="\Usuario::class" owner-alias="" inverse-alias="usuarioFinLaminas" many-owner="true" many-inverse="false" uuid="50e91030-c7bd-4ea2-93f2-bc2648c4213d">
+      <association-field from="usuarioFinLaminas_id" to="id" uuid="6764a962-0875-432f-afc7-36d3e1642acc"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Produccion" to="\Usuario::class" owner-alias="" inverse-alias="usuarioFinMecanica" many-owner="true" many-inverse="false" uuid="4c8b1ff7-77dd-4dff-acec-85d0720361ab">
+      <association-field from="usuarioFinMecanica_id" to="id" uuid="9cfd9bd5-55c0-4c83-a51e-d342fcd48f61"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Produccion" to="\Usuario::class" owner-alias="" inverse-alias="usuarioFinEmbalaje" many-owner="true" many-inverse="false" uuid="b4b0ae96-c8cb-43b3-86c0-f7e8f6af13a3">
+      <association-field from="usuarioFinEmbalaje_id" to="id" uuid="931c144d-5cd0-4a33-a2b5-2caa44cd6406"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Produccion" to="\Usuario::class" owner-alias="" inverse-alias="usuarioFinTransporte" many-owner="true" many-inverse="false" uuid="24026004-f1b4-4066-bc04-97e1fb1d9e63">
+      <association-field from="usuarioFinTransporte_id" to="id" uuid="54fae296-55a3-4f60-b0ad-36e228244140"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\App\Entity\Usuario" local-name="Usuario" namespace="\App\Entity" uuid="9fcdd73e-5715-4ea2-83d6-3571406e8318">
+      <field name="id" type="integer" required="true" primary="true" uuid="04a46afe-7049-4bec-961c-7fbb80616af3">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="nombre" type="string" size="50" required="true" uuid="9e7ead6f-1ec1-409d-a51b-abc4df838f64"/>
+      <field name="apellidos" type="string" size="50" required="true" uuid="131fe58d-36bb-4964-bbbc-00d560d2a35d"/>
+      <field name="rol" type="string" size="10" required="true" uuid="927f7f74-6057-41b7-bda0-f3bc1b7c4f12"/>
+      <field name="password" type="string" size="255" required="true" uuid="274c9126-362d-4b73-a3bd-b256925f9b71"/>
+      <field name="id_usuario_id" uuid="b06fff76-cb45-41cd-8120-30b273739dbd"/>
+      <orm-attributes>
+        <attribute name="repository-class">UsuarioRepository::class</attribute>
+        <attribute name="export-file-name">Usuario.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Usuario" to="\Usuario::class" owner-alias="" inverse-alias="id_usuario" many-owner="true" many-inverse="false" uuid="983ead62-56d0-45e3-893d-f9321f49f8ca">
+      <association-field from="id_usuario_id" to="id" uuid="86eed9da-587d-4c82-9b5c-933ed3545816"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+  </module>
+  <module name="\tmp" local-name="tmp" namespace="\" uuid="119ecbf8-c80b-421a-a968-60855dabb235">
+    <entity name="\Usuario::class" local-name="Usuario::class" namespace="\" uuid="0d8f34b5-ace2-4668-8cb1-09d8fa0f0513">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="09651455-0517-4e05-ad9d-41c13140909d"/>
+    </entity>
+    <entity name="\Cliente::class" local-name="Cliente::class" namespace="\" uuid="5b856190-50c1-476c-a8cd-4ffaba43a9cf">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="821dc225-2c76-4e25-8dfd-27b6147c9578"/>
+    </entity>
+  </module>
+  <visual-data>
+    <association uuid="1438efa9-3363-45a4-8844-3b348520b0bf" color="#C774AF"/>
+    <association uuid="24026004-f1b4-4066-bc04-97e1fb1d9e63" color="#2E63AF"/>
+    <association uuid="4c8b1ff7-77dd-4dff-acec-85d0720361ab" color="#C774AF"/>
+    <association uuid="50e91030-c7bd-4ea2-93f2-bc2648c4213d" color="#B31F24"/>
+    <association uuid="983ead62-56d0-45e3-893d-f9321f49f8ca" color="#2E63AF"/>
+    <association uuid="b4b0ae96-c8cb-43b3-86c0-f7e8f6af13a3" color="#8A54A2"/>
+    <association uuid="dad54bb5-0e36-44d2-b6b0-dc963a36b992" color="#B31F24"/>
+    <association uuid="e6e1b0c8-a9c3-4035-aa87-39c87a0d84a9" color="#8A54A2"/>
+    <entity uuid="0d8f34b5-ace2-4668-8cb1-09d8fa0f0513" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="73" size-y="0" size-y2="31"/>
+    <entity uuid="18bb5ea0-a039-4171-9faf-7e8265e11d93" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="36" position-y="177" size-x="0" size-x2="115" size-y="0" size-y2="157"/>
+    <entity uuid="5907fce2-05f5-4f14-a235-cf2f9474239c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="334" position-y="42" size-x="0" size-x2="160" size-y="0" size-y2="409"/>
+    <entity uuid="5b856190-50c1-476c-a8cd-4ffaba43a9cf" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="22" position-y="111" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <entity uuid="9fcdd73e-5715-4ea2-83d6-3571406e8318" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="37" position-y="43" size-x="0" size-x2="117" size-y="0" size-y2="101"/>
+    <entity uuid="d7b5b4b9-abff-4b89-b40f-a90e0c992808" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="170" position-y="42" size-x="0" size-x2="139" size-y="0" size-y2="87"/>
+    <module uuid="119ecbf8-c80b-421a-a968-60855dabb235" bg-color="#EAE4F1" position-x="325" position-y="53" size-x="0" size-x2="113" size-y="-8" size-y2="184"/>
+    <module uuid="34cf0c13-1604-48ff-a858-1284015d4615" bg-color="#F9FD9A" position-x="94" position-y="251" size-x="29" size-x2="538" size-y="0" size-y2="471"/>
+    <project uuid="2d061d4f-d792-4808-bac9-faa61e25f59a" size-x="-15" size-x2="652" size-y="-40" size-y2="828"/>
+  </visual-data>
+</skipper>

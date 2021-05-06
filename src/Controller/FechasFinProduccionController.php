@@ -37,7 +37,10 @@ class FechasFinProduccionController extends AbstractController
         {
             $inicioMecanica = $produccionActiva->getFechaInicioMecanica('Europe/Paris');
             $finMecanica = $produccionActiva->getFechaFinMecanica('Europe/Paris');
-            $totalMecanica = $inicioMecanica->diff($finMecanica);
+            $totalMecanica = date_diff($inicioMecanica,$finMecanica);
+            
+                        
+            print_r($totalMecanica->format('%D:%H:%I'));
   
             $tiempoM = $totalMecanica->format('%D:%H:%I');
             $tiempoMecanica = preg_split("/:/",$tiempoM);
@@ -45,7 +48,7 @@ class FechasFinProduccionController extends AbstractController
             $horasMecanica = $tiempoMecanica[1];
             $minMecanica = $tiempoMecanica[2];
 
-            $totalMecanica =  ((($diasMecanica/24)*60) + ($horasMecanica*60) + $minMecanica)/60;
+            $totalMecanica =  ((($diasMecanica*24)*60) + ($horasMecanica*60) + $minMecanica)/60;
 
             $produccionActiva->setTiempoMecanica($totalMecanica);
         }
@@ -65,7 +68,7 @@ class FechasFinProduccionController extends AbstractController
             $horasLaminas = $tiempoLaminas[1];
             $minLaminas = $tiempoLaminas[2];
 
-            $totalLaminas =  ((($diasLaminas/24)*60) + ($horasLaminas*60) + $minLaminas)/60;
+            $totalLaminas =  ((($diasLaminas*24)*60) + ($horasLaminas*60) + $minLaminas)/60;
 
             $produccionActiva->setTiempoLaminas($totalLaminas);
         }
@@ -83,7 +86,7 @@ class FechasFinProduccionController extends AbstractController
             $horasEmbalaje = $tiempoEmbalaje[1];
             $minEmbalaje = $tiempoEmbalaje[2];
 
-            $totalEmbalaje =  ((($diasEmbalaje/24)*60) + ($horasEmbalaje*60) + $minEmbalaje)/60;
+            $totalEmbalaje =  ((($diasEmbalaje*24)*60) + ($horasEmbalaje*60) + $minEmbalaje)/60;
 
             $produccionActiva->setTiempoEmbalaje($totalEmbalaje);
         }   
@@ -101,7 +104,7 @@ class FechasFinProduccionController extends AbstractController
             $horasTransporte = $tiempoTransporte[1];
             $minTransporte = $tiempoTransporte[2];
 
-            $totalTransporte =  ((($diasTransporte/24)*60) + ($horasTransporte*60) + $minTransporte)/60;
+            $totalTransporte =  ((($diasTransporte*24)*60) + ($horasTransporte*60) + $minTransporte)/60;
 
             $produccionActiva->setTiempoTransporte($totalTransporte);
         }
@@ -126,8 +129,8 @@ class FechasFinProduccionController extends AbstractController
         $entityManager->persist($produccionActiva);
 
         try {
-            $self = $_SERVER['PHP_SELF'];
-            header("refresh:0.1; url=$self/$id");
+            //$self = $_SERVER['PHP_SELF'];
+            //header("refresh:0.1; url=$self/$id");
             $produccionActiva->setFinalizado('SI') ;
             $entityManager->flush();
             

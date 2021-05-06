@@ -34,6 +34,7 @@ class FechasLaminasController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaInicioLaminas(new \DateTime('Europe/Paris'));
+        $produccionActiva->setUsuarioFinLaminas($this->getUser());
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);

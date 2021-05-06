@@ -62,7 +62,8 @@ class FechasTransporteController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaFinTransporte(new \DateTime('Europe/Paris'));
-  
+        $produccionActiva->setUsuarioFinTransporte($this->getUser());
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 

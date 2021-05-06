@@ -68,15 +68,15 @@
 
                     <td>
                        {% if ord.mecanica == '' %} 
-                            <p class="btn-light">-</p>
+                            <p class="btn-light">-</p> 
                         {% elseif ord.fechaFinMecanica %} 
-                            <p class="btn-success">Finalizado</p>
+                            <i class="fas fa-check-double fa-2x" style="color:#008f39"></i>
                         {% elseif ord.fechaInicioMecanica %} 
-                            <p class="btn-warning">Iniciado</p>
+                            <i class="fas fa-cogs fa-2x" style="color:#FF8000"></i>
                         {% elseif ord.mecanica %} 
-                            <p class="btn-danger">No Iniciado</p>
+                            <i class="far fa-pause-circle fa-2x" style="color:#FF0000"></i>
                         {% else %}                          
-                            <p>NO</p> 
+                           <p>NO</p>  
                         {% endif %}
                     </td>
                     
@@ -84,11 +84,11 @@
                         {% if ord.laminas == '' %} 
                             <p class="btn-light">-</p>
                         {% elseif ord.fechaFinLaminas %} 
-                            <p class="btn-success">Finalizado</p>
+                            <i class="fas fa-check-double fa-2x" style="color:#008f39"></i>
                         {% elseif ord.fechaInicioLaminas %} 
-                            <p class="btn-warning">Iniciado</p>
+                            <i class="fas fa-cogs fa-2x" style="color:#FF8000"></i>
                         {% elseif ord.laminas %} 
-                            <p class="btn-danger">No Iniciado</p>
+                           <i class="far fa-pause-circle fa-2x" style="color:#FF0000"></i>
                         {% else %}                          
                             <p>NO</p> 
                         {% endif %}
@@ -98,11 +98,11 @@
                         {% if ord.embalaje == '' %} 
                             <p class="btn-light">-</p>
                         {% elseif ord.fechaFinembalaje %} 
-                            <p class="btn-success">Finalizado</p>
+                            <i class="fas fa-check-double fa-2x" style="color:#008f39"></i>
                         {% elseif ord.fechaInicioembalaje %} 
-                            <p class="btn-warning">Iniciado</p>
+                            <i class="fas fa-cogs fa-2x" style="color:#FF8000"></i>
                         {% elseif ord.embalaje %} 
-                            <p class="btn-danger">No Iniciado</p>
+                           <i class="far fa-pause-circle fa-2x" style="color:#FF0000"></i>
                         {% else %}                          
                             <p>NO</p> 
                         {% endif %}
@@ -112,11 +112,11 @@
                         {% if ord.transporte == '' %} 
                             <p class="btn-light">-</p>
                         {% elseif ord.fechaFintransporte %} 
-                            <p class="btn-success">Finalizado</p>
+                            <i class="fas fa-check-double fa-2x" style="color:#008f39"></i>
                         {% elseif ord.fechaIniciotransporte %} 
-                            <p class="btn-warning">Iniciado</p>
+                            <i class="fas fa-cogs fa-2x" style="color:#FF8000"></i>
                         {% elseif ord.transporte %} 
-                            <p class="btn-danger">No Iniciado</p>
+                           <i class="far fa-pause-circle fa-2x" style="color:#FF0000"></i>
                         {% else %}                          
                             <p>NO</p> 
                         {% endif %}
@@ -144,7 +144,7 @@
           {# BOTON ATRAS #}
           <div class="container mb-5">
               <div class="nav justify-content-end float-left mr-5 pr-5 col-md-12">
-                  <a class="btn btn-success mr-1"  href="{{ path('selec_cliente_produccion')}}">Crear nueva produccion</a>
+                  <a class="btn btn-success mr-1" href="{{ path('selec_cliente_produccion')}}"><i class="fas fa-folder-plus"></i></a>
                   <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>
                   
                  

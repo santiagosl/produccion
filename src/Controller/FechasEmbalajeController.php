@@ -63,6 +63,7 @@ class FechasEmbalajeController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaFinEmbalaje(new \DateTime('Europe/Paris'));
+        $produccionActiva->setUsuarioFinEmbalaje($this->getUser());
        
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);

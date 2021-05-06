@@ -27,9 +27,11 @@ class BorrarProduccionController extends AbstractController {
         $entityManager = $this->getDoctrine()->getManager(); 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
         $produccion = $repositorio->find($id); 
+
         if ($produccion) 
         {
-              $entityManager->remove($produccion); 
+           
+            $entityManager->remove($produccion); 
 
               try {
 
@@ -41,7 +43,7 @@ class BorrarProduccionController extends AbstractController {
         } else {
              return new Response ('No se puede borrar el último registro');
         }
-        return $this->redirectToRoute('lista_ordenes');
+        return $this->redirectToRoute('busca_lista_ordenes');
      }
 
 

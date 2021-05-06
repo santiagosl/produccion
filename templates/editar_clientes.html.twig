@@ -42,8 +42,10 @@
             <div class="float-left col-md-6">
                 {{form_row(formulario.web)}} 
             </div>
-            <div class=" col-md-5">
-                <button class="btn btn-primary" type="submit">Enviar </button>
+
+            <div class="float-right col-md-12">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+                <a class="float-right btn btn-primary fas fa-undo"  href="{{ path('clientes')}}"></a>
             </div>
 
         {{ form_widget(formulario) }} 
@@ -51,11 +53,7 @@
 
 
         {# BOTON ATRAS #}
-        <div class="container">
-            <div class="nav justify-content-end">
-                <a class="btn btn-primary"  href="{{ path('clientes')}}" >Atrás</a>
-            </div>
-        </div>
+        
     </div>
 <main>
 

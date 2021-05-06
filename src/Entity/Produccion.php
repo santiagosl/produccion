@@ -19,31 +19,31 @@ class Produccion
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $embalaje;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $laminas;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $mecanica;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $transporte;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $referencia;
 
@@ -54,20 +54,20 @@ class Produccion
 
      /**
      * @ORM\Column(type="datetime",nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $fechaFin;
 
 
     /**
      * @ORM\Column(type="integer",nullable=true)
-     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $tiempoTotal;
 
     /**
      * @ORM\ManyToOne(targetEntity=Usuario::class)
-     * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $idUsuario;
 
@@ -148,6 +148,26 @@ class Produccion
      * @ORM\Column(type="string", length=2, nullable=true)
      */
     private $finalizado;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class)
+     */
+    private $usuarioFinLaminas;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class)
+     */
+    private $usuarioFinMecanica;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class)
+     */
+    private $usuarioFinEmbalaje;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class)
+     */
+    private $usuarioFinTransporte;
 
 
     public function getId(): ?int
@@ -437,6 +457,54 @@ class Produccion
       public function setFinalizado(?string $finalizado): self
       {
           $this->finalizado = $finalizado;
+
+          return $this;
+      }
+
+      public function getUsuarioFinLaminas(): ?Usuario
+      {
+          return $this->usuarioFinLaminas;
+      }
+
+      public function setUsuarioFinLaminas(?Usuario $usuarioFinLaminas): self
+      {
+          $this->usuarioFinLaminas = $usuarioFinLaminas;
+
+          return $this;
+      }
+
+      public function getUsuarioFinMecanica(): ?Usuario
+      {
+          return $this->usuarioFinMecanica;
+      }
+
+      public function setUsuarioFinMecanica(?Usuario $usuarioFinMecanica): self
+      {
+          $this->usuarioFinMecanica = $usuarioFinMecanica;
+
+          return $this;
+      }
+
+      public function getUsuarioFinEmbalaje(): ?Usuario
+      {
+          return $this->usuarioFinEmbalaje;
+      }
+
+      public function setUsuarioFinEmbalaje(?Usuario $usuarioFinEmbalaje): self
+      {
+          $this->usuarioFinEmbalaje = $usuarioFinEmbalaje;
+
+          return $this;
+      }
+
+      public function getUsuarioFinTransporte(): ?Usuario
+      {
+          return $this->usuarioFinTransporte;
+      }
+
+      public function setUsuarioFinTransporte(?Usuario $usuarioFinTransporte): self
+      {
+          $this->usuarioFinTransporte = $usuarioFinTransporte;
 
           return $this;
       }

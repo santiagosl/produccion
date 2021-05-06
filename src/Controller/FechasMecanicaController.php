@@ -66,12 +66,14 @@ class FechasMecanicaController extends AbstractController
         $produccionActiva = $repositorio->find($id);
 
         $produccionActiva->setFechaFinMecanica(new \DateTime('Europe/Paris'));
+        $produccionActiva->setUsuarioFinMecanica($this->getUser());
     
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
+        
 
         try {
-             $self = $_SERVER['PHP_SELF'];
+            $self = $_SERVER['PHP_SELF'];
             header("refresh:0.1; url=$self/$id");
             $entityManager->flush(); 
         } catch (\Exception $e){
