@@ -38,10 +38,7 @@ class FechasFinProduccionController extends AbstractController
             $inicioMecanica = $produccionActiva->getFechaInicioMecanica('Europe/Paris');
             $finMecanica = $produccionActiva->getFechaFinMecanica('Europe/Paris');
             $totalMecanica = date_diff($inicioMecanica,$finMecanica);
-            
-                        
-            print_r($totalMecanica->format('%D:%H:%I'));
-  
+             
             $tiempoM = $totalMecanica->format('%D:%H:%I');
             $tiempoMecanica = preg_split("/:/",$tiempoM);
             $diasMecanica = $tiempoMecanica[0];
@@ -129,8 +126,8 @@ class FechasFinProduccionController extends AbstractController
         $entityManager->persist($produccionActiva);
 
         try {
-            //$self = $_SERVER['PHP_SELF'];
-            //header("refresh:0.1; url=$self/$id");
+            $self = $_SERVER['PHP_SELF'];
+            header("refresh:0.1; url=$self/$id");
             $produccionActiva->setFinalizado('SI') ;
             $entityManager->flush();
             

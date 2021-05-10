@@ -7,15 +7,24 @@
     <section class="jumbotron p-1 text-center">
             <div class="container">
             <h1 class="jumbotron-heading">Clientes</h1>
-            <p class="lead text-muted">Crea, edita y borra los clientes</p>
+            {% if is_granted('ROLE_ADMIN') %}
+                <p class="lead text-muted">Crea, edita y borra los clientes</p>
+            {% endif %}
             </div>
     </section>
+
+
+        <div class="container">
+            {{ form_start(formCliente) }}  
+            {{ form_widget(formCliente) }} 
+            {{ form_end(formCliente) }}
+        </div>
 
    <main>
     <div class="container">
 
         <div class="container">
-        {% if clientes %}
+        {% if buscar %}
                 <table class="table table-responsive mt-1">
                     <thead class="bg-info">
                         <tr>
@@ -31,7 +40,7 @@
                             <th class="col" scope="col">Borrar</th>
                         </tr>
                     </thead>
-                    {% for cli in clientes %}
+                    {% for cli in buscar %}
                         <tbody>
                             <tr>
                                 <th scope='row'>{{cli.id}}</td>
@@ -42,8 +51,14 @@
                                 <td>{{cli.provincia}}</td>
                                 <td>{{cli.telefono}}</td>
                                 <td>{{cli.mail}}</td>
-                                <td><a class="btn btn-warning" href="{{ path('editar_clientes', {'id': cli.id}) }}"><i class="far fa-edit"></i></a></td>
-                                <td><a class="btn btn-danger" href="{{ path('borrar_clientes', {'id': cli.id}) }}"><i class="far fa-trash-alt"></i></a></td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td><a class="btn btn-warning" href="{{ path('editar_clientes', {'id': cli.id}) }}"><i class="far fa-edit"></i></a></td>
+                                    <td><a class="btn btn-danger" href="{{ path('borrar_clientes', {'id': cli.id}) }}" onclick="return borrarRegistro();"><i class="far fa-trash-alt"></i></a></td>
+                                {% else %}
+                                    <td><a><i class="fas fa-ban fa-2x"></i></a></td>
+                                    <td><a><i class="fas fa-ban fa-2x"></i></a></td>
+                                {% endif %}
+
                             </tr>
  
                         </tbody>
@@ -54,7 +69,7 @@
         {% else %}
 
         <div class="alert alert-info mt-2" role="alert">
-              <p>No hay clientes</p>
+              <p>No hay clientes con ese criterio</p>
         </div>
 
         {% endif %}
@@ -64,7 +79,9 @@
         {# BOTON ATRAS #}
         <div class="container">
             <div class="nav justify-content-end p-2">
+            {% if is_granted('ROLE_ADMIN') %}
                 <a class="btn btn-primary mr-2"  href="{{ path('alta_clientes')}}" ><i class="fas fa-user-plus"></i></a>
+            {% endif %}
                 <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>
             </div>
         </div>

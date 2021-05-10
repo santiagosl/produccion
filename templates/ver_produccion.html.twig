@@ -30,7 +30,7 @@
                     <td scope='row'>{{pr.id}}</td>
                     <td>{{pr.fechaCreacion | date('d-m-Y')}}</td>
                     
-                    <td>{{ pr.idCliente}}</td>
+                    <td>{{ pr.idCliente}} - {{ pr.idCliente.nombre}}</td>
                     <td>{{ pr.referencia }}</td>
                 </tr>
                  {% endfor %}
@@ -211,7 +211,9 @@
        
             <div class="container ">
             {% if produccion.fechaFinMecanica != null and produccion.fechaFinLaminas != null  and produccion.fechaFinEmbalaje != null and produccion.fechaFinTransporte != null %}
-                <a class="btn btn-primary mr-3 float-left"  href="{{ path('finProduccion', {'id': produccion.id}) }}" >Finalizacion produccion</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-primary mr-3 float-left"  href="{{ path('finProduccion', {'id': produccion.id}) }}" >Finalización producción</a>
+                {% endif %}    
             {% endif %}
                 <a class="btn btn-success mt-1 w-100 text-white disabled">Total produccion</a>
                 <input class="text-center w-100 mb-1" type="text" value="{{ produccion.tiempoTotal | number_format(0, '.', ',') }} hora/s" disabled>

@@ -19,6 +19,9 @@
           {# PRODUCCION #}
           <div class="row">
          
+          {% if is_granted('ROLE_ADMIN') %}
+            
+            {# VISTA COMO ADMINISTRADOR #}
 
             {# RESUMEN #}
             <div class="col-md-3">
@@ -55,6 +58,7 @@
 
         
             {# ALTA USUARIOS #}
+            
             <div class="col-md-3">
               <div class="card mb-3 box-shadow">
                 <img class="card-img-top" src="./image/alta-usuarios.jpg" alt="alta_usuarios">
@@ -70,6 +74,7 @@
                 </div>
               </div>
             </div>
+           
 
             {# ESTADISTICAS #}
             <div class="col-md-3">
@@ -88,6 +93,63 @@
               </div>
             </div>
 
+
+          {% else %}
+
+            {# VISTA COMO USUARIO #}
+        
+            {# RESUMEN #}
+            <div class="col-md-4">
+              <div class="card mb-3 box-shadow">
+               <img class="card-img-top" src="./image/resumen.png" alt="resumen">
+                <div class="card-body">
+                  <p class="card-text">Producción</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group w-100">
+                       <a class="btn btn-primary btn-lg btn-block"  href="{{ path('busca_lista_ordenes')}}" ><i class="far fa-eye"></i></a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {# ALTA CLIENTES #}
+            <div class="col-md-4">
+              <div class="card mb-3 box-shadow">
+              <img class="card-img-top" src="./image/clientes.jpg" alt="cliente">
+                <div class="card-body">
+                  <p class="card-text">Clientes</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group w-100">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('clientes')}}" ><i class="far fa-eye"></i></a>
+                   
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            {# ESTADISTICAS #}
+            <div class="col-md-4">
+              <div class="card mb-3 box-shadow">
+                <img class="card-img-top" src="./image/estadisticas.jpg" alt="estadisticas">
+                <div class="card-body">
+                  <p class="card-text">Estadísticas</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group w-100">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('estadisticas')}}" ><i class="far fa-eye"></i></a>
+                    
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          {% endif %}
 
           </div>
         </div>

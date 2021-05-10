@@ -14,7 +14,8 @@
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+            <script src="./javaScript/borrarRegistro.js"></script>
+            <script src="./javaScript/fechaHora.js"></script>
 
         {% endblock %}
     </head>
@@ -58,9 +59,6 @@
         <!-- Body -->
 
         {% block body %}
-
-
-
      
                 
         {% endblock %}
@@ -85,38 +83,6 @@
 
         {% endblock %}
 
-
-        <script language="JavaScript">
-
-            function mueveReloj(){
-                momentoActual = new Date()
-                dia = momentoActual.getDate();
-                mes = momentoActual.getMonth();
-                anyo = momentoActual.getFullYear();
-                hora = momentoActual.getHours()
-                minuto = momentoActual.getMinutes()
-                segundo = momentoActual.getSeconds()
-
-                str_segundo = new String (segundo)
-                if (str_segundo.length == 1)
-                segundo = "0" + segundo
-
-                str_minuto = new String (minuto)
-                if (str_minuto.length == 1)
-                minuto = "0" + minuto
-
-                str_hora = new String (hora)
-                if (str_hora.length == 1)
-                hora = "0" + hora
-
-                horaImprimible = dia + "/" + (mes+1) + "/" + anyo + " - " + hora + ":" + minuto + ":" + segundo ;
-
-                document.form_reloj.reloj.value = horaImprimible
-
-                setTimeout("mueveReloj()",1000)
-            }
-        </script>
-
-        <script> mueveReloj();</script>
+   <script> mueveReloj();</script>
 
 </html>

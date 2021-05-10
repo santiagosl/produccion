@@ -56,6 +56,7 @@
               <th scope="col">Ver       </th>
               <th scope="col">Editar    </th>
               <th scope="col">Borrar    </th>
+
             </tr>
           </thead>
            {% for ord in produccion %}
@@ -63,7 +64,7 @@
                 <tr>
                   <th scope='row'>{{ord.id}}</td>
                     <td>{{ ord.fechaCreacion | date('d/m/y')}}</td>
-                    <td>{{ ord.idCliente}}</td>
+                    <td>{{ ord.idCliente.nombre}}</td>
                     <td>{{ ord.referencia }}</td>
 
                     <td>
@@ -126,13 +127,18 @@
                     <td>{% if(ord.fechaFin) %}  <p class="btn-success">{{ord.fechaFin | date ('d/m/y')}}</p> {% else %} <p>-</p>{% endif %}</td>
                     
                     <td><a class="btn btn-primary" href="{{ path('ver_produccion', {'id': ord.id})    }}"><i class="far fa-eye"></i></a></td>
-                    <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}"><i class="far fa-edit"></i></a></td>
-                    <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}"><i class="far fa-trash-alt"></i></a></td> 
+                    {% if is_granted('ROLE_ADMIN') %}
+                      <td><a class="btn btn-warning" href="{{ path('editar_produccion', {'id': ord.id}) }}"><i class="far fa-edit"></i></a></td>
+                      <td><a class="btn btn-danger" href="{{ path('borrar_produccion',  {'id': ord.id}) }}" onclick="return borrarRegistro();"><i class="far fa-trash-alt"></i></a></td>
+                    {% else %}
+                       <td><a class=""><i class="fas fa-ban fa-2x"></i></a></td>
+                       <td><a class="r"><i class="fas fa-ban fa-2x"></i></a></td>
+                    {% endif %}
             </tbody>
             {% endfor %}
       
         </table>
-          {% else %}
+        {% else %}
 
           <div class="container alert alert-info mt-2 float-left col-md-12" role="alert">
                 <p>No hay produccion en el criterio de búsqueda</p>
@@ -144,10 +150,10 @@
           {# BOTON ATRAS #}
           <div class="container mb-5">
               <div class="nav justify-content-end float-left mr-5 pr-5 col-md-12">
+              {% if is_granted('ROLE_ADMIN') %}
                   <a class="btn btn-success mr-1" href="{{ path('selec_cliente_produccion')}}"><i class="fas fa-folder-plus"></i></a>
-                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>
-                  
-                 
+              {% endif %}
+                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>                 
               </div>
           </div>
       </div>
