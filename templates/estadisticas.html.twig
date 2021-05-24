@@ -12,6 +12,8 @@
           <p class="lead text-muted">Estadísticas de producción</p>
          </div>
       </section>
+
+
       
      <div class="container">
 
@@ -40,41 +42,59 @@
          
         {% if produccion %}
 
-        {# TABLA DE NUMERO DE PEDIDOS/TIEMPO MEDIO/TIEMPO RECORD #}
-        <table class="table w-100 table-hover text-center float-left ">
-          <thead class="bg-info">
-            <tr>
-              <th scope="col">Numero de pedidos</th>
-              <th scope="col">Tiempo medio</th>
-              <th scope="col">Tiempo Record</th>
-            </tr>
-          </thead>
-            <tr>
-                <td>{{produccion}}</td>
-                <td>{{tiempoTotal | number_format(1, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
-                <td>{{tiempoRecord | number_format(1, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
-                
-            </tr>
-        </table>
+      <canvas class="container" id="myChart"></canvas>
+      <script>
+     
+      var ctx = document.getElementById('myChart').getContext('2d');
 
-        {# TABLA DE TIEMPOS DE MECANICA, EMBALAJE, LAMINAS Y TRANSPORTE#}
-        <table class="table w-100 table-hover text-center float-left ">
-          <thead class="bg-info">
-            <tr>
-              <th scope="col">Tiempo medio Mecánica</th>
-              <th scope="col">Tiempo medio Láminas</th>
-              <th scope="col">Tiempo medio Embalaje</th>
-              <th scope="col">Tiempo medio Transporte </th>
-            </tr>
-          </thead>
-            <tr>
-                <td>{{tiempoMedioMecanica | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
-                <td>{{tiempoMedioLaminas | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
-                <td>{{tiempoMedioEmbalaje | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
-                <td>{{tiempoMedioTransporte | number_format(2, '.', ',')}} horas</td> {# Formateamos los decimales en la vista #}
-                
-            </tr>
-        </table>
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Pedidos', 'Tiempo medio', 'Record', 'Mecánica', 'Láminas', 'Embalaje' , 'Transporte'],
+
+              datasets: [{
+                  label: 'Gráfico estadísticas',
+                  data: [{{produccion}},
+                         {{tiempoTotal}},
+                         {{tiempoRecord}},
+                         {{tiempoMedioMecanica}},
+                         {{tiempoMedioLaminas}},
+                         {{tiempoMedioEmbalaje}},
+                         {{tiempoMedioTransporte}}
+                         ],
+                         
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+
+      </script>
 
        
           {% else %}
@@ -86,6 +106,9 @@
         {% endif %}
 
 
+        {# GRAFICO #}
+      
+    
 
           {# BOTON ATRAS #}
           <div class="container mb-5 ">

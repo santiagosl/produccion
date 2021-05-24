@@ -180,7 +180,7 @@ class Produccion
         return $this->embalaje;
     }
 
-    public function setEmbalaje(string $embalaje): self
+    public function setEmbalaje(?string $embalaje): self
     {
         $this->embalaje = $embalaje;
 
@@ -192,7 +192,7 @@ class Produccion
         return $this->laminas;
     }
 
-    public function setLaminas(string $laminas): self
+    public function setLaminas(?string $laminas): self
     {
         $this->laminas = $laminas;
 
@@ -204,7 +204,7 @@ class Produccion
         return $this->mecanica;
     }
 
-    public function setMecanica(string $mecanica): self
+    public function setMecanica(?string $mecanica): self
     {
         $this->mecanica = $mecanica;
 
@@ -216,7 +216,7 @@ class Produccion
         return $this->transporte;
     }
 
-    public function setTransporte(string $transporte): self
+    public function setTransporte(?string $transporte): self
     {
         $this->transporte = $transporte;
 
@@ -228,7 +228,7 @@ class Produccion
         return $this->referencia;
     }
 
-    public function setReferencia(string $referencia): self
+    public function setReferencia(?string $referencia): self
     {
         $this->referencia = $referencia;
 

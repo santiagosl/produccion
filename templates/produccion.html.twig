@@ -14,18 +14,83 @@
 
     <main>
 
-        <div class="container w-50">
-            {{ form_start(formulario) }} 
-            {{ form_widget(formulario) }} 
-            {{ form_end(formulario) }}
-        </div>
 
-        {# BOTON ATRAS #}
-        <div class="container w-50">
-            <div class="nav justify-content-end">
-                <a class="btn btn-primary mr-3 fas fa-undo"  href="{{ path('busca_lista_ordenes')}}" ></a>
+    <div class="container w-60">
+
+        
+        {{ form_start(formulario) }} 
+
+            <div class="float-left col-md-12">
+                {{form_row(formulario.referencia)}} 
             </div>
-        </div>
+
+            <div class="float-right col-md-3">
+                {{form_row(formulario.mecanica)}}
+                
+                <div class="alert alert-success" role="alert">
+                <p id="form_mecan"></p>
+                </div>
+               
+            </div>
+
+            <div class="float-left col-md-3">
+                {{form_row(formulario.laminas)}}
+                
+                <div class="alert alert-success" role="alert">
+                    <p id="form_lamin"></p>
+                </div>
+            </div>
+
+            <div class="float-right col-md-3">
+                {{form_row(formulario.embalaje)}}
+                  <div class="alert alert-success" role="alert">
+                <p id="form_embal"></p>
+                </div>
+            </div>
+
+            <div class="float-left col-md-3">
+                {{form_row(formulario.transporte)}}
+                <div class="alert alert-success" role="alert">
+                <p id="form_trans"></p>
+                </div>
+            </div>
+            
+            <div class="float-right col-md-12">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+                <a class="float-right btn btn-primary fas fa-undo"  href="{{ path('busca_lista_ordenes')}}"></a>
+            </div>
+
+        {{ form_widget(formulario) }} 
+        {{ form_end(formulario) }}
+
+        
+
+        <script>
+
+        document.getElementById('form_mecanica').onchange = function () {
+        console.log(this.value);
+        document.getElementById('form_mecan').innerHTML = document.getElementById('form_mecanica').files[0].name;
+        }
+        
+        document.getElementById('form_laminas').onchange = function () {
+        console.log(this.value);
+        document.getElementById('form_lamin').innerHTML = document.getElementById('form_laminas').files[0].name;
+        }
+
+        document.getElementById('form_embalaje').onchange = function () {
+        console.log(this.value);
+        document.getElementById('form_embal').innerHTML = document.getElementById('form_embalaje').files[0].name;
+        }
+
+        document.getElementById('form_transporte').onchange = function () {
+        console.log(this.value);
+        document.getElementById('form_trans').innerHTML = document.getElementById('form_transporte').files[0].name;
+        }
+
+        </script>
+      
+    </div>
+
     </main>
 
 {% endblock %}

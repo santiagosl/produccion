@@ -33,9 +33,7 @@ class ProduccionRepository extends ServiceEntityRepository
         
         $query->setParameter('fechaInicio' , $fechaInicio) ;
         $query->setParameter('fechaFinal'  , $fechaFinal)  ;
-        
 
-        
         return $query->getResult();
     }
 

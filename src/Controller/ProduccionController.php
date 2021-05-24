@@ -61,7 +61,7 @@ class ProduccionController extends AbstractController
               array('label' => 'Transporte',
               'required' => false))
 
-        ->add('save', SubmitType::Class, array('label' => 'Enviar'))
+        
       
         ->getForm();
       
@@ -78,7 +78,7 @@ class ProduccionController extends AbstractController
           //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($mecanica = $formulario['mecanica']->getData())
           {
-            $nombreMecanica = bin2hex(random_bytes(6)). '.' . $mecanica->guessExtension();
+            $nombreMecanica = date("Ymd") . '_mecanica_' . $formulario->get("referencia")->getData() .  '.' . $mecanica->guessExtension();
             try {
               $mecanica->move($archivoPDF, $nombreMecanica);
             } catch (\FileException $e) {
@@ -96,7 +96,7 @@ class ProduccionController extends AbstractController
           //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($laminas = $formulario['laminas']->getData())
           {
-            $nombreLaminas = bin2hex(random_bytes(6)). '.' . $laminas->guessExtension();
+            $nombreLaminas =  date("Ymd") . '_laminas_' . $formulario->get("referencia")->getData() .'.' . $laminas->guessExtension();
             try {
               $laminas->move($archivoPDF, $nombreLaminas);
             } catch (\FileException $e) {
@@ -113,7 +113,7 @@ class ProduccionController extends AbstractController
           //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
           if($embalaje = $formulario['embalaje']->getData())
           {
-            $nombreEmbalaje = bin2hex(random_bytes(6)). '.' . $embalaje->guessExtension();
+            $nombreEmbalaje =  date("Ymd") . '_embalaje_' . $formulario->get("referencia")->getData() .'.' . $embalaje->guessExtension();
             try {
               $embalaje->move($archivoPDF, $nombreEmbalaje);
             } catch (\FileException $e) {
@@ -128,15 +128,17 @@ class ProduccionController extends AbstractController
 
           //Codigo que se encarga de subir los archivos TRANSPORTE a la base de datos
           //En caso de introducir archivos se le asiganará una hora en incio y final de tarea.
+
           if($transporte = $formulario['transporte']->getData())
           {
-            $nombreTransporte = bin2hex(random_bytes(6)). '.' . $transporte->guessExtension();
+            $nombreTransporte =  date("Ymd") . '_transporte_' . $formulario->get("referencia")->getData() .'.' . $transporte->guessExtension();
             try {
               $transporte->move($archivoPDF, $nombreTransporte);
             } catch (\FileException $e) {
                  return new Response ('Error al insertar archivo transporte');
             }
             $nuevaProduccion->settransporte($nombreTransporte);
+            
           } else {
             $nuevaProduccion->setTransporte('');
             $nuevaProduccion->setFechaInicioTransporte(new \DateTime('Europe/Paris'));
@@ -148,14 +150,15 @@ class ProduccionController extends AbstractController
            $nuevaProduccion->setFinalizado('NO');
            $nuevaProduccion->setIdUsuario($this->getUser());
            $nuevaProduccion->setIdCliente($clienteSeleccionado);
-           
+  
                   
           try {
               $entityManager->flush(); 
              
 
           } catch (\Exception $e){
-              return new Response ('Error al insertar el usuario');
+
+              return new Response ('Error al insertar los datos');
           }
 
             return $this->redirectToRoute('busca_lista_ordenes');
