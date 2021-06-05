@@ -1,4 +1,5 @@
             function mueveReloj(){
+                
                 momentoActual = new Date()
                 dia = momentoActual.getDate();
                 mes = momentoActual.getMonth();

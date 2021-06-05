@@ -35,10 +35,9 @@ class EditarProduccionController extends AbstractController {
         $embalaje_2 = $editarProduccion->getEmbalaje();
         $transporte_2 = $editarProduccion->getTransporte();
 
-        
-         $formulario = $this->createFormBuilder($editarProduccion) 
+        $formulario = $this->createFormBuilder($editarProduccion) 
                      
-            ->add('referencia', TextType::class, array('required' => false))
+            ->add('referencia', IntegerType::class, array("label" =>"Numero de presupuesto:" , 'required' => false))
             ->add('mecanica',   FileType::class, array("label" => "Mecanica",   'required' => false, "attr" => array("class" => "table"), "data_class" => null))
             ->add('laminas',    FileType::class, array("label" => "Laminas",    'required' => false, "attr" => array("class" => "table"), "data_class" => null))
             ->add('embalaje',   FileType::class, array("label" => "Embalaje",   'required' => false, "attr" => array("class" => "table"), "data_class" => null))
@@ -56,9 +55,9 @@ class EditarProduccionController extends AbstractController {
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->persist($nuevaProduccion);
 
-          //Codigo que se encarga de subir los archivos MECANICA a la base de datos
+          //Codigo que se encarga de copiar el archivo, cambiar el nombre y almacenarlo en el servido.
+          //El nombre del archivo se cambiar y se almacena en la base de datos.
           if($mecanica = $formulario['mecanica']->getData())
-            
           {
             $nombreMecanica = date("Ymd") . '_mecanica_' . $formulario->get("referencia")->getData() .  '.' . $mecanica->guessExtension();
             try {
@@ -66,20 +65,18 @@ class EditarProduccionController extends AbstractController {
             } catch (\FileException $e) {
                   return new Response ('Error al insertar archivo mecanica');
             }
-
             $nuevaProduccion->setMecanica($nombreMecanica);
-            
           } else {
 
             $nuevaProduccion->setMecanica($mecanica_2);
-            
           }  
 
-          
-          //Codigo que se encarga de subir los archivos LAMINAS a la base de datos
+          //Codigo que se encarga de copiar el archivo, cambiar el nombre y almacenarlo en el servido.
+          //El nombre del archivo se cambiar y se almacena en la base de datos.
           if($laminas = $formulario['laminas']->getData())
           {
-            $nombreLaminas = bin2hex(random_bytes(6)). '.' . $laminas->guessExtension();
+           
+            $nombreLaminas = date("Ymd") . '_laminas_' . $formulario->get("referencia")->getData() .  '.' . $laminas->guessExtension();
             try {
               $laminas->move($archivoPDF, $nombreLaminas);
             } catch (\FileException $e) {
@@ -91,10 +88,12 @@ class EditarProduccionController extends AbstractController {
 
           }
 
-          //Codigo que se encarga de subir los archivos EMBALAJE a la base de datos
+          //Codigo que se encarga de copiar el archivo, cambiar el nombre y almacenarlo en el servido.
+          //El nombre del archivo se cambiar y se almacena en la base de datos.
           if($embalaje = $formulario['embalaje']->getData())
           {
-            $nombreEmbalaje = bin2hex(random_bytes(6)). '.' . $embalaje->guessExtension();
+           
+            $nombreEmbalaje = date("Ymd") . '_embalaje_' . $formulario->get("referencia")->getData() .  '.' . $embalaje->guessExtension();
             try {
               $embalaje->move($archivoPDF, $nombreEmbalaje);
             } catch (\FileException $e) {
@@ -106,10 +105,12 @@ class EditarProduccionController extends AbstractController {
 
           }
 
-          //Codigo que se encarga de subir los archivos TRANSPORTE a la base de datos
+          //Codigo que se encarga de copiar el archivo, cambiar el nombre y almacenarlo en el servido.
+          //El nombre del archivo se cambiar y se almacena en la base de datos.
           if($transporte = $formulario['transporte']->getData())
           {
-            $nombreTransporte = bin2hex(random_bytes(6)). '.' . $transporte->guessExtension();
+            
+            $nombreTransporte = date("Ymd") . '_transporte_' . $formulario->get("referencia")->getData() .  '.' . $transporte->guessExtension();
             try {
               $transporte->move($archivoPDF, $nombreTransporte);
             } catch (\FileException $e) {
@@ -124,7 +125,6 @@ class EditarProduccionController extends AbstractController {
           try {
 
               $entityManager->flush(); 
-             
           } catch (\Exception $e){
 
               return new Response ('Error al insertar los datos');

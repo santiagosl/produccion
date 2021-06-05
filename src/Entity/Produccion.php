@@ -42,7 +42,7 @@ class Produccion
     private $transporte;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * 
      */
     private $referencia;
@@ -223,12 +223,12 @@ class Produccion
         return $this;
     }
 
-    public function getReferencia(): ?string
+    public function getReferencia(): ?int
     {
         return $this->referencia;
     }
 
-    public function setReferencia(?string $referencia): self
+    public function setReferencia(?int $referencia): self
     {
         $this->referencia = $referencia;
 

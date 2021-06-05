@@ -43,7 +43,7 @@ class ProduccionController extends AbstractController
     $nuevaProduccion = new Produccion();
 
     $formulario = $this->createFormBuilder($nuevaProduccion)         
-        ->add('referencia', TextType::class, array('label' => 'Referencia'))
+        ->add('referencia', IntegerType::class, array('label' => 'Referencia'))
       
         ->add('mecanica', FileType::class, 
               array('label' => 'Mecánica',

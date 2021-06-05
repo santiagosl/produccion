@@ -41,13 +41,12 @@ security:
         - { path: ^/editar_clientes/, roles: ROLE_ADMIN }
         - { path: ^/borrar_clientes/, roles: ROLE_ADMIN }
         - { path: ^/alta_clientes, roles: ROLE_ADMIN }
+        - { path: ^/usuarios, roles: ROLE_ADMIN }
         - { path: ^/editar_usuarios/, roles: ROLE_ADMIN }
         - { path: ^/borrar_usuarios/, roles: ROLE_ADMIN }
         - { path: ^/alta_usuarios, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-    
+            
     encoders:
         # App\Entity\Usuario: plaintext
         App\Entity\Usuario: 

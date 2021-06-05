@@ -78,7 +78,6 @@
                                 {% else %} 
                                         <a class="btn btn-success w-100 disabled"  href="#">Finalizado</a>
                                         <input class="text-center w-100" type="text" value="{{ prod.fechaFinMecanica | date("d/m/y H:i:s")}}" disabled>
-                                        
                                         <a class="btn btn-success mt-1 w-100 disabled text-white">Total</a>
                                         <input class="text-center w-100" type="text" value="{{ prod.tiempoMecanica | number_format(0, '.', ',')}} hora/s" disabled>
                                         

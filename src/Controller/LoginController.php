@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Login;
 use App\Entity\Usuario;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class LoginController extends AbstractController
@@ -22,8 +23,34 @@ class LoginController extends AbstractController
 
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('login.html.twig', array('error' => $error, 'lastUsername' => $lastUsername));    
+        return $this->render('login.html.twig', array('error' => $error, 'lastUsername' => $lastUsername));     
+        
     }
 }
 
 ?>
+
+
+<!-- 
+             
+            EN INICIOCONTROLLER FUNCIONA, PERO SE REPITE CADA VEZ QUE SE REFRESCA LA PAGINA DE INICIO.
+
+            $registro = new Login();
+
+            $registro->setNombreUsuario($this->getUser()->getNombre());
+            $registro->setFecha(new \DateTime());
+            $registro->setHora(new \DateTime('Europe/Paris'));
+            $registro->setIdUsuario($this->getUser());
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($registro);
+         
+         try{
+
+             $entityManager->flush(); 
+
+         } catch  (\Exception $e) {
+             return new Response ('Error al grabar el login del usuario');
+         }
+
+ -->
