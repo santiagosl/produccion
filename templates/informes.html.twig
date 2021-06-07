@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estadísticas{% endblock %}
+
+
+{% block body %}
+
+  <main class="main">
+
+      <section class="jumbotron p-1 text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Informes</h1>
+          <p class="lead text-muted">Descargar en pdf todos los informes</p>
+         </div>
+      </section>
+  </main>
+
+ <div class="container w-50 mb-4">
+  <a type="button" class="btn btn-secondary btn-lg btn-block" href="{{path('informeFinalizado')}}">Partes finalizados <i class="far fa-file-pdf"></i></a>
+  <a type="button" class="btn btn-secondary btn-lg btn-block" href="{{path('informePendientes')}}">Partes pendientes <i class="far fa-file-pdf"></i></a>
+  <a type="button" class="btn btn-secondary btn-lg btn-block" href="{{path('informeTodos')}}">Todos los partes <i class="far fa-file-pdf"></i></a>
+  <a type="button" class="btn btn-secondary btn-lg btn-block" href="{{path('informeClientes')}}">Listado de Clientes <i class="far fa-file-pdf"></i></a>
+  <a type="button" class="btn btn-secondary btn-lg btn-block" href="{{path('informeUsuarios')}}">Listado de Usuarios <i class="far fa-file-pdf"></i></a>
+  
+</div>
+          {# BOTON ATRAS #}
+          <div class="container mb-5">
+              <div class="nav justify-content-end float-left mr-5 pr-5 col-md-12">
+                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>  
+              </div>
+          </div>
+      </div>
+  </main>
+
+{% endblock %}
+

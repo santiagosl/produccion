@@ -153,10 +153,12 @@
               {% if is_granted('ROLE_ADMIN') %}
                   <a class="btn btn-success mr-1" href="{{ path('selec_cliente_produccion')}}"><i class="fas fa-folder-plus"></i></a>
               {% endif %}
-                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>                 
+                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>  
+
               </div>
           </div>
       </div>
   </main>
 
 {% endblock %}
+

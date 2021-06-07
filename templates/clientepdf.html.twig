@@ -1,0 +1,68 @@
+
+{% block body %}
+
+  <main role="main">
+
+      <section class="jumbotron p-1 text-center">
+        <div class="container">
+          <h2 class="jumbotron-heading" style="text-align:center; background-color:#87ceeb; color:white;">Listado Producci&oacuten</h2>
+         </div>
+      </section>
+      
+     <div class="container">
+            
+        {% if produccion %}
+
+          <table class="table table-responsive w-100 table-hover text-center">
+         
+          <thead class="bg-info">
+            <tr>
+              <th scope="col" style="width:100px; text-align:center;border-style:solid; background-color:CCCCCC">ID        </th>
+              <th scope="col" style="width:200px; text-align:center;border-style:solid; background-color:CCCCCC">Nombre     </th>
+              <th scope="col" style="width:300px; text-align:center;border-style:solid; background-color:CCCCCC">Direccion   </th>
+              <th scope="col" style="width:100px; text-align:center;border-style:solid; background-color:CCCCCC">CP</th>
+              <th scope="col" style="width:200px; text-align:center;border-style:solid; background-color:CCCCCC">Poblacion</th>
+              <th scope="col" style="width:200px; text-align:center;border-style:solid; background-color:CCCCCC">Provincia</th>
+              <th scope="col" style="width:100px; text-align:center;border-style:solid; background-color:CCCCCC">Telefono</th>
+              <th scope="col" style="width:200px; text-align:center;border-style:solid; background-color:CCCCCC">e-mail</th>
+            </tr>
+          </thead>
+           {% for ord in produccion %}
+              <tbody>
+                <tr>
+                    <td style="width:100px; text-align:center;">{{ord.id}}          </td>
+                    <td style="width:100px; text-align:center;">{{ ord.nombre }}    </td>
+                    <td style="width:200px; text-align:center;">{{ ord.Direccion }} </td>
+                    <td style="width:300px; text-align:center;">{{ ord.CP }}        </td>
+                    <td style="width:100px; text-align:center;">{{ ord.Poblacion }} </td>
+                    <td style="width:200px; text-align:center;">{{ ord.Provincia }} </td>
+                    <td style="width:100px; text-align:center;">{{ ord.Telefono }}  </td>
+                    <td style="width:200px; text-align:center;">{{ ord.mail }}      </td>
+
+            </tbody>
+            {% endfor %}
+      
+        </table>
+        {% else %}
+
+          <div class="container alert alert-info mt-2 float-left col-md-12" role="alert">
+                <p>No hay produccion en el criterio de b&uacutesqueda</p>
+          </div>
+
+        {% endif %}
+   
+
+          {# BOTON ATRAS #}
+          <div class="container mb-5">
+              <div class="nav justify-content-end float-left mr-5 pr-5 col-md-12">
+              {% if is_granted('ROLE_ADMIN') %}
+                  <a class="btn btn-success mr-1" href="{{ path('selec_cliente_produccion')}}"><i class="fas fa-folder-plus"></i></a>
+              {% endif %}
+                  <a class="btn btn-primary"  href="{{ path('resumen')}}" ><i class="fas fa-undo"></i></a>  
+              </div>
+          </div>
+      </div>
+  </main>
+
+{% endblock %}
+

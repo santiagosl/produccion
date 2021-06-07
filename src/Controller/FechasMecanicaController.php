@@ -38,13 +38,18 @@ class FechasMecanicaController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
-        try {
-           
-            $entityManager->flush(); 
+        if($produccionActiva)
+        {
 
-
-        } catch (\Exception $e){
-            return new Response ('Error al insertar datos');
+            try {
+               
+                $entityManager->flush(); 
+    
+    
+            } catch (\Exception $e){
+                return new Response ('Error al insertar datos');
+            }
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
@@ -70,12 +75,16 @@ class FechasMecanicaController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
         
+        if($produccionActiva)
+        {
 
-        try {
-            
-            $entityManager->flush(); 
-        } catch (\Exception $e){
-            return new Response ('Error al insertar datos');
+            try {
+                
+                $entityManager->flush(); 
+            } catch (\Exception $e){
+                return new Response ('Error al insertar datos');
+            }
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 

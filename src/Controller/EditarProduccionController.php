@@ -153,6 +153,8 @@ class EditarProduccionController extends AbstractController {
         if ($produccion) 
         {
               $produccion->setMecanica('');
+              $produccion->setFechaInicioMecanica(null);
+              $produccion->setFechaFinMecanica(null);
               
               try {
 
@@ -180,6 +182,8 @@ class EditarProduccionController extends AbstractController {
         if ($produccion) 
         {
               $produccion->setLaminas('');
+              $produccion->setFechaInicioLaminas(null);
+              $produccion->setFechaFinLaminas(null);
               
               try {
 
@@ -206,6 +210,8 @@ class EditarProduccionController extends AbstractController {
         if ($produccion) 
         {
               $produccion->settransporte('');
+              $produccion->setFechaInicioTransporte(null);
+              $produccion->setFechaFinTransporte(null);
               
               try {
 
@@ -231,7 +237,9 @@ class EditarProduccionController extends AbstractController {
         $produccion = $repositorio->find($id); 
         if ($produccion) 
         {
-              $produccion->setembalaje('');
+              $produccion->setEmbalaje('');
+              $produccion->setFechaInicioEmbalaje(null);
+              $produccion->setFechaFinEmbalaje(null);
               
               try {
 

@@ -22,23 +22,6 @@
           {% if is_granted('ROLE_ADMIN') %}
             
             {# VISTA COMO ADMINISTRADOR #}
-
-            {# RESUMEN #}
-            <div class="col-md-3">
-              <div class="card mb-3 box-shadow">
-               <img class="card-img-top" src="./image/resumen.png" alt="resumen">
-                <div class="card-body">
-                  <p class="card-text">Producción</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group w-100">
-                       <a class="btn btn-primary btn-lg btn-block"  href="{{ path('busca_lista_ordenes')}}" ><i class="far fa-eye"></i></a>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {# ALTA CLIENTES #}
             <div class="col-md-3">
               <div class="card mb-3 box-shadow">
@@ -56,7 +39,6 @@
               </div>
             </div>
 
-        
             {# ALTA USUARIOS #}
             
             <div class="col-md-3">
@@ -74,7 +56,21 @@
                 </div>
               </div>
             </div>
-           
+            {# RESUMEN #}
+            <div class="col-md-3">
+              <div class="card mb-3 box-shadow">
+               <img class="card-img-top" src="./image/resumen.png" alt="resumen">
+                <div class="card-body">
+                  <p class="card-text">Producción</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group w-100">
+                       <a class="btn btn-primary btn-lg btn-block"  href="{{ path('busca_lista_ordenes')}}" ><i class="far fa-eye"></i></a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {# ESTADISTICAS #}
             <div class="col-md-3">
@@ -88,6 +84,21 @@
                     
                     </div>
                     
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {# INFORMES #}
+            <div class="col-md-3">
+              <div class="card mb-3 box-shadow">
+                <img class="card-img-top" src="./image/informes.jpg" alt="informes">
+                <div class="card-body">
+                  <p class="card-text">Listados pdf</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group w-100">
+                      <a class="btn btn-primary btn-lg btn-block"  href="{{ path('informes')}}" ><i class="far fa-eye"></i></a>
+                    </div>
                   </div>
                 </div>
               </div>

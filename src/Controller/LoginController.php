@@ -29,28 +29,3 @@ class LoginController extends AbstractController
 }
 
 ?>
-
-
-<!-- 
-             
-            EN INICIOCONTROLLER FUNCIONA, PERO SE REPITE CADA VEZ QUE SE REFRESCA LA PAGINA DE INICIO.
-
-            $registro = new Login();
-
-            $registro->setNombreUsuario($this->getUser()->getNombre());
-            $registro->setFecha(new \DateTime());
-            $registro->setHora(new \DateTime('Europe/Paris'));
-            $registro->setIdUsuario($this->getUser());
-            
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($registro);
-         
-         try{
-
-             $entityManager->flush(); 
-
-         } catch  (\Exception $e) {
-             return new Response ('Error al grabar el login del usuario');
-         }
-
- -->

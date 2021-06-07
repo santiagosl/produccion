@@ -125,15 +125,21 @@ class FechasFinProduccionController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
-        try {
-           
-            $produccionActiva->setFinalizado('SI') ;
-            $entityManager->flush();
-            
-        } catch (\Exception $e){
+        if($produccionActiva)
+        {
 
-            return new Response ('Error al insertar datos');
+            try {
+               
+                $produccionActiva->setFinalizado('SI') ;
+                $entityManager->flush();
+                
+            } catch (\Exception $e){
+    
+                return new Response ('Error al insertar datos');
+            }
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
+
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
         $verProduccion = $repositorio->findBy(["id"=> $id]);

@@ -38,11 +38,15 @@ class FechasLaminasController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
-        try {
-          
-            $entityManager->flush(); 
-        } catch (\Exception $e){
-            return new Response ('Error al insertar datos');
+        if($produccionActiva){
+
+            try {
+              
+                $entityManager->flush(); 
+            } catch (\Exception $e){
+                return new Response ('Error al insertar datos');
+            }
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
@@ -67,11 +71,17 @@ class FechasLaminasController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
-        try {
-           
-            $entityManager->flush(); 
-        } catch (\Exception $e){
-            return new Response ('Error al insertar datos');
+        if($produccionActiva)
+        {
+
+            try {
+               
+                $entityManager->flush(); 
+            } catch (\Exception $e){
+                return new Response ('Error al insertar datos');
+            }
+            
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 

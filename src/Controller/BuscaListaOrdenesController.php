@@ -49,32 +49,23 @@ class BuscaListaOrdenesController extends AbstractController
       
       if($request->server->get('REQUEST_METHOD') == 'POST')
       {
-
         $Finalizado = $formProduccion->getData();
         $FechaInicio = $formProduccion->getData();
         $FechaFinal = $formProduccion->getData();
-
         
         if($Finalizado['Finalizado'] == 'SI'){
-
           $produccion = $repositorio->finalizado($FechaInicio['FechaInicio'],
                                                  $FechaFinal ['FechaFinal']);
         } else if($Finalizado['Finalizado'] == 'NO')
-        
         {
            $produccion = $repositorio->noFinalizado($FechaInicio['FechaInicio'],
                                                     $FechaFinal ['FechaFinal']);
         }
-        
         else 
-        
         {
-          
           $produccion = $repositorio->todos($FechaInicio['FechaInicio'],
                                                    $FechaFinal ['FechaFinal']);
         } 
-
-
 
       }
 

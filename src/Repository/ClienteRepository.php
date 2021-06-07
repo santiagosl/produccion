@@ -55,4 +55,15 @@ class ClienteRepository extends ServiceEntityRepository
        $query->setParameter('nombre', '%' . $nombre . '%');
        return $query->getResult();
     }
+
+        //Funcion para buscar por rango de fecha y si está finalizado o no.
+        public function clientes(): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT Cliente
+                                                FROM App\Entity\Cliente Cliente 
+                                                ");
+        
+        return $query->getResult();
+    }
 }

@@ -55,4 +55,15 @@ class UsuarioRepository extends ServiceEntityRepository
        $query->setParameter('nombre', '%' . $nombre . '%');
        return $query->getResult();
     }
+
+        //Funcion para buscar por rango de fecha y si está finalizado o no.
+        public function usuarios(): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT Usuario
+                                                FROM App\Entity\Usuario Usuario 
+                                                ");
+        
+        return $query->getResult();
+    }
 }

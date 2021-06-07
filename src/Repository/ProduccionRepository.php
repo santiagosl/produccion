@@ -181,4 +181,37 @@ class ProduccionRepository extends ServiceEntityRepository
         return $tiempoMedio[0][1];
     }
 
+        //Funcion que devuelve todos los resultados para los informes
+        public function informeFinalizados(): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT produccion
+                                                FROM App\Entity\Produccion produccion 
+                                                WHERE produccion.finalizado = 'SI'");
+       
+        return $query->getResult();
+    }
+
+        //Funcion que devuelve los resultados pendientes para los informes
+        public function informePendientes(): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT produccion
+                                                FROM App\Entity\Produccion produccion 
+                                                WHERE produccion.finalizado = 'NO'");
+       
+        return $query->getResult();
+    }
+
+        //Funcion que devuelve los resultados de todos los partes para los informes
+        public function informeTodos(): array 
+    {
+        $entityManager = $this->getEntityManager(); 
+        $query = $entityManager->createQuery("SELECT produccion
+                                                FROM App\Entity\Produccion produccion 
+                                                ");
+       
+        return $query->getResult();
+    }
+
 }

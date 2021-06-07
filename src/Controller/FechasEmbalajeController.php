@@ -38,12 +38,17 @@ class FechasEmbalajeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
-        try {
-            $self = $_SERVER['PHP_SELF'];
-            header("refresh:0.1; url=$self/$id");
-            $entityManager->flush(); 
-        } catch (\Exception $e){
-            return new Response ('Error al insertar datos');
+        if($produccionActiva)
+        {
+
+            try {
+                $self = $_SERVER['PHP_SELF'];
+                header("refresh:0.1; url=$self/$id");
+                $entityManager->flush(); 
+            } catch (\Exception $e){
+                return new Response ('Error al insertar datos');
+            }
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 
@@ -68,11 +73,16 @@ class FechasEmbalajeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($produccionActiva);
 
-        try {
- 
-            $entityManager->flush(); 
-        } catch (\Exception $e){
-            return new Response ('Error al insertar datos');
+        if($produccionActiva)
+        {
+
+            try {
+     
+                $entityManager->flush(); 
+            } catch (\Exception $e){
+                return new Response ('Error al insertar datos');
+            }
+            return $this->redirectToRoute('ver_produccion',['id' => $id]);
         }
 
         $repositorio = $this->getDoctrine()->getRepository(Produccion::class); 

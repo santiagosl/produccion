@@ -382,7 +382,7 @@ class Produccion
           return $this->fechaInicioTransporte;
       }
 
-      public function setFechaInicioTransporte(\DateTimeInterface $fechaInicioTransporte): self
+      public function setFechaInicioTransporte(?\DateTimeInterface $fechaInicioTransporte): self
       {
           $this->fechaInicioTransporte = $fechaInicioTransporte;
 
